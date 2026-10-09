@@ -69,7 +69,7 @@ flowchart LR
 | System disk | Hard drive; SATA SSD; NVMe | Linux `lsblk -o NAME,SIZE,ROTA,MODEL` (ROTA 1 = spinning) | Immich keeps its database on local SSD **[V1]**; Docker and databases on a spinning laptop disk are slow |
 | Data disks | None; one external; one internal; two or more | `lsblk`, `df -h` | Where photos and the backup copy live; whether 3-2-1 is possible (`06` section 5.1) |
 | Uplink (upload speed) | 2 Mbps or less; 2-10; 10-20; 20 or more | A speed test; read the **upload** figure and its unit (Mbps or MB/s) | Off-site seeding time, remote streaming, remote camera viewing (section 2.3) |
-| Inbound reachability | None (CGNAT, or a router that cannot forward ports); public IPv4 with forwarding; IPv6 only; relay (VPS or tunnel service) | Compare the router's WAN address with an external "what is my IP" page; 100.64.0.0/10 is CGNAT **[K]** | Whether anything can be hosted for people outside the house (section 4) |
+| Inbound reachability | None (CGNAT, or a router that cannot forward ports); public IPv4 with forwarding; IPv6 only; relay (VPS or tunnel service) | Compare the router's WAN address with an external "what is my IP" page; 100.64.0.0/10 is CGNAT **[V33]** | Whether anything can be hosted for people outside the house (section 4) |
 | One-time budget | About Rs 5,000 or less; 5,000-15,000; 15,000-40,000; more | Decide | Which ladder rungs are reachable at once (section 6) |
 | Monthly budget | About Rs 200 or less; 200-500; more. Includes electricity? | Decide | Off-site storage size, relay or hosting fees (`08`) |
 | Audience | Household; invited people who can install an app; strangers | Ask who actually needs it | Section 4 |
@@ -82,23 +82,23 @@ flowchart LR
 
 "An old Core i3" can mean anything from a 2010 to a 2017 machine, and three features decide which services it can run: **AVX2** (Frigate needs AVX and AVX2 **[V13]**), **x86-64-v2** (Immich's machine-learning container **[V1]**) and **Quick Sync on Linux** (Jellyfin transcoding, from Broadwell **[V24]**). The digits after `i3-` start with the generation: `i3-2310M` is 2nd, `i3-4005U` 4th, `i3-6006U` 6th; a three-digit number such as `i3-380M` is 1st generation. The table below follows search summaries of Wikipedia, WikiChip and spec sites **[S40]** plus general knowledge **[K]**: confirm the exact part on Intel's product page or, better, by looking at the CPU flags on the machine itself.
 
-| Generation | Codename, year | Mobile i3 examples | Cores / threads (mobile i3) | AVX | AVX2 | Linux Quick Sync **[V24]** |
-|------------|----------------|--------------------|-----------------------------|:---:|:----:|----------------------------|
-| 1st | Arrandale, 2010 | i3-330M, i3-380M | 2 / 4 | no | no | No (legacy VA-API only) |
-| 2nd | Sandy Bridge, 2011 | i3-2310M, i3-2350M | 2 / 4 | yes | no | No (legacy VA-API only) |
-| 3rd | Ivy Bridge, 2012 | i3-3110M, i3-3120M | 2 / 4 | yes | no | No (legacy VA-API only) |
-| 4th | Haswell, 2013 | i3-4005U, i3-4030U | 2 / 4 | yes | yes | No (legacy VA-API only) |
-| 5th | Broadwell, 2015 | i3-5005U, i3-5010U | 2 / 4 | yes | yes | Yes; H.264 |
-| 6th | Skylake, 2015 | i3-6006U, i3-6100U | 2 / 4 | yes | yes | Yes; HEVC 8-bit |
-| 7th | Kaby Lake, 2017 | i3-7100U | 2 / 4 | yes | yes | Yes; HEVC 10-bit |
+| Generation | Codename, year | Mobile i3 examples | Cores / threads (mobile i3) | AVX | AVX2 | Intel video hardware on Linux **[V24]** |
+|------------|----------------|--------------------|-----------------------------|:---:|:----:|-----------------------------------------|
+| 1st | Arrandale, 2010 | i3-330M, i3-380M | 2 / 4 | no | no | Legacy VA-API only |
+| 2nd | Sandy Bridge, 2011 | i3-2310M, i3-2350M | 2 / 4 | yes | no | Legacy VA-API only |
+| 3rd | Ivy Bridge, 2012 | i3-3110M, i3-3120M | 2 / 4 | yes | no | Legacy VA-API only |
+| 4th | Haswell, 2013 | i3-4005U, i3-4030U | 2 / 4 | yes | yes | Legacy VA-API only |
+| 5th | Broadwell, 2015 | i3-5005U, i3-5010U | 2 / 4 | yes | yes | Quick Sync or VA-API; H.264 |
+| 6th | Skylake, 2015 | i3-6006U, i3-6100U | 2 / 4 | yes | yes | Quick Sync or VA-API; HEVC 8-bit |
+| 7th | Kaby Lake, 2017 | i3-7100U | 2 / 4 | yes | yes | Quick Sync or VA-API; HEVC 10-bit |
+| 8th | Kaby Lake R, 2017 | i3-8130U | 2 / 4 | yes | yes | Quick Sync or VA-API; HEVC 10-bit |
 
 What the table means for the matrix in section 3:
 
 - **AVX2 first appears in the 4th generation (2013).** A 1st-3rd generation i3 cannot meet Frigate's AVX2 requirement **[V13]**, whatever its RAM. Many Pentium, Celeron and Atom parts lack AVX and AVX2 too (notably Celeron and Pentium models before the 2020 Tiger Lake generation **[V13]**, `03` section 1), so a model that merely says "Intel" proves nothing.
 - **x86-64-v2 needs SSE4.2 and POPCNT**, which every Core i3 from the 1st generation has **[K]**; Immich's ML container is not blocked by CPU age (`03` says most CPUs from about 2012 qualify **[V1]**).
-- **Quick Sync on Linux starts at the 5th generation (Broadwell)** **[V24]**; older Intel graphics use VA-API. A 4th-generation i3 meets Frigate's CPU requirement but can only use the legacy VA-API path for Jellyfin **[V24]**.
+- **Quick Sync on Linux starts at the 5th generation (Broadwell)** **[V24]**; older Intel graphics use VA-API. A 4th-generation i3 meets Frigate's CPU requirement but can only use the legacy VA-API path for Jellyfin **[V24]**. Jellyfin's docs also say Quick Sync is being phased out on Linux for Ice Lake and older parts as Intel's MediaSDK is deprecated **[V24]**, so on a machine of this age VA-API is the more durable route.
 - **The test is the flags, not the name.** On Linux, `lscpu` lists them; `grep -o -w -E 'avx|avx2|sse4_2|popcnt' /proc/cpuinfo | sort -u` prints just the ones that matter (read-only). On Windows, Settings > System > About shows the model; look that exact model up.
-
 
 ### 2.3 Uplink bands: what each realistically supports
 
@@ -124,7 +124,7 @@ Use restic's `--limit-upload` so the household can still use the line **[V]**; s
 |-------|-----------------|-----|-------------|-----|-------|
 | **A1** | Old dual-core laptop | 4 GB | Hard drive | 2 cores; AVX2 unknown | `13` section 2; `03` Tier A |
 | **A2** | Old dual-core laptop | 8 GB | SSD | 2 cores; AVX2 unknown | `13` section 2; `03` Tier A |
-| **B1** | Refurbished office mini PC or small desktop: 4-core Core i5, 6th-9th generation | 8-16 GB | SSD | 4 cores, AVX2, Quick Sync **[V24]** | `03` Tier B; section 6 for prices |
+| **B1** | Refurbished office mini PC or small desktop: 4-core Core i5, 6th-9th generation | 8-16 GB | SSD | 4 cores, AVX2, Quick Sync or VA-API **[V24]** | `03` Tier B; section 6 for prices |
 | **B2** | New N100/N150-class mini PC | 16 GB | SSD | Low-power 4 cores with an iGPU Jellyfin and Frigate use as their example **[V5][V6]** | `03` Tier B; `08` price book |
 | **C** | Workstation or desktop | 32-128 GB | NVMe plus several HDDs | 8-16 or more cores | `03` Tier C |
 | **D** | C plus a GPU | 32 GB or more | NVMe plus HDDs | GPU | `03` Tier D |
@@ -153,7 +153,7 @@ Use restic's `--limit-upload` so the household can still use the line **[V]**; s
 | Workload | A1 | A2 | B1 | B2 | C | D | What moves it up, and the basis |
 |----------|:--:|:--:|:--:|:--:|:-:|:-:|---------------------------------|
 | Jellyfin, direct play on the home network | ⚠️ | ✅ | ✅ | ✅ | ✅ | ✅ | Library on an external drive mounted read-only; on 4 GB it is the only extra service. `13` sections 1-2; `03` section 4. A2 is a refinement of `03` Tier A ⚠️ |
-| Jellyfin with transcoding | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | Needs a Quick Sync-class iGPU: Linux QSV from Broadwell **[V24]**; HEVC 8-bit from Skylake, 10-bit from Kaby Lake **[V24]**; software HDR tone-mapping is extremely demanding **[V5]**. On A-class machines plan for direct play. `03` section 4 |
+| Jellyfin with transcoding | ❌ | ❌ | ⚠️ | ✅ | ✅ | ✅ | Needs a capable Intel iGPU: Linux Quick Sync from Broadwell, HEVC 8-bit from Skylake, 10-bit from Kaby Lake **[V24]**; software HDR tone-mapping is extremely demanding **[V5]**. B1 (6th-9th generation) works through VA-API or Quick Sync, but Jellyfin's docs say Quick Sync is being phased out for Ice Lake and older parts **[V24]**, so B1 is marked more cautious than `03` Tier B. On A-class machines plan for direct play |
 | Download and library-management stack | ⚠️ | ⚠️ | ✅ | ✅ | ✅ | ✅ | Legal content only; IO-heavy (`apps/E`). `03` section 4 |
 
 **Cameras, games, development, monitoring and AI**
@@ -211,7 +211,7 @@ Why not Cloudflare or ngrok for the game itself: Cloudflare Tunnel has no UDP se
 
 | Thing | Route | Notes |
 |-------|-------|-------|
-| A small public web app or form | Cloudflare Tunnel plus Access: no inbound ports, any connectivity | HTTP/HTTPS (and TCP through a client) only; TCP, SSH, RDP and SMB need Cloudflare's client program on the visitor's device and there is no UDP **[V27]**; request bodies are capped at 100 MB on Free and Pro **[V28]**; passes the exposure checklist first (`apps/00`) |
+| A small public web app or form | Cloudflare Tunnel plus Access: no inbound ports, any connectivity | HTTP/HTTPS for ordinary visitors; TCP, SSH, RDP and SMB need Cloudflare's client program on the visitor's device and there is no UDP **[V27]**; request bodies are capped at 100 MB on Free and Pro **[V28]**; passes the exposure checklist first (`apps/00`) |
 | Private apps (photos, files, documents, passwords) | Tailscale; LAN address at home | Never published (`apps/00`) |
 | A DVR or NVR | Tailscale subnet router on the LAN | Never port-forward the recorder; view one sub-stream at a time on a slow uplink (`13` section 8). Sharing a machine does not carry the subnet router's routes, so each person who needs the DVR must be invited as a user and counts toward the free-plan limit **[S39]** |
 | SSH and router admin pages | Tailscale or LAN only | Never published |
