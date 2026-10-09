@@ -24,15 +24,16 @@ Every verified fact and its source is in [`docs/12-verification-log.md`](docs/12
 | C | Core design decisions | [`docs/02-design-decisions.md`](docs/02-design-decisions.md) | draft v0.1 |
 | C | Storage architecture and directory layout | [`docs/02a-storage-layout.md`](docs/02a-storage-layout.md) | draft v0.1 |
 | D | Hardware tiers and capacity matrix | [`docs/03-hardware-capacity.md`](docs/03-hardware-capacity.md) | draft v0.1 |
-| E | Application catalogue (one file per category) | `docs/apps/` | planned |
+| E | Application catalogue + service-exposure matrix (one file per category) | [`docs/apps/`](docs/apps/README.md) | draft v0.1 |
 | F | Device integration matrix | `docs/05-device-integration.md` | planned |
-| G | Security, identity and backup architecture | `docs/06-security-backup.md` | planned |
-| H | Automation and monitoring | `docs/07-automation-monitoring.md` | planned |
+| G | Security, identity and backup architecture | [`docs/06-security-backup.md`](docs/06-security-backup.md) | draft v0.1 |
+| H | Automation and monitoring | [`docs/07-automation-monitoring.md`](docs/07-automation-monitoring.md) | draft v0.1 |
 | I | Cost comparison (INR, dated sources) | `docs/08-cost.md` | planned |
 | J | Phased implementation roadmap | [`docs/09-roadmap.md`](docs/09-roadmap.md) | draft v0.1 |
 | J | Staged growth plan | [`docs/09a-growth-stages.md`](docs/09a-growth-stages.md) | draft v0.1 |
 | K | Documentation templates | `docs/templates/` | planned |
 | L | Information needed from the owner | [`docs/11-information-needed.md`](docs/11-information-needed.md) | **awaiting answers** |
+| - | Tested example scripts, systemd units and test suites | [`examples/`](examples/README.md) | tested |
 | - | Verification log | [`docs/12-verification-log.md`](docs/12-verification-log.md) | live |
 
 ## How to use this

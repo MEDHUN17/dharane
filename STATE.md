@@ -11,8 +11,9 @@ Last updated: 2026-10-09
 - [x] Part J roadmap + staged growth plan
 - [x] Part L information request
 - [x] Verification log (sources and dates)
-- [ ] Part E application catalogue (one file per category)
-- [ ] Part F device integration, Part G security + backup, Part H automation + monitoring
+- [x] Part E application catalogue + exposure matrix (docs/apps/)
+- [x] Part G security + backup, Part H automation + monitoring, tested example scripts (examples/)
+- [ ] Part F device integration
 - [ ] Part I cost comparison (needs dated INR research; hardware/state answers help)
 - [ ] Part K documentation templates
 - [ ] Implementation phases (start after Part L is answered)
