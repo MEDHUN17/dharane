@@ -155,9 +155,8 @@ Verify dumps: size sanity check, and restore into a scratch instance monthly.
 
 | Time (server local) | Job |
 |---------------------|-----|
-| 02:00 | Immich built-in DB dump **[V default]** and other dump hooks (start no later than 02:30) |
-| 03:00 | Local restic backup (after dumps) |
-| 04:00 | Off-site restic backup (after local; bandwidth-limited if needed with `--limit-upload` **[V]**) |
+| 02:00 | Immich's own built-in database dump (app-native, default schedule **[V]**) |
+| 03:00 | `backup.sh` (example): runs the dump hooks for any *other* databases first, then the local restic backup, then the off-site backup, in that order. Split into two timers with `--local-only` and `--offsite-only` if you want different times. Bandwidth-limit the off-site leg with `--limit-upload` if needed **[V]** |
 | Weekly (Sun 05:00) | `forget` per policy (local); `check` (structure) |
 | Monthly | `check --read-data-subset` rotating slice **[V]**; off-site restore of a sample |
 | Quarterly | Full-app restore rehearsal |

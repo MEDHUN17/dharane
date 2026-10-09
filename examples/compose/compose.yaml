@@ -1,0 +1,92 @@
+# Generic Compose project template (EXAMPLE, not an application).
+# Replace every placeholder. Take app-specific settings (image, ports, environment variables,
+# commands) from the application's CURRENT official install documentation at install time.
+# This file shows the conventions from docs/02-design-decisions.md section C5 only.
+name: example-app
+
+services:
+  app:
+    image: registry.example.invalid/example/app:1.2.3   # pin a version or digest; never "latest"
+    restart: unless-stopped
+    user: "10001:10001"                 # dedicated numeric ID, recorded in the inventory
+    read_only: true                     # root filesystem read-only; list the writable paths below
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL                             # add back only what the app documents it needs
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 512m
+    cpus: 1.0
+    pids_limit: 200
+    env_file:
+      - .env                            # real values stay out of Git; commit .env.example only
+    healthcheck:
+      test: ["CMD", "/app/healthcheck"] # placeholder: use the app's documented health command
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    depends_on:
+      db:
+        condition: service_healthy      # wait until the database is READY, not merely started
+        restart: true
+    networks:
+      - proxy                           # shared with the reverse proxy only
+      - internal                        # private to this stack
+    volumes:
+      - type: bind
+        source: /srv/appdata/example-app/config
+        target: /config
+        bind:
+          create_host_path: false       # refuse to start if the directory is missing (unmounted disk)
+      - type: bind
+        source: /srv/storage/media-root/media
+        target: /media
+        read_only: true                 # data the app only reads is mounted read-only
+        bind:
+          create_host_path: false
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    # Deliberately no "ports:" - the reverse proxy reaches the app over the proxy network.
+    # If a host port is ever needed, publish it to 127.0.0.1 or the Tailscale address, never all interfaces.
+
+  db:
+    image: registry.example.invalid/example/db:16.0
+    restart: unless-stopped
+    user: "10002:10002"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 1g
+    pids_limit: 200
+    secrets:
+      - db_credential                   # the app must support reading its secret from a file
+    healthcheck:
+      test: ["CMD-SHELL", "db-ready-check"]   # placeholder: use the database's documented readiness command
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - internal                        # databases are never on the proxy network
+    volumes:
+      - type: bind
+        source: /srv/appdata/example-app/db
+        target: /var/lib/db
+        bind:
+          create_host_path: false
+
+networks:
+  proxy:
+    external: true
+    name: proxy                         # created once, shared with Caddy
+  internal:
+    internal: true                      # no route to the internet
+
+secrets:
+  db_credential:
+    file: /srv/secrets/example-app/db_credential   # root-owned, mode 0600, outside Git

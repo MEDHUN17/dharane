@@ -8,8 +8,9 @@
 # when its level changes, and again every REMIND_HOURS while it persists; a "resolved"
 # message is sent once when it clears. State lives in STATE_DIR.
 #
-# A server cannot reliably report its own complete failure: pair this with an EXTERNAL
-# heartbeat/uptime check (Part H).
+# A server cannot reliably report its own complete failure, so each completed run also pings an
+# EXTERNAL dead-man's-switch URL (HEARTBEAT_URL, optional). The absence of the ping is the alert
+# that the host or this timer is down. The URL is a secret and is never printed or logged.
 #
 # Usage: check-health.sh [--dry-run] [-h]     (--dry-run prints findings, notifies nothing, keeps no state)
 # Config: $HEALTH_CONF or /etc/home-server/health.conf (shell syntax). See examples/config/health.conf.example.
@@ -37,7 +38,7 @@ CONF="${HEALTH_CONF:-/etc/home-server/health.conf}"
 [ -r "$CONF" ] || { echo "config not readable: $CONF" >&2; exit 1; }
 # shellcheck source=/dev/null
 . "$CONF"
-: "${DISK_WARN_PCT:=80}" "${DISK_CRIT_PCT:=90}" "${BACKUP_MAX_AGE_HOURS:=30}"
+: "${DISK_WARN_PCT:=80}" "${DISK_CRIT_PCT:=90}" "${BACKUP_WARN_AGE_HOURS:=26}" "${BACKUP_MAX_AGE_HOURS:=30}"
 : "${MEM_AVAILABLE_WARN_PCT:=10}" "${LOAD_WARN_PER_CORE:=2}" "${TEMP_WARN_C:=80}" "${TEMP_CRIT_C:=90}"
 : "${CERT_WARN_DAYS:=14}" "${CERT_CRIT_DAYS:=5}" "${REMIND_HOURS:=24}" "${CHECK_DOCKER:=1}"
 : "${STATE_DIR:=/var/lib/home-server/health}" "${NOTIFY_CMD:=/usr/local/bin/notify.sh}"
@@ -79,7 +80,9 @@ check_backups() {
     if ! [[ "$ts" =~ ^[0-9]+$ ]]; then emit WARN "backup:$f" "unreadable backup stamp $f"; continue; fi
     age=$(((NOW - ts) / 3600))
     if [ "$age" -ge "$BACKUP_MAX_AGE_HOURS" ]; then
-      emit CRIT "backup:$f" "last backup recorded in $f is ${age}h old (limit ${BACKUP_MAX_AGE_HOURS}h)"
+      emit CRIT "backup:$f" "last backup recorded in $f is ${age}h old (critical at ${BACKUP_MAX_AGE_HOURS}h)"
+    elif [ "$age" -ge "$BACKUP_WARN_AGE_HOURS" ]; then
+      emit WARN "backup:$f" "last backup recorded in $f is ${age}h old (warning at ${BACKUP_WARN_AGE_HOURS}h)"
     fi
   done
 }
@@ -203,6 +206,16 @@ process() {
   fi
 }
 
+# Ping the external dead-man's-switch once per completed run. A failed ping must not fail the run,
+# and nothing here may print the URL (curl's own messages are suppressed).
+heartbeat() {
+  local url="${HEARTBEAT_URL:-}"
+  [ -n "$url" ] || return 0
+  if [ "$DRY_RUN" -eq 1 ]; then echo "dry-run: would send the heartbeat ping"; return 0; fi
+  curl -fsS -m 10 --retry 2 -o /dev/null "$url" >/dev/null 2>&1 || echo "warning: heartbeat ping failed" >&2
+  return 0
+}
+
 check_disks
 check_mounts
 check_backups
@@ -213,4 +226,5 @@ check_systemd
 check_docker
 check_certs
 process
+heartbeat
 [ "${#FINDINGS[@]}" -gt 0 ] || echo "all checks passed"

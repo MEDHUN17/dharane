@@ -83,7 +83,7 @@ Hard gate: **no public exposure (Phase 9) until Phase 6 (restore-tested backups)
 |---|---|
 | Objective | A hardened baseline before anything is added |
 | Prerequisites | Phase 1; keep console access until verified |
-| Tasks | Generate an SSH key (with a passphrase) on your admin machine; install the public key; disable password and root login with a **drop-in** file; test in a second session before closing the first **[W]**. Host firewall (ufw) with default-deny inbound, allowing SSH from the LAN (tailnet later) - remembering Docker bypasses ufw for published ports **[V]**. Automatic security updates **[W]**. Time sync. Journald size limits. Power: firmware auto-restart; plan a UPS (decision in Part J/Part I). Note recovery steps for a broken sshd config. |
+| Tasks | Generate an SSH key (with a passphrase) on your admin machine; install the public key; disable password and root login with a **drop-in** file; test in a second session before closing the first **[W]**. Host firewall (ufw) with default-deny inbound, allowing SSH from the LAN (tailnet later) - remembering Docker bypasses ufw for published ports **[V]**. Automatic security updates **[W]**. Time sync. Journald size limits. Power: firmware auto-restart; plan a UPS and put the router/ONT on it too (see [`04-power-physical.md`](04-power-physical.md)); decision and prices in Part I. Note recovery steps for a broken sshd config. |
 | Config produced | `sshd` drop-in, firewall rules, unattended-upgrades config |
 | Expected outcome | Keys-only SSH, deny-by-default inbound, auto security patches |
 | Security checks | `ss -tlnp` shows only SSH (and DNS client stuff) **[R]**; no listening service you didn't choose |

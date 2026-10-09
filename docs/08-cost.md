@@ -118,6 +118,7 @@ Not on storage cost alone. A shared Google One 2 TB plan is about **Rs 7,800/yr*
 
 | Service | Watch for |
 |---------|-----------|
+| Off-site repo growth | With `OFFSITE_PRUNE_ENABLED=0` and no prune run from a trusted machine, the off-site repository only ever grows, and so does a per-TB bill. Schedule a periodic prune elsewhere (use `forget --keep-within` for append-only repositories) before relying on it |
 | Backblaze B2 | Free egress only up to about 3x your stored volume per month; beyond that US$0.01/GB; a full `restic check --read-data` or a mass restore counts as egress **[S]** |
 | Cloudflare R2 | Per-operation charges and a free allowance whose existence sources dispute; chatty backups make many operations **[S]**; verify on the pricing page |
 | Wasabi | 1 TB minimum billing; minimum retention for deleted objects, whose length sources disagree on **[U]** |
@@ -132,3 +133,15 @@ Habits: set budget alerts where offered; test restores on small slices; record e
 ## 7. What I still need to finish this part
 
 Your state/DISCOM and tariff slab; whether you already own a server, disks and a UPS; how much data must be backed up off-site; whether you plan cameras or game servers (then I will price those items properly).
+
+## 8. Source links
+
+Rows in the price book come from these pages; open them to confirm before buying. The same links, by ID, are in [`12-verification-log.md`](12-verification-log.md).
+
+- Exchange rates: https://dollarrupee.in/ , https://30rates.com/eur-to-inr
+- Backblaze B2: https://egresscost.com/backblaze-b2 ; Cloudflare R2: https://filebase.com/blog/cloudflare-r2-pricing-costs-savings-and-alternatives-in-2026/ ; Wasabi: https://toolradar.com/tools/wasabi/pricing ; Hetzner BX11: https://www.hetzner.com/de/storage/storage-box/bx11/
+- Google One and iCloud+ (India): https://www.itforsme.in/best/cloud-storage-personal-use-india
+- Domains: https://priceworld.com/domains/cloudflare/ , https://domainoffer.net/tld/in
+- Tailscale plan change: https://tailscale.com/blog/pricing-v4 ; Cloudflare Zero Trust: https://zerotrustcost.com/cloudflare-zero-trust-pricing ; Plex: https://9to5mac.com/2026/05/19/plex-increasing-lifetime-plex-pass-cost-to-whopping-750/
+- India hardware: https://techenclave.com/t/intel-n100-n150-mini-pcs-itx-motherboards-for-nas-home-servers-firewalls-opnsense-pfsense/397179 , https://getpc.co.in/parts/storage/seagate-ironwolf-4tb , https://magicdrop.in/drops/2tb-hard-disk , https://magicdrop.in/drops/1tb-ssd , https://magicdrop.in/drops/best-ups-for-home , https://estorewale.com/product/apc-back-ups-1100va-bx1100c-in
+- Electricity tariffs (indicative): https://www.voltflow.net/blog/electricity-rates-india-by-state-2026 , https://desiutility.com/electricity/tariffs , https://www.mymotor.in/blog/ev-charging-cost-india-state-wise-tariff

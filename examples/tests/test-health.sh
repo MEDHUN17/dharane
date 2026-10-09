@@ -47,6 +47,11 @@ cat >"$T/notifier" <<'EOS'
 #!/usr/bin/env bash
 echo "$*" >>"$STUB_DIR/notify.log"
 EOS
+cat >"$T/bin/curl" <<'EOS'
+#!/usr/bin/env bash
+echo "$*" >>"$STUB_DIR/curl.log"
+exit "$(cat "$STUB_DIR/curl.rc" 2>/dev/null || echo 0)"
+EOS
 chmod +x "$T"/bin/* "$T/notifier"
 export STUB_DIR="$T"
 export PATH="$T/bin:$PATH"
@@ -70,7 +75,8 @@ CONF
 }
 
 reset() {
-  rm -rf "$T/state" "$T/thermal" "$T"/docker.* "$T"/systemd.failed "$T/df.pct"
+  rm -rf "$T/state" "$T/thermal" "$T"/docker.* "$T"/systemd.failed "$T/df.pct" "$T/curl.rc"
+  : >"$T/curl.log"
   mkdir -p "$T/state" "$T/thermal/zone0"
   : >"$T/notify.log"
   echo "$T/data" >"$T/mounted.list"
@@ -139,6 +145,26 @@ reset; echo "app" >"$T/docker.unhealthy"; run
 check "unhealthy container -> WARN" notified 'unhealthy containers: app'
 reset; printf 'foo.service loaded failed failed Foo\n' >"$T/systemd.failed"; run
 check "failed systemd unit -> WARN" notified 'failed units: foo.service'
+
+# 7b. backup age: warning then critical
+reset; echo $(($(date +%s) - 27 * 3600)) >"$T/stamp"; run
+check "27 h old backup -> WARN" bash -c "grep -q 'WARN' '$T/notify.log' && grep -q 'warning at 26h' '$T/notify.log'"
+reset; echo $(($(date +%s) - 31 * 3600)) >"$T/stamp"; run
+check "31 h old backup -> CRIT" bash -c "grep -q 'critical at 30h' '$T/notify.log'"
+
+# 7c. external heartbeat
+reset; write_conf <<<"HEARTBEAT_URL=http://127.0.0.1:9/hb-private-token"; run
+check "heartbeat is pinged on a normal run" grep -q 'hb-private-token' "$T/curl.log"
+check "heartbeat URL is never printed" bash -c "! printf '%s' \"$OUT\" | grep -q hb-private-token"
+reset; write_conf <<<"HEARTBEAT_URL=http://127.0.0.1:9/hb-private-token"; echo 95 >"$T/df.pct"; run
+check "heartbeat still pings when there are findings" grep -q 'hb-private-token' "$T/curl.log"
+reset; write_conf <<<"HEARTBEAT_URL=http://127.0.0.1:9/hb-private-token"; echo 22 >"$T/curl.rc"; run
+check "a failed heartbeat does not fail the run" test "$RC" -eq 0
+check "a failed heartbeat warns without leaking the URL" bash -c "printf '%s' \"$OUT\" | grep -q 'heartbeat ping failed' && ! printf '%s' \"$OUT\" | grep -q hb-private-token"
+reset; write_conf <<<"HEARTBEAT_URL=http://127.0.0.1:9/hb-private-token"; run --dry-run
+check "dry run sends no heartbeat" test ! -s "$T/curl.log"
+reset; run
+check "no heartbeat when none is configured" test ! -s "$T/curl.log"
 
 # 8. dry run
 reset; echo 95 >"$T/df.pct"; run --dry-run

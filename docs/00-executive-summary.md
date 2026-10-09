@@ -99,6 +99,6 @@ Each has a gate in the staged growth plan (Part J, stages) and is revisited when
 - Decision table: [`02-design-decisions.md`](02-design-decisions.md), storage layout: [`02a-storage-layout.md`](02a-storage-layout.md)
 - Hardware tiers and capacity: [`03-hardware-capacity.md`](03-hardware-capacity.md)
 - Application catalogue and exposure matrix: [`apps/README.md`](apps/README.md)
-- Devices: [`05-device-integration.md`](05-device-integration.md); security and backup: [`06-security-backup.md`](06-security-backup.md); automation and monitoring: [`07-automation-monitoring.md`](07-automation-monitoring.md); costs: [`08-cost.md`](08-cost.md)
+- Power and physical setup: [`04-power-physical.md`](04-power-physical.md); devices: [`05-device-integration.md`](05-device-integration.md); security and backup: [`06-security-backup.md`](06-security-backup.md); automation and monitoring: [`07-automation-monitoring.md`](07-automation-monitoring.md); costs: [`08-cost.md`](08-cost.md)
 - Roadmap: [`09-roadmap.md`](09-roadmap.md) and growth stages [`09a-growth-stages.md`](09a-growth-stages.md); troubleshooting: [`10-troubleshooting.md`](10-troubleshooting.md); templates: [`templates/README.md`](templates/README.md)
 - Questions for you: [`11-information-needed.md`](11-information-needed.md)

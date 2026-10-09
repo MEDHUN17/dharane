@@ -17,6 +17,8 @@ Last updated: 2026-10-09
 - [x] Part I cost comparison (dated, sourced; hardware prices low confidence; refine after Part L)
 - [x] Part K documentation templates + repo/secrets policy
 - [x] Troubleshooting handbook
+- [x] Power, UPS, inverter and physical-setup guide (docs/04-power-physical.md)
+- [x] Generic schema-validated Compose template (examples/compose/)
 - [ ] Implementation phases (start after Part L is answered)
 
 ## Open decisions (owner)

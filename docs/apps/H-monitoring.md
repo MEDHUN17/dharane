@@ -19,7 +19,7 @@ Monitoring tells you a service is *up*; it does not prove its data is intact or 
 | **Authentication / security** | Admin account with 2FA **[V]**; notification tokens in its database are secrets: back it up encrypted |
 | **Backup / recovery** | Back up the data directory using a consistent method (stop briefly or use its backup facility); worst case, rebuild monitors from your service inventory (Part K) |
 | **Maintenance / cost** | Monthly update after release notes; free |
-| **Limits** | **It cannot report its own host dying.** Run a second probe on a different device or use a hosted external check, and use Kuma's push/heartbeat monitor with the backup and health timers as a dead-man's switch |
+| **Limits** | **It cannot report its own host dying.** Run a second probe on a different device or use a hosted external check, and use Kuma's push monitor (or a hosted heartbeat service) with the backup job and `check-health.sh` as dead-man's switches |
 | **Continuous?** | Yes |
 | **Avoid when** | You have no services yet, or prefer only scripts and an external heartbeat |
 

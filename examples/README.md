@@ -11,7 +11,9 @@ They contain placeholders only; real configuration and secrets live outside this
 | `scripts/notify.sh` | One push notification to an ntfy-style HTTP endpoint; token passed via a private header file, never on the command line |
 | `config/*.example` | Configuration templates (shell syntax, root-owned, mode 0600 when real) |
 | `systemd/*` | Service/timer pairs and an `OnFailure=` notifier |
+| `compose/` | Generic, schema-validated Compose template showing the project conventions (placeholder images only) |
 | `tests/*.sh` | Test suites using stub `restic`, `df`, `docker`, `curl` etc. in a temp directory |
+| `tests/validate-compose.py` | Validates a Compose file against the official compose-spec JSON schema (2020-12) |
 
 ## Run the tests (safe: no root, no network, no real repositories)
 
@@ -19,6 +21,10 @@ They contain placeholders only; real configuration and secrets live outside this
 bash examples/tests/test-backup.sh
 bash examples/tests/test-health.sh
 bash examples/tests/test-notify.sh
+
+# Compose template (needs: pip install jsonschema pyyaml, and the schema file)
+curl -O https://raw.githubusercontent.com/compose-spec/compose-spec/main/schema/compose-spec.json
+python3 examples/tests/validate-compose.py examples/compose/compose.yaml compose-spec.json
 ```
 
 They were run with `shellcheck` (clean) and `bash -n`; the unit files pass `systemd-analyze verify`.
@@ -38,6 +44,6 @@ Phase 6 (backups) and Phase 7 (monitoring) in [`docs/09-roadmap.md`](../docs/09-
 
 ## Known limits
 
-- `check-health.sh` reports local conditions. A server cannot reliably report its own complete failure: pair it with an external heartbeat/uptime check.
+- `check-health.sh` reports local conditions and pings an optional external heartbeat URL after each run (`HEARTBEAT_URL`); a server cannot reliably report its own complete failure, so the *missing* ping is what the external service alerts on.
 - Certificate checks need `openssl` and network reachability to the endpoint.
 - Network-usage and trend alerts are out of scope here (they need a metrics stack or `vnstat`; see Part H).

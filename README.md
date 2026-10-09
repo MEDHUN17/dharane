@@ -29,6 +29,7 @@ Every verified fact and its source is in [`docs/12-verification-log.md`](docs/12
 | G | Security, identity and backup architecture | [`docs/06-security-backup.md`](docs/06-security-backup.md) | draft v0.1 |
 | H | Automation and monitoring | [`docs/07-automation-monitoring.md`](docs/07-automation-monitoring.md) | draft v0.1 |
 | I | Cost comparison (INR, dated sources) | [`docs/08-cost.md`](docs/08-cost.md) | draft v0.1 (prices low-to-medium confidence) |
+| - | Power, UPS, inverters and physical setup | [`docs/04-power-physical.md`](docs/04-power-physical.md) | draft v0.1 |
 | J | Phased implementation roadmap | [`docs/09-roadmap.md`](docs/09-roadmap.md) | draft v0.1 |
 | J | Staged growth plan | [`docs/09a-growth-stages.md`](docs/09a-growth-stages.md) | draft v0.1 |
 | K | Documentation templates and repo/secrets policy | [`docs/templates/`](docs/templates/README.md) | draft v0.1 |

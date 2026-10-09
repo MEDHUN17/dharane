@@ -30,7 +30,7 @@ A server cannot reliably report its own complete failure. So:
 
 | Must run **outside** the server | May run on the server |
 |---------------------------------|-----------------------|
-| Heartbeat from the backup job and from the health timer (the *absence* of a ping is the alert) | smartd, disk/mount/sentinel checks |
+| Heartbeat pings from the backup job (nightly) and from `check-health.sh` (every 15 minutes, `HEARTBEAT_URL`); the *absence* of a ping is the alert | smartd, disk/mount/sentinel checks |
 | Reachability of public hostnames and of the tailnet address (from a cheap second device or a hosted prober) | Container health, restart loops |
 | Power/internet loss visibility (a second device on mains, or the hosted heartbeat going silent) | Memory/CPU/temperature, cert expiry (also check externally) |
 
@@ -40,7 +40,7 @@ Thresholds are starting points; tune after a month of real data. "Where" says wh
 
 | Condition | Signal / tool | Where | Warning | Critical | Action | How to test |
 |-----------|---------------|-------|---------|----------|--------|-------------|
-| Host unreachable | External heartbeat from `check-health.sh`; external ping/TCP probe | **External** | 1 missed beat | 3 missed beats (45 min) | Check power, router, then console | Stop the timer for 50 min once |
+| Host unreachable | Heartbeat ping sent by `check-health.sh` every 15 min to a hosted dead-man's-switch; external ping/TCP probe | **External** | 1 missed beat | 3 missed beats (45 min) | Check power, router, then console | Stop the timer for 50 min once |
 | Application unavailable | Uptime Kuma HTTP/keyword checks (via tailnet or LAN) | External-ish (run on a *different* device if possible) | 2 failed checks | 5 min down | Check container logs/health | Stop the container once |
 | Container restarting repeatedly | `docker ps --filter status=restarting` in `check-health.sh` | Local | n/a | any restarting | `docker compose logs`; roll back last change | Start a container with a bad command |
 | Disk failure indicators | smartd + `smartctl -H` | Local | reallocated/pending sectors > 0 | SMART FAILING status | Replace disk after verifying backup | `smartctl` self-test log; smartd test mail option |
