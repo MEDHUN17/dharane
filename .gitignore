@@ -1,0 +1,22 @@
+# Secrets and machine-specific material - never commit these.
+.env
+.env.*
+!.env.example
+*.env
+secrets/
+*.key
+*.pem
+*.age
+*.gpg
+*.kdbx
+id_rsa*
+id_ed25519*
+!*.pub
+*authkey*
+*.token
+*password*
+!*password*.md
+
+# Editor / OS noise
+*.swp
+.DS_Store
