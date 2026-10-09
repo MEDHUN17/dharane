@@ -90,3 +90,10 @@ Many homes have an inverter and battery bank. Things to know:
 | 8 | Cooling, dust control and sensible placement | Longevity |
 | 9 | Spare cables, a spare router/AP, a saved router config | Fast recovery |
 | 10 | Up-to-date inventory and recovery kit | Makes everything above recoverable by someone else |
+
+## 12. A laptop as the server
+
+- **The battery is a small built-in UPS** that lets the OS shut down cleanly when it runs low; many cheap UPS units have no data port, so the laptop's own battery signal can be the shutdown trigger. Check the battery for swelling before running 24/7 and remove it if it is swollen **[K]**.
+- **Power-on after an outage:** most laptops will not turn themselves on again after the battery has run flat; the external heartbeat alert is how you find out.
+- **External drives:** a mains-powered 3.5" dock loses power in an outage while the laptop keeps running on its battery, unless the dock is on the UPS; a bus-powered 2.5" drive keeps running only as long as the laptop does. Disable USB autosuspend and disk spin-down for the data drive **[K]**.
+- **Network gear on the UPS**, wired Ethernet, a cleaned fan and a hard ventilated surface (sections 3 and 7).

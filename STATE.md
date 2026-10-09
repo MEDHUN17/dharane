@@ -19,7 +19,8 @@ Last updated: 2026-10-09
 - [x] Troubleshooting handbook
 - [x] Power, UPS, inverter and physical-setup guide (docs/04-power-physical.md)
 - [x] Generic schema-validated Compose template (examples/compose/)
-- [ ] Implementation phases (start after Part L is answered)
+- [x] Constrained single-laptop profile (docs/13-low-end-profile.md), generic; personal answers kept out of this public repo
+- [ ] Implementation phases: Phase 0 (inventory) in progress; waiting on the follow-up answers in docs/11-information-needed.md
 
 ## Open decisions (owner)
 1. **Repo visibility is PUBLIC.** Fine for this generic blueprint. Make it private, or use a separate private
@@ -50,4 +51,4 @@ storage, backup-local).
 - No public exposure before backups are restore-tested and alerts exist.
 
 ## Next
-Waiting on Part L answers (docs/11-information-needed.md). Then: tier the hardware, refine Part I, start Phase 0/1 interactively.
+Waiting on the follow-up answers (docs/11-information-needed.md): laptops and CPU model, upload speed, router DNS setting, camera type, data sizes, who "public" means, whether the monthly budget includes electricity. Then: finalise purchases, refine Part I, start Phase 1 interactively.

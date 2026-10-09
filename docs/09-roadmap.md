@@ -4,6 +4,8 @@ Hardware is still unknown, so this roadmap lists **tasks, validations, rollback 
 
 Command labels used from now on: **[R]** read-only, **[W]** changes configuration or state, **[D]** destructive or hard to reverse (always preceded by target verification and a backup). Never paste passwords, auth keys, tokens, private keys or recovery codes into chat; use placeholders and I will show where to insert the real value locally.
 
+> **Constrained hardware?** If the machine is an old laptop with 4-8 GB RAM, a ~256 GB disk and a slow uplink, follow [`13-low-end-profile.md`](13-low-end-profile.md) for which phases to do, in what order, and which to skip.
+
 ## Dependency map
 
 Solid arrows are hard prerequisites. Dashed arrows are optional or conditional.

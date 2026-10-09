@@ -72,3 +72,18 @@ Heavier, multi-container, with its own licensing and resource needs **[U]**: ver
 4. Never put behind SSO: SSH, the Tailscale login, the password manager, the gateway's own recovery, or the router.
 
 MFA support differs per app; see the table in [`O-family-access.md`](O-family-access.md).
+
+## If you already use LastPass
+
+**Facts [S]:** LastPass disclosed in late 2022 that attackers copied customers' encrypted vault backups (along with some unencrypted data such as website URLs). The encryption holds only as long as the master password is strong and the iteration count is high; researchers and reporters link later large cryptocurrency thefts to cracked vaults (amounts vary by report, so none is quoted here). UC Berkeley's guidance: set *password iterations* to at least 600,000, enable MFA, and change passwords for sensitive accounts. I could not find LastPass's own current default iteration figure: check the value in your account settings.
+
+**Do this now:**
+1. Use a long, unique master password (a passphrase of several random words is easier to remember than symbols).
+2. Check the iteration setting; raise it if it is below 600,000.
+3. Keep MFA on (an authenticator app); generate and print the account's recovery options.
+4. Change the passwords for email, banking and anything financial first; then the rest over time.
+5. Do not keep cryptocurrency seed phrases in any password manager.
+
+**Staying or leaving:** hardening LastPass is acceptable if you do the steps above; moving to a hosted manager such as Bitwarden is a reasonable alternative (several comparison pages are affiliate-style, so weigh them). **Do not self-host Vaultwarden yet** on a single old laptop with no tested backups; revisit once restores have been rehearsed (Stage 3).
+
+**Authenticator hygiene:** Google Authenticator can back its codes up to your Google account, which makes a lost phone recoverable but is reported as not end-to-end encrypted, so protect the Google account itself; also generate the Google account's one-time backup codes and store them printed, off the phone **[S]**.

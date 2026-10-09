@@ -56,9 +56,9 @@ Design rule: the server holds the master; PCs and phones are clients or caches; 
 | **Install** | Container or host service on the server; clients on PCs/phones. Verify the current install method at Phase 8 |
 | **Exposure / access** | Sync port class 2; the web GUI is admin-only (localhost / SSH tunnel) |
 | **Authentication / security** | Devices authenticate by device ID; verify IDs when pairing; GUI password set; use folder types deliberately (send-only on the server for pure distribution, receive-only for pure ingest) **[K]** |
-| **Backup / recovery** | Not a backup. Enable file versioning for accident recovery; the server's copy is backed up by restic |
+| **Backup / recovery** | Not a backup. File versioning is **off by default**: enable *Trash Can* versioning so deleted files are kept in `.stversions` **[V]**, and leave `ignoreDelete` alone (the docs reserve it for power users) **[V]**; the server's copy is backed up by restic |
 | **Maintenance / cost** | Updates monthly; free |
-| **Limits / devices** | **Android:** the official Syncthing-Android wrapper is **discontinued**: its README states the last GitHub/F-Droid release was the December 2024 Syncthing version and the repo is being archived **[V]**. Community forks exist; evaluate their maintenance before relying on one **[U]**. **iOS:** no official app; third-party apps are limited by iOS background execution **[K]**. Conflicts create `sync-conflict` copies that need human review |
+| **Limits / devices** | **Android:** the official Syncthing-Android wrapper is **discontinued**: its README states the last GitHub/F-Droid release was the December 2024 Syncthing version and the repo is being archived **[V]**. A community fork, **Syncthing-Fork** (repository `researchxxl/syncthing-android`, F-Droid package `com.github.catfriend1.syncthingfork`), is documented in its own README **[V]**; check its latest release date and issue tracker before relying on it **[U]**. **iOS:** no official app; third-party apps are limited by iOS background execution **[K]**. Conflicts create `sync-conflict` copies that need human review |
 | **Continuous?** | Yes (on at least the server and one other device) |
 | **Avoid when** | Your devices are mainly phones (use Immich for photos), or you want a single web UI for everything (consider Nextcloud) |
 

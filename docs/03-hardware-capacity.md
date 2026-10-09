@@ -15,6 +15,8 @@ Hardware is **unknown**. These are workload classes, not product recommendations
 
 Limits of this table: two machines in the same tier can behave very differently (memory channels, SSD quality, iGPU generation). The real classifier is *measured* headroom, which we collect in Phase 0 and again after Stage 2.
 
+Constrained laptop-class hardware (old dual-core Core i3, 4-8 GB RAM, small disk, slow uplink): see [`13-low-end-profile.md`](13-low-end-profile.md) for what is realistic.
+
 Hardware gotchas that matter regardless of tier:
 - **Jellyfin on integrated graphics**: its docs recommend, for example, Intel N100, Core i5-11400 or Pentium Gold G7400 class parts, say **not** to expect good results from Intel J/M/N/Y-series up to 11th gen, advise against AMD graphics for this role, and list most single-board computers (including the Raspberry Pi 5) as too slow for a good experience **[V]**. Jellyfin 10.11 requires a CPU with SSE4.1 **[V]**.
 - **Immich machine-learning** on x86 requires the x86-64-v2 level since v3; most CPUs from about 2012 qualify **[V]**.

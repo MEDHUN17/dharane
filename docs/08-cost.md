@@ -24,6 +24,10 @@ Confidence: **A** several consistent sources; **B** one decent source; **C** con
 | Cloudflare Zero Trust (Access, Tunnel) | US$0 for up to 50 users; paid US$7/user/month | Third-party pages 2026 **[S]** | Rs 0 | B |
 | Plex Pass | Lifetime US$749.99 since 2026-07-01; five-year US$249.99 | Press coverage **[S]** | Rs 71,962 lifetime (not recommended; Jellyfin is free) | B |
 | Hosted heartbeat, push notifications | Free tiers typical | Not researched | N | N |
+| Google One tiers (India) | Rs 59 (30 GB), Rs 130 (100 GB), Rs 210 (200 GB), Rs 650 (2 TB) per month | July 2026 buyer's guide **[S]** | 100 GB = **Rs 1,560/yr**; 200 GB = **Rs 2,520/yr** | B |
+| playit.gg premium | US$3/month or US$30/year (free tier exists; limits disputed) | Reviews and guides 2026 **[S]** | Rs 288/month or Rs 2,879/yr | C |
+| Minecraft hosting, India | Rs 150 per GB (4 GB = Rs 399/month, vendor claim); Hostinger Game Panel Rs 649/month renewing at Rs 999 | Vendor pages and a 2026-10-05 news article **[S]** | as listed | C |
+| Aternos, Oracle Cloud Always Free | Free (Aternos ad-supported; Oracle reportedly cut to 2 OCPU/12 GB in June 2026) | Guides and trackers **[S]** | Rs 0 | C |
 
 ### Hardware (one-time)
 
@@ -38,7 +42,10 @@ Confidence: **A** several consistent sources; **B** one decent source; **C** con
 | UPS, APC Back-UPS 600 VA (router + mini PC) | About Rs 3,490-4,800 | Reseller pages and a July 2026 roundup | B |
 | UPS, APC Back-UPS 1100 VA | About Rs 6,700-8,430 | Same | B |
 | Raspberry Pi 5 4 GB | Sources range Rs 5,500 to Rs 12,000 | Retailer blogs | **N** (too inconsistent to use) |
-| Managed or PoE switch, cameras, surveillance HDD, VPS, UPS replacement batteries | Not researched | - | **N**: tell me if you plan to buy and I will price them |
+| 1 TB portable USB drive | Toshiba Canvio about Rs 3,599; WD Elements Rs 8,899-9,981; Seagate Expansion about Rs 9,799; older deal pages Rs 3,700-4,000 | June 2026 roundup and deal pages | **C** (large spread) |
+| 256 GB 2.5" SATA SSD | Rs 2,599-3,599 (several brands) | July-September 2026 deal listings and a June roundup | **C** |
+| 16-channel analog DVR | CP Plus Rs 5,700-6,800 (5 MP Rs 10,800); Hikvision Rs 9,500-14,500; full 16-camera kit with 4 TB disk Rs 30,000-45,000 | B2B listings and a price tracker, 2026 | **C** (hard disk not priced) |
+| Managed or PoE switch, cameras, surveillance HDD, VPS, USB-SATA dock/enclosure, UPS replacement batteries | Not researched | - | **N**: tell me if you plan to buy and I will price them |
 
 ## 2. Electricity
 
@@ -90,6 +97,18 @@ Tariffs differ by state, slab, fixed charges and surcharges. Search results disa
 | Additional purchases | Higher-tier machine or a second box, a secondary DNS/monitor device (Raspberry Pi class: **not priced**), a managed/PoE switch (**not priced**), more drives |
 | Mandatory recurring | Electricity at 60-100 W: about Rs 2,100-8,600/yr; off-site for ~5 TB: about Rs 40,000/yr on B2 or Wasabi, about Rs 86,000/yr on R2 (plus operations) |
 | Optional recurring | VPS relay for game servers (**not priced**), additional storage-box tiers (**not priced**) |
+
+### Scenario D: Constrained single laptop (about Rs 12,000-15,000 once and about Rs 200/month)
+
+| Category | Cost |
+|----------|------|
+| Existing hardware assumed | The laptop(s), a UPS, the router, the phones |
+| Additional purchases (choose by what you own) | **If the laptop has a hard drive:** a 256 GB SATA SSD, about Rs 2,600-3,600 **C**. **Data storage, one of:** 1 TB portable Rs 3,600-10,000 **C**; 2 TB portable Rs 12,049-12,949 **C**; 4 TB 3.5" NAS-class Rs 7,000-10,500 **C** plus an enclosure/dock (not priced). **Small items:** Ethernet cable, USB installer stick (a few hundred rupees **E**). Examples: SSD + 4 TB drive about **Rs 9,600-14,100** before the dock; a 2 TB portable alone about **Rs 12,000-12,900**; SSD + 1 TB portable about **Rs 6,200-13,600** |
+| Mandatory recurring | Off-site copy: Backblaze B2 at about Rs 667/TB/month gives roughly **300 GB for Rs 200** (150 GB for Rs 100); or Google One 100 GB Rs 130 or 200 GB Rs 210. Domain renewal about Rs 970-1,000/yr, roughly Rs 80/month. Electricity for a laptop plus drive (about 25-35 W): about 18-25 kWh/month, **Rs 72-250/month** across Rs 4-10 tariffs. *Whether the Rs 200 includes electricity decides which of these fit* |
+| Optional | A second local drive (another Rs 3,600-10,500 **C**) to reach three copies; a recorder for cameras (separate budget); a paid game host (Rs 400+/month) |
+| What money at this scale cannot fix | Public hosting of media or games from a home line with no inbound ports; 16-camera AI recording on an old laptop |
+
+Seeding time for the off-site copy depends on the measured upload speed (section 5 of [`13-low-end-profile.md`](13-low-end-profile.md)).
 
 ### Additions
 
@@ -145,3 +164,4 @@ Rows in the price book come from these pages; open them to confirm before buying
 - Tailscale plan change: https://tailscale.com/blog/pricing-v4 ; Cloudflare Zero Trust: https://zerotrustcost.com/cloudflare-zero-trust-pricing ; Plex: https://9to5mac.com/2026/05/19/plex-increasing-lifetime-plex-pass-cost-to-whopping-750/
 - India hardware: https://techenclave.com/t/intel-n100-n150-mini-pcs-itx-motherboards-for-nas-home-servers-firewalls-opnsense-pfsense/397179 , https://getpc.co.in/parts/storage/seagate-ironwolf-4tb , https://magicdrop.in/drops/2tb-hard-disk , https://magicdrop.in/drops/1tb-ssd , https://magicdrop.in/drops/best-ups-for-home , https://estorewale.com/product/apc-back-ups-1100va-bx1100c-in
 - Electricity tariffs (indicative): https://www.voltflow.net/blog/electricity-rates-india-by-state-2026 , https://desiutility.com/electricity/tariffs , https://www.mymotor.in/blog/ev-charging-cost-india-state-wise-tariff
+- Added for the constrained scenario: https://magicdrop.in/drops/1tb-external-hard-drive , https://magicdrop.in/drops/256gb-ssd , https://www.aajjo.com/product/cp-plus-16-ch-dvr-in-ghaziabad-ms-sv-india-infotech-solutions , https://price-history.in/product/cp-plus-16-channel-dvr-2-ea7eWzIm , https://gbnodes.host/blogs/cheap-minecraft-server-hosting-india-2026/ , https://zoutons.com/news/hostinger-minecraft-server-hosting-price-india-2026 , https://terminalbytes.com/oracle-cloud-free-tier-changes-2026 , https://www.teklynk.dev/blog/how-to-host-a-game-server-from-your-home-using-playItgg

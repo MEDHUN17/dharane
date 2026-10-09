@@ -29,11 +29,12 @@ Every verified fact and its source is in [`docs/12-verification-log.md`](docs/12
 | G | Security, identity and backup architecture | [`docs/06-security-backup.md`](docs/06-security-backup.md) | draft v0.1 |
 | H | Automation and monitoring | [`docs/07-automation-monitoring.md`](docs/07-automation-monitoring.md) | draft v0.1 |
 | I | Cost comparison (INR, dated sources) | [`docs/08-cost.md`](docs/08-cost.md) | draft v0.1 (prices low-to-medium confidence) |
+| - | **Constrained single-laptop profile** (old laptop, small disk, slow uplink, tiny budget) | [`docs/13-low-end-profile.md`](docs/13-low-end-profile.md) | draft v0.1 |
 | - | Power, UPS, inverters and physical setup | [`docs/04-power-physical.md`](docs/04-power-physical.md) | draft v0.1 |
 | J | Phased implementation roadmap | [`docs/09-roadmap.md`](docs/09-roadmap.md) | draft v0.1 |
 | J | Staged growth plan | [`docs/09a-growth-stages.md`](docs/09a-growth-stages.md) | draft v0.1 |
 | K | Documentation templates and repo/secrets policy | [`docs/templates/`](docs/templates/README.md) | draft v0.1 |
-| L | Information needed from the owner | [`docs/11-information-needed.md`](docs/11-information-needed.md) | **awaiting answers** |
+| L | Information needed from the owner | [`docs/11-information-needed.md`](docs/11-information-needed.md) | first answers received (kept private); follow-ups open |
 | - | Troubleshooting handbook (25 topics) | [`docs/10-troubleshooting.md`](docs/10-troubleshooting.md) | draft v0.1 |
 | - | Tested example scripts, systemd units and test suites | [`examples/`](examples/README.md) | tested |
 | - | Verification log | [`docs/12-verification-log.md`](docs/12-verification-log.md) | live |

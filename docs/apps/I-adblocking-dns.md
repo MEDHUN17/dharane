@@ -82,3 +82,12 @@ A DNS monitor (Uptime Kuma supports DNS record checks **[V]**) running on a diff
 ## Recommended approach
 
 AdGuard Home (or Pi-hole) as primary on the server, an identical instance on a cheap always-on device as secondary, both handed out by router DHCP (method A), blocking and rewrites kept in sync from Git, Tailscale split DNS for the internal zone, ports bound to LAN and tailnet only, and a documented break-glass step for DNS failure. Trial on one device for a week before switching the household.
+
+## Exception: one machine and no spare device
+
+The rule above (every resolver filters identically) assumes a second always-on device. With a single laptop and a router that may not let you set DNS, use this compromise:
+
+- **Primary:** AdGuard Home on the laptop (blocking plus any local names).
+- **Secondary:** a **hosted filtering resolver**, for example AdGuard DNS's default servers 94.140.14.14 and 94.140.15.15 (non-filtering 94.140.14.140 and 94.140.14.141; family 94.140.14.15 and 94.140.15.16) **[S]**. Ads are still filtered if the laptop is down, but internal names are not resolved by it and your DNS queries go to a third party.
+- **If the router cannot hand out DNS servers:** set static DNS per device (Android Wi-Fi settings, Android TV network settings) **[K]**. Do not use a Private DNS hostname you have not verified on the provider's own page.
+- Record this as a deliberate exception in your inventory and revisit it when a second device exists.

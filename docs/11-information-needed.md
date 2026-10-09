@@ -4,6 +4,8 @@ The plan does **not** block on these answers: provisional assumptions are in `00
 
 **Never send:** passwords, auth keys, API tokens, private keys, recovery codes, your exact home address, or your public IP. Disk serial numbers: last 4 characters are enough.
 
+> **Status:** first answers received in chat and deliberately **not stored in this public repository**. The profile they point to is described generically in [`13-low-end-profile.md`](13-low-end-profile.md). Remaining follow-ups are listed in section "Follow-up questions" at the end.
+
 ## Questions (and why each matters)
 
 | # | Question | Why I ask / what it changes |
@@ -63,3 +65,13 @@ Cameras / games / media size:
 1. I classify the machine into a tier and say which Stage 2-4 workloads are realistic (Part D section 11).
 2. I fill Part I with prices (dated, sourced, estimates marked) for your scenario.
 3. We start **Phase 0 -> Phase 1** interactively, one small verified batch at a time (`09-roadmap.md`).
+
+## Follow-up questions (what blocks a purchase or an install)
+
+1. **Laptops:** how many; for each the exact CPU model (Windows: Settings > System > About), RAM, whether the drive is an HDD or SSD (Task Manager > Performance > Disk), and whether it can be wiped and dedicated to the server.
+2. **Speed test:** download **and upload** in Mbps (fast.com or speedtest.net); whether the advertised plan speed is in megabits per second (Mbps) or megabytes per second (MB/s); any data cap; whether the router's WAN address looks like CGNAT (100.64.x.x to 100.127.x.x or a private range).
+3. **Router:** make and model; whether the DHCP/LAN settings let you change the DNS servers; whether you have the admin password.
+4. **Cameras:** coax/BNC cables to a DVR (analog) or network cables (IP)? Is there already a recorder with a hard disk?
+5. **Data size:** roughly how many GB of photos and videos across the phones (Settings > Storage), and whether Google Photos/Google One is already in use; how much documents; rough media library size.
+6. **"Public":** people you know who can install an app, or anyone? Minecraft Java or Bedrock; other games; do any players use consoles?
+7. **Budget:** does the monthly figure include electricity?

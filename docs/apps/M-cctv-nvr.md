@@ -41,3 +41,9 @@
 ## Why NVR storage needs its own policy
 
 It is continuous, write-heavy, high-volume and expendable. Documents and photos are small, precious, and kept for years. Different disks, different retention (days to weeks, not years), different backup rules (export selectively), different privacy handling (who may view, how long it is kept).
+
+## Many cameras, an old laptop, or an existing DVR/NVR
+
+- **Do the numbers first:** at 1 Mbps per camera, 16 cameras write about 173 GB per day (about 346 GB at 2 Mbps); a 256 GB disk holds under two days and a 4 TB disk roughly 12-23 days **[E]**. AI detection additionally needs video decoding, a capable CPU or accelerator, AVX2 and 4-16 GB of RAM **[V]**. An old dual-core laptop is not an NVR for that many cameras.
+- **If you already own a recorder (analog DVR or IP NVR):** keep it. Change its passwords, disable vendor cloud/P2P features, update its firmware, and leave it unreachable from the internet. Reach it remotely through a Tailscale **subnet router** on the LAN (Docker's default forward-drop policy must be allowed for that to work **[V]**), and view one sub-stream at a time over a slow uplink.
+- **Analog cameras with no recorder:** a 16-channel analog DVR was listed at roughly Rs 5,700-14,500 before the hard disk, and a full 16-camera kit with disk at Rs 30,000-45,000 **[S][C]**. Budget it separately and defer it; check that a model supports analog inputs rather than being an IP-only NVR.

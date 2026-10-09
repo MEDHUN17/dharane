@@ -43,3 +43,17 @@ The same pattern applies to others: a CPU and RAM budget, a world directory, a d
 ## Verdict
 
 Install later, one server at a time, after Phase 7 monitoring shows spare headroom. If friends are outside your tailnet and you want a public IP-free setup, rent a host rather than expose your home.
+
+## Offering a server to people you do not know (no inbound ports, tiny budget)
+
+You cannot host publicly from a home line with no port forwarding or behind CGNAT, and a small uplink would not carry it anyway. Realistic options, cheapest first. All figures are search-reported **[S]** and change; confirm on the provider's page.
+
+| Option | Cost | What to know |
+|--------|------|--------------|
+| Players you invite, on **Tailscale** (PC and Android; consoles cannot) | Rs 0 | Private; works behind CGNAT. The free plan is reported at 6 users, with node sharing for more |
+| **Aternos** | Rs 0 | Ad-supported, start-up queue, sleeps when empty, limited RAM, may delete inactive servers; Java and Bedrock, Paper/Spigot, Forge/Fabric; Bedrock players can join Java via Geyser |
+| **playit.gg** tunnel to your home server | Free tier; premium US$30/year or US$3/month | Outbound tunnel; conflicting reports on Java/TCP on the free tier after a late-2025 abuse crackdown **[U]**; some ISPs block its domain |
+| **Oracle Cloud Always Free** (Arm VM) | Rs 0 | Reportedly cut to 2 OCPU/12 GB in June 2026; "out of host capacity" is common; verify on Oracle's page; treat as an experiment **[U]** |
+| Paid Minecraft host (India) | about Rs 400 for 4 GB (vendor claim); another vendor Rs 649 rising to Rs 999 | Over a Rs 200/month budget; a 4 GB plan is the realistic size for 8 players |
+
+An old dual-core laptop may struggle with 8 players because Minecraft is bound by single-thread speed: test with the real group and watch the server's tick rate **[E]**, and keep the game server off a box that also runs Immich or Paperless.
