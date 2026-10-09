@@ -36,7 +36,9 @@ Last updated: 2026-10-09
 
 ## Facts to re-check before relying on them
 - Tailscale free-plan limits: reported 6 users / unlimited devices since 2026-04-08 (S9); confirm on the pricing page.
-- Cloudflare CDN video/large-file terms for Free/Pro: second-hand only (U2).
+- Cloudflare video/large-file terms: Cloudflare's docs state the effect (V29); the binding text on cloudflare.com was not read (U2).
+- Memory, SSD and hard-drive prices rose sharply in 2026 and may keep rising into 2027 (S27-S33, S41-S43); every price in `docs/08-cost.md` and the ladder in `docs/14-decision-guide.md` must be re-checked on live listings before buying.
+- Static IP, CGNAT and relay-server facts come from forum reports and aggregator sites (S36-S38); get any provider's offer in writing.
 
 ## Provisional assumptions (superseded by `profile/owner.md` wherever it has a value)
 

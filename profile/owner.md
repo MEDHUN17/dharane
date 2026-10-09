@@ -13,7 +13,7 @@ Status: **provisional**. First recorded 2026-10-09 from the owner's chat answers
 | Item | Recorded | Source | What it decides | How to check (read-only) |
 |------|----------|--------|-----------------|--------------------------|
 | Server candidate | Old laptop(s) with a "pretty old" Core i3; how many laptops is not stated | said + unknown | Tier A ([`03`](../docs/03-hardware-capacity.md)); a second laptop can become the second DNS resolver, watcher or subnet router ([`13`](../docs/13-low-end-profile.md) section 2) | Count the machines |
-| CPU generation and flags | Core i3 class, probably dual-core (older mobile i3 parts are) | inferred **[K]** | AVX2 for Frigate, Quick Sync for Jellyfin, x86-64-v2 for Immich machine learning ([`03`](../docs/03-hardware-capacity.md) section 1) | Linux: `lscpu`. Windows: Settings > System > About, then look the model number up |
+| CPU generation and flags | Core i3 class, probably dual-core (older mobile i3 parts are) | inferred **[S40]** | AVX2 for Frigate, Quick Sync for Jellyfin, x86-64-v2 for Immich machine learning ([`03`](../docs/03-hardware-capacity.md) section 1) | Linux: `lscpu`. Windows: Settings > System > About, then look the model number up |
 | RAM | 4 GB or 8 GB (which machine has which is not stated) | range | Which single heavy workload fits ([`13`](../docs/13-low-end-profile.md) section 2) | `free -h`; Windows: Task Manager > Performance > Memory |
 | Internal disk | One 256 GB disk, hard drive or SSD (type not stated) | range | Immich needs its database on an SSD **[V1]**; Docker on a spinning laptop disk is slow ([`13`](../docs/13-low-end-profile.md) section 3) | `lsblk -o NAME,SIZE,ROTA,MODEL` (ROTA 1 means spinning) |
 | Extra disks | None stated | unknown | Where photos, files and the backup copy live ([`02a`](../docs/02a-storage-layout.md)) | List the drives you own |
@@ -84,7 +84,7 @@ The ranking orders the *effort*, not the wish list: the owner also wants the med
 |------|----------|--------|-----------------|
 | Photos and videos | Size not stated | unknown | Disk size, off-site seeding time |
 | Documents | Size not stated | unknown | Same |
-| Media library | "All my childhood shows and movies"; size not stated | said + unknown | Disk size; whether transcoding matters |
+| Media library | Wants to hold all of their childhood shows and movies ("hopefully all"); size not stated | said + unknown | Disk size; whether transcoding matters |
 | Existing backups | None | said | Backups come first ([`09`](../docs/09-roadmap.md) Phase 6, [`13`](../docs/13-low-end-profile.md) section 5) |
 | Cameras | 16, wired. Analog (coax to a DVR) or IP, whether a recorder with a disk exists, brand: not stated | said + unknown | Which CCTV path applies ([`apps/M`](../docs/apps/M-cctv-nvr.md)) |
 | Games | Minecraft and "other similar titles"; 4 to 8 players. Java or Bedrock, consoles: not stated | said + unknown | Game-server plan ([`apps/N`](../docs/apps/N-game-servers.md)) |
