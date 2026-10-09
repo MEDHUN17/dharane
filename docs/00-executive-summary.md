@@ -51,7 +51,7 @@ Virtualisation, Kubernetes, SSO platforms and workflow engines are deliberately 
 | 7 | No UPS yet | Not provided | UPS moves up the priority list (Part J, phase 2) |
 | 8 | Budget moderate; reuse existing hardware first | Cost-aware requirement | Scenarios in Part I |
 
-Some of these are now answered in the owner's sanitised profile ([`../profile/owner.md`](../profile/owner.md)): an old laptop, a domain owned, a UPS available. This document keeps the generic wording on purpose, so it stays valid for any hardware; the [decision guide](14-decision-guide.md) shows how the choices change with each variable.
+Some of these are now answered in the owner's sanitised profile ([`../profile/owner.md`](../profile/owner.md)). This document keeps the generic wording on purpose, so it stays valid for any hardware; the [decision guide](14-decision-guide.md) shows how the choices change with each variable.
 
 ## 4. Where I challenge the brief (simpler or safer alternatives)
 

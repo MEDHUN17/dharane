@@ -4,6 +4,8 @@
 
 **This repository is public**, so only counts, ranges and classes are recorded. Left out on purpose: the ISP name, the domain name, IP addresses, account and tailnet names, serial numbers, router make and credentials, and the password-manager brand (recorded only as "hosted"). Keep those in a private place: a private repository, or a local file named `profile/<name>.local.<ext>` (git ignores that pattern).
 
+This file is a record for the decision guide, not homework. The only part meant for the owner is section 9 (things to look up); words you do not know are explained in the [glossary](../docs/14-decision-guide.md#words-used-in-this-guide).
+
 Status: **provisional**. First recorded 2026-10-09 from the owner's chat answers to [Part L](../docs/11-information-needed.md); the follow-up questions there are still open.
 
 **Source column.** *said* = stated by the owner; *range* = the owner gave alternatives; *inferred* = my reading of what was said; *unknown* = not answered yet.
@@ -31,7 +33,7 @@ Status: **provisional**. First recorded 2026-10-09 from the owner's chat answers
 | Internet plan | Advertised as "4 megabyte": either 4 Mbps or 4 MB/s (= 32 Mbps). Unit not confirmed | range | An 8x difference for off-site seeding time and remote streaming ([`13`](../docs/13-low-end-profile.md) sections 5 and 6) | Speed test (fast.com or speedtest.net) |
 | Upload speed | Not stated | unknown | Off-site seed time; remote streaming (Jellyfin recommends at least 20 Mbps upload **[V5]**) | Same speed test: read the *upload* figure |
 | Data cap | Not stated | unknown | Whether big off-site seeding and remote streaming are allowed | ISP bill or plan page |
-| CGNAT or public IPv4 | Not stated. A router without port forwarding does not by itself prove CGNAT | unknown | Whether any inbound hosting is possible even with a better router | Compare the router's WAN address with an external "what is my IP" page; 100.64.0.0 to 100.127.255.255 means CGNAT |
+| CGNAT or public IPv4 | Not stated. A router without port forwarding does not by itself prove CGNAT | unknown | Whether any inbound hosting is possible even with a better router | Compare the router's WAN address with an external "what is my IP" page; an address from 100.64.0.0 to 100.127.255.255 (written 100.64.0.0/10) means CGNAT |
 | IPv6 | Not stated | unknown | Whether a second reachability path exists | Router status page |
 
 ## 3. Power and place
@@ -60,10 +62,10 @@ Status: **provisional**. First recorded 2026-10-09 from the owner's chat answers
 | One-time budget | Rs 12,000-15,000 | said | Which rungs of the upgrade ladder are reachable ([`08`](../docs/08-cost.md) Scenario D) |
 | Monthly budget | Rs 200 | said | Off-site backup size and provider |
 | Does the monthly figure include electricity? | Not stated | unknown | Which off-site option fits ([`08`](../docs/08-cost.md) Scenario D) |
-| Domain | Owned (name not recorded) | said | HTTPS names, Cloudflare options ([`apps/A`](../docs/apps/A-remote-access-infrastructure.md)) |
+| Domain | "Yes"; most naturally read as already owned (name not recorded), not confirmed | said + inferred | HTTPS names, Cloudflare options ([`apps/A`](../docs/apps/A-remote-access-infrastructure.md)) |
 | Cloudflare account | Can be created | said | Same |
 
-## 6. Priorities, ranked by the owner
+## 6. Priorities, in the order the owner listed them (read as a ranking: inferred)
 
 1. Photo backup
 2. File sync
@@ -76,7 +78,7 @@ Status: **provisional**. First recorded 2026-10-09 from the owner's chat answers
 9. Media server
 10. Development
 
-The ranking orders the *effort*, not the wish list: the owner also wants the media server and a game server to be reachable by "public" users, even though the media server is ranked ninth.
+The list order is taken as priority order (confirm with the owner), and it orders the *effort*, not the wish list: the owner also wants the media server and a game server to be reachable by "public" users, even though the media server is ranked ninth.
 
 ## 7. Data, cameras and games
 
@@ -94,8 +96,8 @@ The ranking orders the *effort*, not the wish list: the owner also wants the med
 
 | Item | Recorded | Source | What it decides |
 |------|----------|--------|-----------------|
-| Authenticator | An authenticator app (TOTP) | said | Recovery design ([`06`](../docs/06-security-backup.md)) |
-| Password manager | A hosted service (brand not recorded) | said | Whether to self-host later ([`apps/F`](../docs/apps/F-secrets-and-identity.md)) |
+| Authenticator | An authenticator app (TOTP) | said + inferred (the owner named the app; the class is my reading) | Recovery design ([`06`](../docs/06-security-backup.md)) |
+| Password manager | A hosted service (brand not recorded) | said + inferred (the owner named the product; the class is my reading) | Whether to self-host later ([`apps/F`](../docs/apps/F-secrets-and-identity.md)) |
 | Account recovery codes printed | Not stated | unknown | Whether a lost phone is recoverable |
 
 ## 9. Measurements that settle the most (all read-only)

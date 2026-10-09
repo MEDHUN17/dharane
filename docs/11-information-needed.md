@@ -78,3 +78,5 @@ Cameras / games / media size:
 8. **Place and power:** your state and electricity provider (for the tariff slab), how often and how long the power goes out, whether the router and modem are on the UPS, and the UPS's VA or watt rating (printed on its label).
 9. **Time and comfort:** how comfortable you are typing commands, and roughly how many hours a month you can spend on maintenance. This decides how much complexity is sensible.
 10. **Phones and TVs:** the TV make and operating system (Android TV, Google TV, Fire OS, webOS, Tizen), and whether anyone uses iPhones, Windows PCs, Macs or game consoles.
+11. **Network link and provider box:** does the server laptop have an Ethernet port or only Wi-Fi; the battery's condition (swollen or not); whether the provider's box can be switched to bridge mode, and whether the provider sells a public (static) address and at what price including GST.
+12. **People to invite:** how many people outside the household would connect, and on what devices (the Tailscale free plan reportedly allows 6 users).

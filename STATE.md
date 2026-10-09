@@ -21,7 +21,7 @@ Last updated: 2026-10-09
 - [x] Generic schema-validated Compose template (examples/compose/)
 - [x] Constrained single-laptop profile (docs/13-low-end-profile.md), written generically for that class of machine
 - [x] Owner profile recorded, sanitised and provisional (profile/owner.md): an input, never a constraint
-- [ ] Decision guide (docs/14): the broader chart for choosing by the variables that change (in progress)
+- [x] Decision guide (docs/14): the broader chart for choosing by the variables that change; reviewed by four independent lenses, fixes applied
 - [ ] Implementation phases: Phase 0 (inventory) in progress; waiting on the follow-up answers in docs/11-information-needed.md
 
 ## Open decisions (owner)
@@ -44,9 +44,9 @@ Last updated: 2026-10-09
 
 The profile is an input to planning, not a constraint on the blueprint: Parts A-K stay valid for any hardware, and anything specific to the owner lives in `profile/` and in the clearly marked example sections of the decision guide.
 
-- Hardware unknown; plan is tier-based (A-D), single machine first.
+- Hardware class known (an old laptop; model, RAM and disk type per machine unmeasured, see profile/owner.md); the plan stays tier-based (A-D), single machine first.
 - CGNAT / no inbound ports possible: design needs no port forwarding by default.
-- Location: India (INR costs, local tariffs); state/DISCOM and ISP not yet known.
+- Location: India (INR costs, local tariffs); state/DISCOM not yet known. The ISP is known to the owner but deliberately not recorded in this public repo.
 
 ## Decisions made (see docs/02-design-decisions.md)
 Debian 13 bare metal; ext4; Docker CE + Compose plugin (rootful, hardened); Tailscale on host; Caddy;

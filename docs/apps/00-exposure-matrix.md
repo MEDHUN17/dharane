@@ -69,7 +69,7 @@ Two notes: (a) a service can be class 2 for daily use yet have an admin interfac
 ## Checklist before anything is made class 3
 
 1. The app has its own authentication and I know how to rotate its admin credential.
-2. Payload sizes and protocols fit Cloudflare's limits (100 MB request body on Free/Pro **[V]**; HTTP/HTTPS, and TCP/SSH/RDP/SMB only through a client program, no UDP **[V]**).
+2. Payload sizes and protocols fit Cloudflare's limits (100 MB request body on Free/Pro **[V]**; HTTP/HTTPS, and TCP/SSH/RDP/SMB only through a client program, and no UDP service type listed **[V]**).
 3. An Access policy exists (who, MFA, session length) and I tested it from a non-tailnet device.
 4. Only the specific hostname is routed; no wildcard routes to internal services.
 5. The app runs on the `public` Docker network only, with no access to databases of other stacks.

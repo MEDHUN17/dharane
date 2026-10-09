@@ -2,19 +2,55 @@
 
 A chart for deciding **later**, when hardware, budget, internet connection or household change. It is built on the *variables* (RAM, disk, CPU generation, uplink, reachability, budget, audience, cameras), not on any one person's setup. The owner's current position is shown in [section 9](#9-where-the-example-profile-sits) as **one example only**; replace it with your measured values and every chart below still applies.
 
-Labels as everywhere: **[V]** verified in the project's own docs, **[S]** search summary, **[K]** stable knowledge, **[E]** estimate to measure, **[U]** unverified, **[C]** low-confidence price. IDs (V5, S9 ...) are in [`12-verification-log.md`](12-verification-log.md). Abbreviations for references: `03` = [`03-hardware-capacity.md`](03-hardware-capacity.md), `13` = [`13-low-end-profile.md`](13-low-end-profile.md), `08` = [`08-cost.md`](08-cost.md), `06` = [`06-security-backup.md`](06-security-backup.md), `apps/X` = [`apps/`](apps/README.md) category X.
+Small tags show how sure we are: **[V]** checked against the project's own sources, **[S]** from a web search, **[K]** well known, **[E]** an estimate to measure, **[U]** not checked, **[C]** a price we are not sure of. Tags with numbers (V5, S9 ...) point to a row in [`12-verification-log.md`](12-verification-log.md). You can read past the tags; they matter when you are about to spend money.
+
+Numbers in backticks name other files in this folder: `03` = [`03-hardware-capacity.md`](03-hardware-capacity.md), `13` = [`13-low-end-profile.md`](13-low-end-profile.md), `08` = [`08-cost.md`](08-cost.md), `06` = [`06-security-backup.md`](06-security-backup.md), `04` = [`04-power-physical.md`](04-power-physical.md), `apps/X` = [`apps/`](apps/README.md) category X.
 
 > **Advisory, not authoritative.** These ratings come from the published minimums and estimates in the cited documents. A measured week of real use (`03` section 10) beats any chart. Where this guide refines a rating in `03` or `13`, the notes column says so; it never silently contradicts them.
 
+## Words used in this guide
+
+| Word | Plain meaning |
+|------|---------------|
+| Mbps and MB/s | Megabits per second (how internet plans are usually sold) and megabytes per second (8 times larger). A plan quoted as "4 megabyte" is either 4 Mbps (slow) or 32 Mbps (decent): run a speed test and read the *upload* line |
+| Uplink, upload speed | How fast your home can send data *out* to the internet. It limits cloud backups, remote streaming and game hosting |
+| LAN, WAN | LAN: your home network. WAN: the connection to the internet; the router's "WAN address" is the address your provider gave it |
+| DNS | The internet's phone book: it turns names into addresses. Ad blockers work by refusing to look up the names of ad servers |
+| SSD and hard drive | An SSD is a fast disk with no moving parts; a hard drive (HDD) is an older spinning disk: slower and bulkier, cheaper per terabyte |
+| UPS | A battery box that keeps things running through a power cut |
+| Port forwarding | A router setting that lets the internet reach one device at home. Nothing in this blueprint needs it by default |
+| CGNAT | Your internet provider shares one public address between many customers, so nothing outside can connect in to your home, even if the router could forward ports |
+| Tailscale | A private network between your own devices (and people you invite), so they reach the server from anywhere without opening your router |
+| Class, tier | A rough size of machine, from A1 (small and old) to D (with a graphics card): section 3.1 |
+| Immich, Syncthing | Immich: a self-hosted look-alike of Google Photos for your phone's photos. Syncthing: copies a folder between your phone and the server, with no account |
+| Jellyfin | Your own Netflix-style app for your own video files |
+| Direct play and transcoding | Direct play: the TV plays the file as stored, almost no work for the server. Transcoding: the server re-encodes the video on the fly, which is heavy work |
+| Quick Sync (QSV) | Intel graphics hardware that transcodes cheaply. Linux supports it from Intel's 5th-generation (Broadwell) chips **[V24]** |
+| ML (machine learning) | Immich's optional face and object recognition and smart search; the heaviest part of the photo app |
+| Frigate | Software that records camera video and spots people and cars |
+| DVR, NVR | A box with a hard disk that records cameras: a DVR for analog cameras (coax cables), an NVR for IP cameras (network cables) |
+| Subnet router | A machine at home that lets your Tailscale devices reach other home devices, such as a DVR, that cannot run Tailscale themselves |
+| Vaultwarden | A self-hosted password manager that works with the Bitwarden apps |
+| AdGuard Home, Pi-hole | Block ads for every device on your home network by filtering DNS |
+| restic | The tool that makes encrypted, versioned backup copies |
+| Seed time | How long the first full copy to the off-site backup takes (section 2.3) |
+| 3-2-1 | Three copies of the data, on two kinds of storage, one of them away from home |
+| SMR | "Shingled" hard drives pack data more densely but slow down under sustained rewriting: fine for photos and backup copies, poor for databases |
+| Relay (VPS) | A small rented server on the internet that passes visitors on to your home over a private tunnel |
+| Gate | Something to *do* first (not buy) before a step is safe: section 3.3 |
+| Heavy service | Immich, a game server or Paperless: the services that need a few gigabytes each |
+
 ## 1. How to use this guide
 
-1. **Measure** the axes in section 2 (every command is read-only).
+1. **Measure** the axes in section 2. Every command only looks and changes nothing; Windows steps are given beside the Linux commands, and a command can wait until the server is installed.
 2. **Find your machine class** in section 3 and read the rows you care about. The notes column says what would move a row up.
 3. **Check reachability** for the audience you have in section 4 (household, invited people, strangers).
 4. **Pick a path** in section 5 for the decision in front of you (photos, off-site backup, game hosting, cameras, passwords, what to buy).
 5. **Price the next step** in the upgrade ladder (section 6), then glance at the gates in section 3.3.
 6. **Write down what would change your mind** (section 7) so the next decision starts from a trigger, not a mood.
 7. Before committing to something costly or awkward to undo, read section 8.
+
+For a worked example of reading the charts, see section 9.
 
 ```mermaid
 flowchart LR
@@ -38,25 +74,18 @@ flowchart LR
 | Something changed. What do I re-read? | Section 7 |
 | How hard is this to undo? | Section 8 |
 
-## Words used in this guide
-
-| Word | Plain meaning |
-|------|---------------|
-| Uplink, upload speed | How fast your home can send data *out* to the internet. It limits cloud backups, remote streaming and game hosting |
-| Port forwarding | A router setting that lets the internet reach one device at home. Nothing in this blueprint needs it by default |
-| CGNAT | Your internet provider shares one public address between many customers, so nothing outside can connect in to your home, even if the router could forward ports |
-| Tailscale | A private network between your own devices (and people you invite), so they reach the server from anywhere without opening your router |
-| Class, tier | A rough size of machine, from A1 (small and old) to D (with a graphics card): section 3.1 |
-| Direct play and transcoding | Direct play: the TV plays the file as stored, almost no work for the server. Transcoding: the server re-encodes the video on the fly, which is heavy work |
-| Quick Sync (QSV) | Intel graphics hardware that transcodes cheaply. Linux supports it from Intel's 5th-generation (Broadwell) chips **[V24]** |
-| ML (machine learning) | Immich's optional face and object recognition and smart search; the heaviest part of the photo app |
-| DVR, NVR | A box with a hard disk that records cameras: a DVR for analog cameras (coax cables), an NVR for IP cameras (network cables) |
-| Subnet router | A machine at home that lets your Tailscale devices reach other home devices, such as a DVR, that cannot run Tailscale themselves |
-| Seed time | How long the first full copy to the off-site backup takes (section 2.3) |
-| 3-2-1 | Three copies of the data, on two kinds of storage, one of them away from home |
-| Relay (VPS) | A small rented server on the internet that passes visitors on to your home over a private tunnel |
-| Gate | Something to *do* first (not buy) before a step is safe: section 3.3 |
-| Heavy service | Immich, a game server or Paperless: the services that need a few gigabytes each |
+| I want... | Look at |
+|-----------|---------|
+| Photo backup | 5.1, then 5.2 for the off-site copy |
+| File sync | The "File sync and shares" row of 3.2 |
+| Ad blocking | The "Ad blocking" row of 3.2, then the DNS gate in 3.3 |
+| Password management | 5.5 |
+| Documents | The Paperless row of 3.2 (plain folders plus backups work on any machine) |
+| Cameras | 4.3 and 5.4 |
+| Game servers | 4.2 and 5.3 |
+| Local AI | The two language-model rows at the end of 3.2 |
+| Media server | 4.1 and the Jellyfin rows of 3.2 |
+| Development | The Git row of 3.2 |
 
 ## 2. The decision axes
 
@@ -69,18 +98,24 @@ flowchart LR
 | System disk | Hard drive; SATA SSD; NVMe | Linux `lsblk -o NAME,SIZE,ROTA,MODEL` (ROTA 1 = spinning) | Immich keeps its database on local SSD **[V1]**; Docker and databases on a spinning laptop disk are slow |
 | Data disks | None; one external; one internal; two or more | `lsblk`, `df -h` | Where photos and the backup copy live; whether 3-2-1 is possible (`06` section 5.1) |
 | Uplink (upload speed) | 2 Mbps or less; 2-10; 10-20; 20 or more | A speed test; read the **upload** figure and its unit (Mbps or MB/s) | Off-site seeding time, remote streaming, remote camera viewing (section 2.3) |
-| Inbound reachability | None (CGNAT, or a router that cannot forward ports); public IPv4 with forwarding; IPv6 only; relay (VPS or tunnel service) | Compare the router's WAN address with an external "what is my IP" page; 100.64.0.0/10 is CGNAT **[V33]** | Whether anything can be hosted for people outside the house (section 4) |
+| Inbound reachability | None (CGNAT, or a router that cannot forward ports); public IPv4 with forwarding; IPv6 only; relay (VPS or tunnel service) | Compare the router's internet (WAN) address with an external "what is my IP" page; the reading is explained under this table | Whether anything can be hosted for people outside the house (section 4) |
 | One-time budget | About Rs 5,000 or less; 5,000-15,000; 15,000-40,000; more | Decide | Which ladder rungs are reachable at once (section 6) |
 | Monthly budget | About Rs 200 or less; 200-500; more. Includes electricity? | Decide | Off-site storage size, relay or hosting fees (`08`) |
+| Power | A UPS and its VA or watt rating; router and modem on it or not; how often and how long the power goes out | The label on the UPS; a plug-in watt meter on the server; note the outages for a month | Clean shutdown, whether the network stays up so alerts can leave the house (`04` sections 1-3) **[K]** |
 | Audience | Household; invited people who can install an app; strangers | Ask who actually needs it | Section 4 |
 | Cameras | None; analog with a DVR; IP with an NVR; cameras with no recorder. Count | Look at the cables (coax/BNC or network) and for a box with a disk | Path in section 5 (cameras) |
 | Operator time and comfort | Hours per month; comfort with a command line | Ask honestly | How much complexity is sensible (`00` principle 6: the smallest tool that does the job) |
 
-**Reading the reachability test.** A router WAN address inside 100.64.0.0/10 means the provider runs carrier-grade NAT **[V33]**. An address outside it does not rule CGNAT out, because an operator may number that link from other address space **[V33]**. A match with the external page means the router has a public IPv4 *now*, not that inbound connections work or that the address stays the same **[K]**. A private WAN address on your own router behind the provider's box is double NAT, not proof of CGNAT: read the outermost device's WAN address, and use an IPv4-only check page, because many show your IPv6 address instead **[K]**.
+**Reading the reachability test.** Open the router's status page and find its internet (WAN) address. Then, on a phone using the home Wi-Fi, look up "what is my IP" on a site that shows an *IPv4* address (many sites show your IPv6 address instead, which proves nothing here **[K]**).
+
+- If the router's address starts with 100.64 to 100.127 (the block 100.64.0.0/10 reserved for provider-level sharing), the provider is sharing addresses: CGNAT **[V33]**.
+- If the two addresses differ, another layer of sharing sits in between. An address outside the 100.64 block does not rule CGNAT out, because a provider may use other ranges **[V33]**.
+- If the router's own address is a private one (192.168..., 10..., 172.16 to 172.31...), your router may be behind a second box of the provider's, which is double NAT rather than proof of CGNAT: read the status page of the outermost box **[K]**.
+- If the two addresses match, the router has a public address *now*. That does not mean inbound connections work or that the address stays the same **[K]**.
 
 ### 2.2 Reading "an old Core i3"
 
-"An old Core i3" can mean anything from a 2010 to a 2017 machine, and three features decide which services it can run: **AVX2** (Frigate needs AVX and AVX2 **[V13]**), **x86-64-v2** (Immich's machine-learning container **[V1]**) and **Quick Sync on Linux** (Jellyfin transcoding, from Broadwell **[V24]**). The digits after `i3-` start with the generation: `i3-2310M` is 2nd, `i3-4005U` 4th, `i3-6006U` 6th; a three-digit number such as `i3-380M` is 1st generation. The table below follows search summaries of Wikipedia, WikiChip and spec sites **[S40]** plus general knowledge **[K]**: confirm the exact part on Intel's product page or, better, by looking at the CPU flags on the machine itself.
+"An old Core i3" can mean anything from a 2010 to a 2018 machine, and three features decide which services it can run: **AVX2** (Frigate needs AVX and AVX2 **[V13]**), **x86-64-v2** (Immich's machine-learning container **[V1]**) and **Quick Sync on Linux** (Jellyfin transcoding, from Broadwell **[V24]**). The digits after `i3-` start with the generation: `i3-2310M` is 2nd, `i3-4005U` 4th, `i3-6006U` 6th; a three-digit number such as `i3-380M` is 1st generation. The table below follows search summaries of Wikipedia, WikiChip and spec sites **[S40]** plus general knowledge **[K]**: confirm the exact part on Intel's product page or, better, by looking at the CPU flags on the machine itself.
 
 | Generation | Codename, year | Mobile i3 examples | Cores / threads (mobile i3) | AVX | AVX2 | Intel video hardware on Linux **[V24]** |
 |------------|----------------|--------------------|-----------------------------|:---:|:----:|-----------------------------------------|
@@ -91,12 +126,12 @@ flowchart LR
 | 5th | Broadwell, 2015 | i3-5005U, i3-5010U | 2 / 4 | yes | yes | Quick Sync or VA-API; H.264 |
 | 6th | Skylake, 2015 | i3-6006U, i3-6100U | 2 / 4 | yes | yes | Quick Sync or VA-API; HEVC 8-bit |
 | 7th | Kaby Lake, 2017 | i3-7100U | 2 / 4 | yes | yes | Quick Sync or VA-API; HEVC 10-bit |
-| 8th | Kaby Lake R, 2017 | i3-8130U | 2 / 4 | yes | yes | Quick Sync or VA-API; HEVC 10-bit |
+| 8th | Kaby Lake R, 2017-2018 | i3-8130U | 2 / 4 | yes | yes | Quick Sync or VA-API; HEVC 10-bit |
 
 What the table means for the matrix in section 3:
 
-- **AVX2 first appears in the 4th generation (2013).** A 1st-3rd generation i3 cannot meet Frigate's AVX2 requirement **[V13]**, whatever its RAM. Many Pentium, Celeron and Atom parts lack AVX and AVX2 too (notably Celeron and Pentium models before the 2020 Tiger Lake generation **[V13]**, `03` section 1), so a model that merely says "Intel" proves nothing.
-- **x86-64-v2 needs SSE4.2 and POPCNT**, which every Core i3 from the 1st generation has **[K]**; Immich's ML container is not blocked by CPU age (`03` says most CPUs from about 2012 qualify **[V1]**).
+- **AVX2 first appears in the 4th generation (2013).** A 1st-3rd generation i3 cannot meet Frigate's AVX2 requirement **[V13]**, whatever its RAM. Many Pentium, Celeron and Atom parts lack AVX and AVX2 too (`03` section 1 puts the cut-off for Celeron and Pentium at the 2020 Tiger Lake generation; **[S40]** agrees that they were excluded from AVX), so a model that merely says "Intel" proves nothing.
+- **x86-64-v2 needs SSE4.2 and POPCNT**, which every Core i3 from the 1st generation has **[K]**; Immich's ML container needs x86-64-v2 **[V1]** and is not blocked by CPU age (`03` section 1 says most CPUs from about 2012 qualify).
 - **Quick Sync on Linux starts at the 5th generation (Broadwell)** **[V24]**; older Intel graphics use VA-API. A 4th-generation i3 meets Frigate's CPU requirement but can only use the legacy VA-API path for Jellyfin **[V24]**. Jellyfin's docs also say Quick Sync is being phased out on Linux for Ice Lake and older parts as Intel's MediaSDK is deprecated **[V24]**, so on a machine of this age VA-API is the more durable route.
 - **The test is the flags, not the name.** On Linux, `lscpu` lists them; `grep -o -w -E 'avx|avx2|sse4_2|popcnt' /proc/cpuinfo | sort -u` prints just the ones that matter (read-only). On Windows, Settings > System > About shows the model; look that exact model up.
 
@@ -124,12 +159,16 @@ Use restic's `--limit-upload` so the household can still use the line **[V]**; s
 |-------|-----------------|-----|-------------|-----|-------|
 | **A1** | Old dual-core laptop | 4 GB | Hard drive | 2 cores; AVX2 unknown | `13` section 2; `03` Tier A |
 | **A2** | Old dual-core laptop | 8 GB | SSD | 2 cores; AVX2 unknown | `13` section 2; `03` Tier A |
-| **B1** | Refurbished office mini PC or small desktop: 4-core Core i5, 6th-9th generation | 8-16 GB | SSD | 4 cores, AVX2, Quick Sync or VA-API **[V24]** | `03` Tier B; section 6 for prices |
+| **B1** | Refurbished office mini PC or small desktop: Core i5, 6th-8th generation | 8-16 GB | SSD | 4-6 cores, AVX2, Quick Sync or VA-API **[V24]** | `03` Tier B; section 6 for prices |
 | **B2** | New N100/N150-class mini PC | 16 GB | SSD | Low-power 4 cores with an iGPU Jellyfin and Frigate use as their example **[V5][V6]** | `03` Tier B; `08` price book |
 | **C** | Workstation or desktop | 32-128 GB | NVMe plus several HDDs | 8-16 or more cores | `03` Tier C |
 | **D** | C plus a GPU | 32 GB or more | NVMe plus HDDs | GPU | `03` Tier D |
 
 **Legend.** ✅ comfortable. ⚠️ possible with caveats; the caveat is in the notes. ❌ not realistic. **¹** = on an 8 GB box this is the one heavy service (Immich, a Minecraft server or Paperless), not two (`13` section 2). Ratings for B2, C and D follow `03` section 4 exactly. A1 and A2 follow `13` where it speaks and are never more optimistic than `03` Tier A except where `13` says otherwise (noted). B1 follows Tier B but is marked more cautious where nothing verified covers its older iGPU.
+
+**In between.** 8 GB with a hard drive: use the A2 column, except that Immich needs the SSD. 4 GB with an SSD: use the A1 column, except that Immich with machine learning off becomes possible with caveats (`03` Tier A, **[V1]**).
+
+**B1 at 8 GB.** The B1 cells assume 16 GB when several heavy services run together; at 8 GB follow `03` section 4: install Immich first, delay Paperless, keep Jellyfin to direct play.
 
 **Example profile (provisional):** sits at A1 or A2 until its RAM and system-disk type are measured (section 9).
 
@@ -137,13 +176,17 @@ Use restic's `--limit-upload` so the household can still use the line **[V]**; s
 
 **Foundation, files, photos, documents and identity**
 
+Key: ✅ comfortable · ⚠️ only with limits · ❌ not realistic · ¹ one heavy service at a time (full legend in 3.1).
+
 | Workload | A1 | A2 | B1 | B2 | C | D | What moves it up, and the basis |
 |----------|:--:|:--:|:--:|:--:|:-:|:-:|---------------------------------|
-| Base stack: Tailscale, Caddy, restic, monitoring, AdGuard Home or Pi-hole, Syncthing, Samba | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | A second disk and an off-site target make the backups real (ladder rungs 4-6). `03` section 4 rows 1-2 |
+| Base: Tailscale, Caddy, restic backups, monitoring | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | A second disk and an off-site target make the backups real (ladder rungs 4-6). `03` section 4 row 1 |
+| File sync and shares (Syncthing, Samba) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | Very light; the data itself is the load. `03` section 4 row 2 |
+| Ad blocking (AdGuard Home or Pi-hole) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | Tiny. Blocking on one device works anywhere; blocking for the whole house needs the DNS gate in 3.3. `03` section 4 row 2 |
 | Photos as plain folders (Syncthing-Fork on phones plus restic) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | The default on 4 GB or a hard drive. `13` section 4 |
 | Immich, machine learning off | ❌ | ⚠️¹ | ✅ | ✅ | ✅ | ✅ | A1 has 4 GB and no SSD; Immich runs on 4 GB only with ML off and wants its database on local SSD **[V1]**. Rungs 2-3. `13` section 4; `03` Tier A ⚠️ |
 | Immich, machine learning on | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | 8 GB and 4 cores recommended **[V1]**; the first ML pass on a 2-core CPU takes days **[E]**. `03` section 4 |
-| Nextcloud | ⚠️ | ⚠️ | ✅ | ✅ | ✅ | ✅ | Small households only; add it only for calendar, contacts or office (`apps/B`). `03` section 4 |
+| Nextcloud | ⚠️ | ⚠️¹ | ✅ | ✅ | ✅ | ✅ | Small households only (on 4 GB it takes the place of Jellyfin, `13` section 2); add it only for calendar, contacts or office (`apps/B`). About 1-2 GB **[E]**. `03` section 4 |
 | Paperless-ngx | ❌ | ⚠️¹ | ✅ | ✅ | ✅ | ✅ | About 1.5-2.5 GB plus OCR bursts **[E]**; on 8 GB and not together with Immich. `13` section 1 refines `03` Tier A ❌ |
 | Self-hosted password manager (Vaultwarden) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | Hardware is not the limit; readiness is (gates, section 3.3). A hosted manager needs no server at all (`apps/F`) |
 | Single sign-on with Authentik (Authelia is lighter) | ❌ | ❌ | ⚠️ | ⚠️ | ✅ | ✅ | Authentik needs 2 or more cores and 2 GB **[V19]** and adds a critical component; not worth it below about three apps and several users (`apps/F`). `03` section 4 |
@@ -153,7 +196,7 @@ Use restic's `--limit-upload` so the household can still use the line **[V]**; s
 | Workload | A1 | A2 | B1 | B2 | C | D | What moves it up, and the basis |
 |----------|:--:|:--:|:--:|:--:|:-:|:-:|---------------------------------|
 | Jellyfin, direct play on the home network | ⚠️ | ✅ | ✅ | ✅ | ✅ | ✅ | Library on an external drive mounted read-only; on 4 GB it is the only extra service. `13` sections 1-2; `03` section 4. A2 is a refinement of `03` Tier A ⚠️ |
-| Jellyfin with transcoding | ❌ | ❌ | ⚠️ | ✅ | ✅ | ✅ | Needs a capable Intel iGPU: Linux Quick Sync from Broadwell, HEVC 8-bit from Skylake, 10-bit from Kaby Lake **[V24]**; software HDR tone-mapping is extremely demanding **[V5]**. B1 (6th-9th generation) works through VA-API or Quick Sync, but Jellyfin's docs say Quick Sync is being phased out for Ice Lake and older parts **[V24]**, so B1 is marked more cautious than `03` Tier B. On A-class machines plan for direct play |
+| Jellyfin with transcoding | ❌ | ❌ | ⚠️ | ✅ | ✅ | ✅ | Needs a capable Intel iGPU: Linux Quick Sync from Broadwell, HEVC 8-bit from Skylake, 10-bit from Kaby Lake **[V24]**; software HDR tone-mapping is extremely demanding **[V5]**. B1 (6th-8th generation) works through VA-API or Quick Sync, but Jellyfin's docs say Quick Sync is being phased out for Ice Lake and older parts **[V24]**, so B1 is marked more cautious than `03` Tier B. On A-class machines plan for direct play |
 | Download and library-management stack | ⚠️ | ⚠️ | ✅ | ✅ | ✅ | ✅ | Legal content only; IO-heavy (`apps/E`). `03` section 4 |
 
 **Cameras, games, development, monitoring and AI**
@@ -161,7 +204,7 @@ Use restic's `--limit-upload` so the household can still use the line **[V]**; s
 | Workload | A1 | A2 | B1 | B2 | C | D | What moves it up, and the basis |
 |----------|:--:|:--:|:--:|:--:|:-:|:-:|---------------------------------|
 | Remote access to an existing DVR or NVR (Tailscale subnet router) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | No recording on the server; Docker's forwarding policy must allow routing **[V2]**. `13` section 8; `apps/M` |
-| Software NVR, 1-4 cameras with a detector | ❌ | ❌ | ⚠️ | ✅ | ✅ | ✅ | Needs AVX and AVX2, 4 GB or more, a detector and a dedicated disk **[V13]**. B1: detector speed on 6th-9th generation iGPUs is not in the docs I read **[U]**; B2: the N100 is Frigate's own example **[V6]**. `03` section 4 |
+| Software NVR, 1-4 cameras with a detector | ❌ | ❌ | ⚠️ | ✅ | ✅ | ✅ | Needs AVX and AVX2, 4 GB or more, a detector and a dedicated disk **[V13]**. B1: detector speed on 6th-8th generation iGPUs is not covered by the cited docs **[U]**; B2: the N100 is Frigate's own example **[V6]**. `03` section 4 |
 | Software NVR, 8 or more cameras with AI | ❌ | ❌ | ⚠️ | ⚠️ | ✅ | ✅ | 16 GB recommended for 8+ cameras **[V13]**; the N100 runs one detector instance **[V6]**. For 16 cameras a hardware recorder is usually simpler (section 5.4) |
 | Small game server, a few players (Minecraft Java, vanilla) | ❌ | ⚠️¹ | ✅ | ✅ | ✅ | ✅ | Single-thread speed matters most **[K]**; about 3 GB with a 2 GB heap **[E]**; test with the real group (`apps/N`). `13` section 2; `03` section 4 |
 | Several or modded game servers | ❌ | ❌ | ⚠️ | ⚠️ | ✅ | ✅ | 2-8 GB or more each **[E]** (`03` section 3). `03` section 4 |
@@ -169,6 +212,8 @@ Use restic's `--limit-upload` so the household can still use the line **[V]**; s
 | Prometheus plus Grafana | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | About 0.5-1.5 GB **[E]**; not needed early (`apps/H`). `03` section 4 |
 | Local LLM, small (about 3-8B, quantised) | ❌ | ❌ | ⚠️ | ⚠️ | ⚠️ | ✅ | CPU-only is slow: a few tokens per second on a mini PC **[E]**. `03` section 4 and 7 |
 | Local LLM, large | ❌ | ❌ | ❌ | ❌ | ❌ | ⚠️ | VRAM-bound. `03` section 4 |
+
+Not rated here: home automation and workflow tools (`apps/J`), and notes or office suites (`apps/G`). They are light to moderate; treat them like the Nextcloud row **[E]**.
 
 ### 3.3 Readiness gates (not hardware)
 
@@ -178,7 +223,7 @@ A machine that *can* run something is not yet *ready* to. These gates come from 
 |------|--------------------------|-----|-------|
 | Putting any irreplaceable data on the server | A restore from backup has been tested once | A backup that was never restored is a hope | `06` section 5.8; `09` Phase 6 |
 | A public hostname (Cloudflare Tunnel plus Access) | Restore-tested backups, alerts, the exposure checklist | Public exposure is the step that is hardest to take back | `apps/00-exposure-matrix.md`; `09` Phase 9 |
-| Household-wide ad blocking (changing the router's DNS) | A second resolver exists, or the single-machine exception is accepted knowingly | One reboot otherwise cuts the whole home's internet | `apps/I`; `13` section 6 |
+| Ad blocking for the whole house (changing the router's DNS setting) | A second device can take over when the server is off, or you accept undoing the setting by hand when it is | The router would ask the server first for every website, so with the server off nothing at home can load pages until the setting is undone. Try it on one phone or PC first | `apps/I`; `13` section 6 |
 | Self-hosting passwords | Tested restores, HTTPS, two-step login for everyone, a printed recovery kit, and a family that can wait out an outage | There is no administrator reset for a forgotten master password **[K]** | `apps/F` |
 | Single sign-on | Three or more apps and several users; a local admin login kept in every app | A mistake can lock everyone out | `apps/F` |
 | Game server | Measured headroom (free RAM, CPU, disk) | A busy server competes with everything else on a small box | `apps/N`; `09` Phase 13 |
@@ -195,23 +240,23 @@ Three audiences: the **household** (always the home network, or Tailscale away f
 |----------|------------|--------|
 | Household | Direct play on the LAN; TV apps exist for Android TV/Fire OS, LG webOS, Samsung Tizen, Roku, tvOS and more, but check each TV model **[V14]** | Library on an external drive; no transcoding on A-class machines |
 | Invited | Tailscale on a phone, PC or an Android TV/Apple TV device **[S26]**; smart TVs generally cannot run Tailscale **[K]** | Each remote stream needs about the file bitrate in upload; Jellyfin recommends 20 Mbps or more **[V5]** (section 2.3) |
-| Strangers | Not advised, from any connection | Needs inbound reachability and a big uplink; on Free, Pro and Business plans, traffic through Cloudflare Tunnel public hostnames is subject to terms that require a paid service to serve video and large files (private routes are exempt, but then every viewer needs Cloudflare's client) **[V29]**; making copyrighted films and shows available to the public is distribution and a legal risk (this is not legal advice). Share individual files through a hosted service instead |
+| Strangers | Not recommended for anyone you cannot invite: if "public" means friends and relatives, invite them with Tailscale (they install one app) | Needs inbound reachability and a big uplink; on Free, Pro and Business plans, traffic through Cloudflare Tunnel public hostnames is subject to terms that require a paid service to serve video and large files (private routes are exempt, but then every viewer needs Cloudflare's client) **[V29]**; making copyrighted films and shows available to the public is distribution and a legal risk (this is not legal advice). A simpler alternative for your own videos is to share individual files through a hosted service |
 
 ### 4.2 Game server
 
 | Connectivity | Invited (can install an app) | Strangers |
 |--------------|------------------------------|-----------|
 | No inbound (CGNAT, or no port forwarding) | **Tailscale** on PC and Android; consoles cannot join; free-plan user limit reportedly 6 **[S9]**; sharing a machine does not add a user but the friend reaches only that machine **[S39]** | A rented host or a free host (Aternos: ad-supported, queues, sleeps when empty **[S20]**); a tunnel service such as playit.gg (free tier, conflicting reports about TCP **[U]**) |
-| No inbound plus a small VPS relay | Not needed | The VPS forwards the game port to the home server over WireGuard or Tailscale; a small plan with a public IPv4 costs about Rs 336-576 a month before 18% GST **[S38]** (section 4.4); it adds latency; the home upload still limits players; check the provider's DDoS terms (`apps/N`) |
+| No inbound plus a small VPS relay | Not needed | The VPS forwards the game port to the home server over WireGuard or Tailscale; a small plan with a public IPv4 in an Indian location costs about Rs 480-576 a month before 18% GST **[S38]** (section 4.4); it adds latency; the home upload still limits players; check the provider's DDoS terms (`apps/N`) |
 | Public IPv4 and a router that can forward | Tailscale is still simpler and private | Port-forward only with a whitelist, isolation from personal data and `cpus`/`mem_limit` set; it exposes the home IP and the shared uplink to attack; a rented host is safer (`apps/N`) |
 
-Why not Cloudflare or ngrok for the game itself: Cloudflare Tunnel has no UDP service type, and TCP needs Cloudflare's `cloudflared` program on every player's device **[V27]**; Spectrum for Minecraft is a paid add-on on Pro or Business, one application each **[V27]**, so it is not an option at this budget. ngrok's free plan gives TCP only with a payment method on file, 1 GB of transfer a month and no UDP **[V31]**.
+Why not Cloudflare or ngrok for the game itself: Cloudflare Tunnel lists no UDP service type, and TCP needs Cloudflare's `cloudflared` program on every player's device **[V27]**; Spectrum for Minecraft is a paid add-on on Pro or Business, one application each **[V27]**, so it is not an option at this budget. ngrok's free plan gives TCP only with a payment method on file, 1 GB of transfer a month, and no UDP endpoint type was found **[V31]**.
 
 ### 4.3 Web apps, cameras and administration
 
 | Thing | Route | Notes |
 |-------|-------|-------|
-| A small public web app or form | Cloudflare Tunnel plus Access: no inbound ports, any connectivity | HTTP/HTTPS for ordinary visitors; TCP, SSH, RDP and SMB need Cloudflare's client program on the visitor's device and there is no UDP **[V27]**; request bodies are capped at 100 MB on Free and Pro **[V28]**; passes the exposure checklist first (`apps/00`) |
+| A small public web app or form | Cloudflare Tunnel plus Access: no inbound ports, any connectivity | HTTP/HTTPS for ordinary visitors; TCP, SSH, RDP and SMB need Cloudflare's client program on the visitor's device, and no UDP service type is listed **[V27]**; request bodies are capped at 100 MB on Free and Pro **[V28]**; passes the exposure checklist first (`apps/00`) |
 | Private apps (photos, files, documents, passwords) | Tailscale; LAN address at home | Never published (`apps/00`) |
 | A DVR or NVR | Tailscale subnet router on the LAN | Never port-forward the recorder; view one sub-stream at a time on a slow uplink (`13` section 8). Sharing a machine does not carry the subnet router's routes, so each person who needs the DVR must be invited as a user and counts toward the free-plan limit **[S39]** |
 | SSH and router admin pages | Tailscale or LAN only | Never published |
@@ -222,9 +267,9 @@ None of this is needed for the household or for invited people (Tailscale works 
 
 | Route | Typical cost (INR) | What to know |
 |-------|--------------------|--------------|
-| A public IP from the provider | A paid static IPv4 is typically Rs 100-350 a month plus 18% GST; BSNL bills Rs 1,800-3,000 a year **[S36]** | Ask in writing: price, GST, whether the address is public or a private (NAT) one, and whether it is static. Some providers reportedly do not sell it for homes, a "static IP" can still sit behind NAT, and some gate bridge mode behind it **[S36]**. It helps only if a router in the path can forward ports |
+| A public IP from the provider | A paid static IPv4 is typically Rs 100-350 a month plus 18% GST (a range derived from conflicting forum reports **[E]**); BSNL bills Rs 1,800-3,000 a year **[S36][C]** | Ask in writing: price, GST, whether the address is public or a private (NAT) one, and whether it is static. Some providers reportedly do not sell it for homes, a "static IP" can still sit behind NAT, and some gate bridge mode behind it **[S36]**. It helps only if a router in the path can forward ports |
 | IPv6 | Usually Rs 0 | Many providers support it **[S37]**, but the provider's router often blocks inbound connections (reports conflict by model), and visitors on IPv4-only networks cannot reach an IPv6-only server **[S37][K]** |
-| A relay server (VPS) with a public IPv4 | About Rs 336-384 a month before 18% GST for the cheapest plans, Rs 480-576 for a 1 GB plan or the Bangalore region **[S38]** | More than a Rs 200 monthly budget on its own. Oracle's free tier costs Rs 0 but was reportedly halved in 2026, reclaims idle accounts after 30 days and needs card verification **[S38][V34]** |
+| A relay server (VPS) with a public IPv4 | About Rs 480-576 a month before 18% GST for a plan in an Indian location (US$5 in Mumbai, Bangalore or Delhi; DigitalOcean Bangalore US$6); US$3.50-4 plans (Rs 336-384) exist only in the US or Singapore **[S38]** | More than a Rs 200 monthly budget on its own. Oracle's free tier costs Rs 0 but was reportedly halved in 2026, may suspend or terminate accounts idle for 30 days and needs card verification **[S38][V34]** |
 | A tunnel service | playit.gg premium US$30 a year (about Rs 2,879) **[S20]**; ngrok pay-as-you-go from US$20 a month **[V31]** | You trust a third party with the traffic; free-tier limits are small or disputed (section 4.2) |
 | A rented game host | About Rs 400 a month for 4 GB (vendor claim) **[S21]** | No home exposure at all |
 
@@ -290,7 +335,7 @@ flowchart TD
   B -- yes --> C["Keep it. Change passwords, turn off cloud/P2P,<br/>update firmware. Reach it through a<br/>Tailscale subnet router"]
   B -- no --> D{"Camera cables: coax (analog)<br/>or network (IP)?"}
   D -- analog --> E["Analog or hybrid DVR with a surveillance disk<br/>(budget separately)"]
-  D -- IP --> F{"AVX2, 16 GB or more, a dedicated disk,<br/>isolated camera network?"}
+  D -- IP --> F{"AVX2, 4 GB or more (16 GB for 8+ cameras),<br/>a dedicated disk, isolated camera network?"}
   F -- yes --> G["Software NVR such as Frigate"]
   F -- no --> H["A hardware NVR, or defer"]
 ```
@@ -310,7 +355,7 @@ flowchart TD
   D -- yes --> V["Self-host with an offline export"]
 ```
 
-There is no administrator reset for a forgotten master password in an end-to-end encrypted vault **[K]** (`apps/F`). Hosted managers have no dependency on your power or internet.
+There is no administrator reset for a forgotten master password in an end-to-end encrypted vault **[K]** (`apps/F`). Hosted managers have no dependency on your power or internet. Staying with a hosted manager is a good, safe choice, not a second-best one; self-hosting is only worth it if you want full control and have the time to look after it.
 
 ### 5.6 What to buy or change next?
 
@@ -329,7 +374,7 @@ flowchart TD
   F -- no --> G["Stay as you are and measure for a month"]
 ```
 
-Backups come first because nothing else matters if the data exists in one place (`13` section 5). The order afterwards follows what each step unlocks per rupee (section 6).
+Backups come first because nothing else matters if the data exists in one place (`13` section 5). The order afterwards follows what each step unlocks per rupee (section 6). Rungs 6, 9, 10 and 11 are reached through sections 5.2, 5.3, 3.3 and 7 rather than this chart, and power (a UPS) comes before putting any data on the server (`04`).
 
 ## 6. Upgrade ladder
 
@@ -337,24 +382,22 @@ Each rung gives a price band, how far to trust it, what it unlocks in section 3,
 
 | Rung | What | Price band (INR) | Unlocks | Settle or check first |
 |------|------|------------------|---------|-----------------------|
-| 0 | **Measure, plus free fixes**: CPU flags, RAM, disk type, upload speed, router WAN check; lid-close setting and compressed swap (`13` section 3) | Rs 0. An Ethernet cable (1-2 m Cat6, Rs 145-355) and an installer USB stick (16 GB, Rs 400-600) come to about Rs 550-950 **[S34]** | Every cell in section 3 stops being a guess | Which machine becomes the server |
+| 0 | **Measure, plus free fixes**: CPU flags, RAM, disk type, upload speed, router WAN check; lid-close setting and compressed swap; read the UPS label, put the router and modem on the UPS, and check the laptop battery for swelling (`13` section 3, `04`) | Rs 0. An Ethernet cable (1-2 m Cat6, Rs 145-355) and an installer USB stick (16 GB, Rs 400-600) come to about Rs 550-950 **[S34]**; a USB gigabit Ethernet adapter (Rs 800-2,000) only if the laptop has no Ethernet port **[S34]** | Every cell in section 3 stops being a guess | Which machine becomes the server |
 | 1 | **Stopgap photo copies**: Google Photos backup on each phone, or copy each phone's camera folder to a computer over USB | Rs 0 inside the free space; Google One 100 GB Rs 130 a month, 200 GB Rs 210 a month **[S13]** | Photos exist in two places before anything is installed | Whether the free space is enough |
 | 2 | **SSD in place of a hard drive**: 256 GB 2.5" SATA SSD | Rs 2,200-3,800 for mainstream brands (no-name Rs 1,250-1,750, premium Rs 5,100-7,700), June-October 2026 **[S33]** | Immich becomes possible once RAM is 8 GB; databases and Docker stop feeling slow (A1 moves towards A2) | Is the drive really a hard drive? Does the laptop take a 2.5" SATA drive? Back up before swapping |
-| 3 | **RAM to 8 GB** | DDR3L (typically 2nd-5th generation laptops): 8 GB Rs 600-2,000 new, typically Rs 1,000-1,600; used Rs 800-1,500 asked. DDR4 (typically 7th generation and later): 8 GB Rs 5,200-7,600 new **[S27]** | A1 becomes A2: one heavy service fits | The memory type (6th generation can be either), free slots and the maker's maximum: read them with `sudo dmidecode -t memory` on Linux or `Get-CimInstance Win32_PhysicalMemory` in Windows PowerShell **[V25]**; a DDR3L stick also works in a DDR3 laptop but not the reverse **[S27]** |
-| 4 | **A data drive** sized to the data: a 512 GB SSD in an enclosure; a portable hard drive; a used drive; or a 3.5" drive with a dock | 512 GB SSD Rs 3,500-6,600 **[S33]** plus a 2.5" enclosure Rs 260-470 **[S31]** (about Rs 3,800-7,100 together); portable hard drives: 1 TB Rs 8,999-11,200, 2 TB Rs 11,250-13,150, 4 TB Rs 12,250-17,100 **[S41]**; used (asking prices): 1 TB Rs 1,500-5,000, 2 TB external Rs 4,200-7,500 **[S41][C]**; 3.5" drives: 2 TB surveillance-rated Rs 13,000-16,000, 4 TB NAS-rated Rs 23,700-26,500, plus a Rs 800-1,200 dock **[S32][S31]** | Photos and files move off the 256 GB disk; a local backup copy can exist | Portable bus-powered drive or 3.5" drive with its own power: put a 3.5" dock on the UPS (`13` section 3); enclosure chip caveats are in the cautions below the table |
-| 5 | **An off-site copy**: object storage with restic, or a consumer cloud plan | About Rs 667 per TB per month on a B2-class service, so about 300 GB for Rs 200 **[S11][S12]**; Google One tiers as in rung 1 | The first copy away from home (three copies need rung 6 as well) | Upload speed and the seed time in section 2.3; section 5.2 |
+| 3 | **RAM to 8 GB** | DDR3L (laptops of roughly the 2nd-5th generation, which also accept it in place of DDR3): 8 GB Rs 600-2,000 new, typically Rs 1,000-1,600; used Rs 800-1,500 asked. DDR4 (8th generation and later; 6th and 7th can be either): 8 GB Rs 5,200-7,600 new **[S27]** | With the SSD from rung 2, A1 becomes A2; on a hard drive it fits one heavy service other than Immich | The memory type, free slots and the maker's maximum. Easiest: search the laptop's model number plus "RAM upgrade" on the maker's site, or ask a shop; do not buy memory until you know the type. Commands: `sudo dmidecode -t memory` on Linux or `Get-CimInstance Win32_PhysicalMemory` in Windows PowerShell **[V25]**. A DDR3L stick also works in a DDR3 laptop but not the reverse **[S27]** |
+| 4 | **A data drive** sized to the data: a 512 GB SSD in an enclosure; a portable hard drive; a used drive; or a 3.5" drive with a dock | 512 GB SSD Rs 3,500-6,600 **[S33]** plus a 2.5" enclosure Rs 260-470 **[S31]** (about Rs 3,800-7,100 together); portable hard drives: 1 TB Rs 8,999-11,200, 2 TB Rs 11,250-13,150, 4 TB Rs 12,250-17,100 **[S41]**; used (asking prices): 1 TB Rs 1,500-5,000, 2 TB external Rs 4,200-7,500 **[S41][C]**; 3.5" drives: 2 TB surveillance-rated Rs 13,000-16,000, 4 TB NAS-rated Rs 23,700-26,500, plus a Rs 800-1,200 dock **[S32][S31]** | Photos and files move off the 256 GB disk; a local backup copy can exist | Portable bus-powered drive or 3.5" drive with its own power: put a 3.5" dock on the UPS (`13` section 3). Read the buying cautions in `08` first (SMR drives, used-drive checks, enclosure chips, timing) |
+| 5 | **An off-site copy**: object storage with restic, or a consumer cloud plan | About Rs 667 per TB per month on a B2-class service, so about 300 GB for Rs 200 **[S11][S12]**; Google One tiers as in rung 1 | The first copy away from home (three copies need rung 6 as well). Rungs 1 and 5 draw on the same monthly figure: a consumer-cloud stopgap or object storage, not both, unless the budget covers both | Upload speed and the seed time in section 2.3; section 5.2 |
 | 6 | **A second local drive** for a separate backup copy | The same prices as rung 4; it must be a separate device, not the second bay of one dock (one cable, one adapter, one failure) | Live copy, local backup and off-site copy on different media (3-2-1) | Whether the budget allows it now or after rung 7 |
-| 7 | **A better machine** (Tier B): a refurbished office mini PC, or a new N100/N150 mini PC | Refurbished i5 (6th-8th generation) with 8 GB and a 256-512 GB SSD: Rs 10,000-13,000 **[S29]**. New N100 with 16 GB and 512 GB: Rs 17,000-19,000 **[S30]** | B1 or B2 in section 3: Immich with machine learning, Paperless alongside it, hardware transcoding, a small camera setup | Compare with rungs 2-3 on the laptop (table below). Warranty is the seller's, not the maker's: get it in writing |
+| 7 | **A better machine** (Tier B): a refurbished office mini PC, or a new N100/N150 mini PC | Refurbished i5 (6th-8th generation) with 8 GB and a 256-512 GB SSD: Rs 10,000-13,000 **[S29]**. New N100 with 16 GB and 512 GB: Rs 17,000-19,000 **[S30]** | B1 or B2 in section 3: Immich with machine learning (Paperless and transcoding alongside it at 16 GB; at 8 GB see 3.1), a small camera setup | Compare with rungs 2-3 on the laptop (table below). Warranty is the seller's, not the maker's: get it in writing |
 | 8 | **A recorder for the cameras** | 16-channel analog DVR Rs 5,700-14,500 before the disk; a full 16-camera kit with a disk Rs 30,000-45,000 **[S24]**; the disk alone is now Rs 12,000-21,500 **[S32]** | Recording and remote viewing without taxing the server | Analog or IP cameras, and whether a recorder already exists (section 5.4) |
-| 9 | **Reach for strangers**: a rented host, a tunnel service, or a relay server; or a public IP from the provider | Rented Minecraft host about Rs 400 a month for 4 GB (vendor claim) **[S21]**; playit.gg premium US$30 a year (about Rs 2,879) **[S20]**; a small relay server (VPS) about Rs 336-576 a month before GST **[S38]**; a paid static IP about Rs 100-350 a month plus GST **[S36]**; routes compared in section 4.4 | Section 4.2 rows for strangers | Who really needs to join, and whether console players are among them |
+| 9 | **Reach for strangers**: a rented host, a tunnel service, or a relay server; or a public IP from the provider | Rented Minecraft host about Rs 400 a month for 4 GB (vendor claim) **[S21]**; playit.gg premium US$30 a year (about Rs 2,879) **[S20]**; a small relay server (VPS) in an Indian location about Rs 480-576 a month before GST **[S38]**; a paid static IP about Rs 100-350 a month plus GST **[S36][C]**; routes compared in section 4.4 | Section 4.2 rows for strangers | Who really needs to join, and whether console players are among them |
 | 10 | **A second always-on device** for DNS, monitoring and the camera subnet router | A spare laptop costs nothing; a single-board computer is not priced (prices in the sources conflicted) | Household ad blocking without one reboot cutting the internet (`13` section 2) | Whether a spare laptop already exists |
 | 11 | **NAS-class storage or a second site** | Not priced | Stage 5 (`09a`) | A measured limit, not a wish |
 
-**Cautions for rung 4 (read before buying an enclosure).** The Linux kernel carries workarounds for specific USB-to-SATA chips, and cheap enclosures rarely say which chip they use, so same-looking boxes differ **[V26]**. After buying, check `lsusb` for the chip and `lsusb -t` for `Driver=uas` or `usb-storage`. Disk health (SMART) passes through some chips only with the right `smartctl` device type; disk spin-down over USB is enclosure-specific and must be tested **[V26]**. A bus-powered 2.5" drive needs a USB port on the laptop itself, not a hub, and a 2 TB or larger drive may draw more at start-up than a USB port supplies **[K]**. A 2-bay dock is one failure domain; use two single-bay boxes for data and backup.
+**Power.** A UPS is the most valuable reliability purchase (`04` section 1). Size it from the measured watts (`04` section 2); the price book has a 600 VA model at Rs 3,490-4,800 and a 1100 VA model at Rs 6,700-8,430 **[S15]**, and a replacement battery is a few years' recurring cost (not priced). Put the router and modem on it too, or alerts cannot leave the house.
 
-**Hard-drive cautions.** A 2 TB portable costs only about Rs 2,250 more than a 1 TB one **[S41]**, so 1 TB is the poorest value. Drives of 2 TB and more, especially 2.5" portables, are often SMR (shingled) and vendors rarely say which drive is inside; SMR is usually tolerable for photo libraries and backup copies, which are mostly sequential or append writes, and poor for databases and busy rewrites **[E]**. Several 3.5" models are SMR too: Seagate BarraCuda 2 TB and larger, WD Blue 2 TB, Toshiba P300 2 TB and larger, and the Toshiba S300 surveillance range **[V35]**. After buying, read the internal model with `smartctl -i` **[V35]**. A used drive is the cheapest route and the riskiest: ask for a SMART report, run `smartctl -t long`, and treat any reallocated, pending or uncorrectable sectors as a reason to return it **[V35][S41]**. A 2 TB portable on an old laptop that has only USB 2.0 ports is the usual case for start-up power trouble **[K]**.
-
-**Timing.** Hard-drive and flash prices are at or near record highs and no source expects relief before 2027 **[S43]**. Festive sales help only if the price beats the six-month history, because list prices are raised before sales **[S43]**. India reportedly requires compulsory registration for standalone internal, NAS and surveillance hard drives from 2026-11-05, which may thin stock of unregistered internal drives; USB-type external drives are already covered **[S43]**.
+**Before buying a drive or an enclosure**, read the cautions in `08` section 1 ("Buying storage and memory in 2026"): which models are SMR, how to check a used drive, USB enclosure chips and power, and timing. Hard-drive and flash prices are at or near record highs and no source expects relief before 2027 **[S43]**.
 
 ### Keep the old laptop, or buy a refurbished office mini PC?
 
@@ -364,12 +407,12 @@ Costs are sums of the ranges in the ladder **[E]**; they say nothing about quali
 |--------|---------------|-------|
 | Laptop with DDR3L memory: 8 GB stick plus 256 GB SSD | About Rs 2,800-5,800 | Cheapest by far; the battery works as a small built-in UPS. Leaves most of a Rs 12,000-15,000 budget for storage |
 | Laptop with DDR4 memory: 8 GB stick plus 256 GB SSD | About Rs 7,400-11,400 | RAM is the expensive part in 2026 |
-| Refurbished i5 office mini PC, 8 GB and a 256-512 GB SSD | About Rs 10,000-13,000 **[S29]** | Comes with RAM and SSD; idles at about 10-15 W **[S35]**; seller warranty only; the most that fits the budget, with nothing left for storage |
+| Refurbished i5 office mini PC, 8 GB and a 256-512 GB SSD | About Rs 10,000-13,000 **[S29]** | Comes with RAM and SSD; idles at about 10-15 W for 6th-7th generation boxes (a 27 W reading for an i5-8400T was questioned) **[S35]**; seller warranty only; the most that fits the budget, with nothing left for storage |
 | New N100 mini PC, 16 GB and 512 GB | About Rs 17,000-19,000 **[S30]** | Over a Rs 12,000-15,000 budget; newer, quiet, low idle power **[K]** |
 
-If the laptop turns out to be DDR3L-era, the first row costs about a third of the third and keeps the laptop; if it is DDR4-era, rows two and three cost about the same and the mini PC adds a second machine. The laptop can then stay as the second resolver, watcher and subnet router (`13` section 2).
+If the laptop turns out to be DDR3L-era, the first row costs roughly a quarter to a half of the third and keeps the laptop; if it is DDR4-era, rows two and three cost about the same and the mini PC adds a second machine. The laptop can then stay as the second resolver, watcher and subnet router (`13` section 2).
 
-**Reading the ladder with a budget.** A one-time budget of about Rs 12,000-15,000 reaches rungs 0-4 in a few combinations: for example rungs 2 and 3 on a DDR3L laptop (Rs 2,800-5,800) plus a 512 GB SSD in an enclosure (Rs 3,800-7,100), or a refurbished mini PC alone. A 2 TB portable drive alone (Rs 11,250-13,150) also fits, with nothing left for rungs 2-3. It does not reach a new 4 TB drive. Rung 5 fits a monthly figure near Rs 200 *if the monthly figure does not also have to pay for electricity* (`08` Scenario D). Rungs 7-9 are outside that budget except as alternatives to rungs 2-3; they are what the revisit triggers in section 7 watch for.
+**Reading the ladder with a budget.** A one-time budget of about Rs 12,000-15,000 reaches rungs 0-4 in a few combinations: for example rungs 2 and 3 on a DDR3L laptop (Rs 2,800-5,800) plus a 512 GB SSD in an enclosure (Rs 3,800-7,100), or a refurbished mini PC alone. A 2 TB portable drive alone (Rs 11,250-13,150) also fits, with nothing left for rungs 2-3. It does not reach a new 4 TB NAS-rated drive (Rs 23,700-26,500); 4 TB portable and surveillance drives are listed from about Rs 12,000-12,250, but those lows are undated or stale **[C]**. Rung 5 fits a monthly figure near Rs 200 *if the monthly figure does not also have to pay for electricity* (`08` Scenario D). Rungs 7-9 are outside that budget except as alternatives to rungs 2-3; they are what the revisit triggers in section 7 watch for.
 
 ## 7. Revisit triggers
 
@@ -389,6 +432,11 @@ When one of these changes, re-read the section named and expect the decision on 
 | A service becomes critical for the family (DNS, passwords) | Section 3.3 | Second resolver, backups, recovery kit |
 | A project is archived or superseded, or a plan's terms change (`12` V18, S9, S17) | `12-verification-log.md` | Replace the app or re-price |
 | A month of measured use is done | `03` section 10 | Real headroom decides the next stage (`09a`) |
+| A drive reports SMART errors or fails | `06` section 5.8; rungs 4 and 6 | Restore-test, replace the drive, re-check that three copies exist |
+| The internet provider, the plan or the house changes | Sections 2.1, 2.3, 4 and 5.2 | Re-measure upload and the CGNAT check; seed time; what can be reached |
+| A household member leaves or joins | Section 3.3; `apps/O` | Accounts, Tailscale invites, shared passwords, the free-plan user limit |
+| Memory or storage prices move sharply, or 2026-11-05 (the reported start of drive registration) passes | Section 6 | Which rung to buy now and which to wait on **[S43]** |
+| Power outages are measured (how often, how long) | Section 2.1; `04` sections 1-3 | UPS size and shutdown settings |
 
 ## 8. Reversibility register
 
@@ -405,11 +453,13 @@ Cheap-to-undo decisions can be made quickly; expensive ones deserve a measuremen
 | Photo library database | Medium | Originals restore; edits and albums live in the database | Keep database dumps and originals (`apps/C`) |
 | Disk layout and mount paths | High | Terabytes to move; paths appear in every Compose file | Follow `02a-storage-layout.md` once; keep one `media-root` |
 | Backup repository format and key | High | A lost key is lost data; changing tool means re-seeding off-site | Two repositories with separate passwords; a recovery kit kept elsewhere (`06` section 5.9) |
+| Buying a data drive (capacity, SMR or CMR, enclosure) | Medium to high | Money spent; an unsuitable drive means a second purchase | Check the model before filling it (`smartctl -i` **[V35]**); buy the smallest drive that holds the data plus growth |
+| Access mechanism (Tailscale or a public hostname) | Low to medium | Clients and bookmarks refer to names | Keep private apps on Tailscale only (`apps/00`) |
 | Camera cabling type (coax or network) and the recorder purchase | High | Cables are in the walls; a DVR cannot read IP cameras and the reverse | Check the cable type and whether a recorder exists before buying anything |
 
 ## 9. Where the example profile sits
 
-The owner's provisional answers are in [`../profile/owner.md`](../profile/owner.md). This section reads them against the axes above. It is an **example**: change the profile and the same reading applies to the new values; nothing in sections 1-8 depends on it.
+The owner's provisional answers are in [`../profile/owner.md`](../profile/owner.md). This section reads them against the axes above: it is what the owner's answers so far mean. It is an **example**, not a rule: change a value in the profile and the reading changes; nothing in sections 1-8 depends on it.
 
 | Axis | Example profile today | Where that puts it | Measure next |
 |------|-----------------------|--------------------|--------------|
@@ -419,8 +469,12 @@ The owner's provisional answers are in [`../profile/owner.md`](../profile/owner.
 | Data disks | None stated | No data disk and no backup disk yet (rungs 4 and 6) | List the drives owned |
 | Uplink | Plan quoted as "4": 4 Mbps or 4 MB/s (32 Mbps); upload unknown | Anywhere from the 2-Mbps-or-less band to the 20-Mbps-or-more band (section 2.3) | A speed test: the upload figure and its unit |
 | Reachability | Router cannot forward ports; CGNAT unknown | Treat as no inbound (section 4) | The WAN-address check |
-| One-time budget | Rs 12,000-15,000 | The 5,000-15,000 band: rungs 0-4 fit in several combinations; rungs 7-9 do not | None |
-| Monthly budget | Rs 200; whether electricity is inside it is unknown | Rung 5 fits only if electricity is paid separately (`08` Scenario D) | Ask |
+| One-time budget | Rs 12,000-15,000 | The 5,000-15,000 band: rungs 0-4 fit in several combinations; rung 7 fits only as a refurbished mini PC (Rs 10,000-13,000) instead of rungs 2-3, with little left for storage; a new N100 and rungs 8-9 do not | None |
+| Monthly budget | Rs 200; whether electricity is inside it is unknown | Rung 5 (about 300 GB for Rs 200) fits only if electricity is paid separately; with the domain renewal (about Rs 80 a month) it is about 180 GB (`13` section 5; `08` Scenario D) | Ask |
+| Power | A UPS is available (rating unknown); whether the router and modem are on it, and the outage pattern, are unknown | Power note under the ladder in section 6 | The UPS label; a watt meter |
+| Router | Cannot forward ports; DNS setting and admin access unknown | Ad blocking for the whole house or per device (section 3.3) | The router's LAN/DHCP page |
+| Backups today | None | The first branch of section 5.6: stopgap copies first | Nothing to measure |
+| Phones and TVs | Android phones; TV make and system unknown | Which Jellyfin client works (section 4.1) | The TV model and its system |
 | Audience | Household of 4; wants media and a game server to work for "public" | Household certain; invited people or strangers unknown (section 4) | Who exactly |
 | Cameras | 16, wired; analog or IP and any recorder unknown | Section 5.4 undecided; a software NVR is not realistic on this class (section 3.2) | The cable type; look for a recorder |
 | Time and comfort | Not stated | Unknown | Ask |
@@ -428,7 +482,7 @@ The owner's provisional answers are in [`../profile/owner.md`](../profile/owner.
 **What the example settles whatever the unknowns turn out to be**
 
 - The base stack, photos as plain folders and a subnet router for a DVR work on every class; Jellyfin transcoding, a software NVR and local language models do not on A-class machines (section 3.2).
-- Media for strangers is not advised from any connection (section 4.1).
+- Media for strangers is not recommended (section 4.1); friends and relatives can be invited with Tailscale.
 - Self-hosting passwords waits for the gates in section 3.3; with no backups yet, the hosted manager stays.
 
 **What stays open until measured**

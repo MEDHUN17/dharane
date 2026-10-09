@@ -122,7 +122,7 @@ Key concepts to be taught in Phase 5: device authorisation, key expiry (disable 
 | Option | Verdict |
 |--------|---------|
 | **Do not publish** (default) | Most services need no public access if family devices run Tailscale |
-| **Cloudflare Tunnel + Access** | Good for small web apps; no inbound port; Access can require identity + MFA before traffic reaches the app. Limits: 100 MB request bodies on Free/Pro **[V]**, HTTP/HTTPS plus TCP/SSH/RDP/SMB through a client program and no UDP **[V]**, a paid service required to serve video and large files over public hostnames on Free/Pro/Business **[V]**, and Cloudflare terminates TLS (it can see plaintext) |
+| **Cloudflare Tunnel + Access** | Good for small web apps; no inbound port; Access can require identity + MFA before traffic reaches the app. Limits: 100 MB request bodies on Free/Pro **[V]**, HTTP/HTTPS plus TCP/SSH/RDP/SMB through a client program, and no UDP service type listed **[V]**, a paid service required to serve video and large files over public hostnames on Free/Pro/Business **[V]**, and Cloudflare terminates TLS (it can see plaintext) |
 | Port-forward + Caddy | Needs a public IPv4 (often unavailable on CGNAT), exposes your home IP, needs hardening and patching discipline. Avoid unless no alternative |
 | VPS reverse proxy (WireGuard back to home) | Solves CGNAT and gives protocol freedom; costs a VPS and another server to secure. Consider for game servers |
 | Tailscale Funnel | Public via your node; allowed ports 443/8443/10000, TLS only, undisclosed bandwidth limits, and the hostname appears in Certificate Transparency logs **[S]**. Use sparingly |

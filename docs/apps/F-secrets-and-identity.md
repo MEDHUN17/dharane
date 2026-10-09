@@ -75,7 +75,9 @@ Heavier, multi-container, with its own licensing and resource needs **[U]**: ver
 
 MFA support differs per app; see the table in [`O-family-access.md`](O-family-access.md).
 
-## If you already use LastPass
+## If you already use a hosted password manager
+
+The best-known breach among hosted managers is LastPass's, so the facts below use it as the example; the same steps apply to any hosted manager.
 
 **Facts [S]:** LastPass disclosed in late 2022 that attackers copied customers' encrypted vault backups (along with some unencrypted data such as website URLs). The encryption holds only as long as the master password is strong and the iteration count is high; researchers and reporters link later large cryptocurrency thefts to cracked vaults (amounts vary by report, so none is quoted here). UC Berkeley's guidance: set *password iterations* to at least 600,000, enable MFA, and change passwords for sensitive accounts. I could not find LastPass's own current default iteration figure: check the value in your account settings.
 
