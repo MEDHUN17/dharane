@@ -48,13 +48,23 @@ This build session's network policy blocked most documentation sites (for exampl
 | S8 | Immich users report Cloudflare Tunnel's 100 MB cap breaks large uploads; common workaround is a LAN/other endpoint in the mobile app | immich-app/immich discussions |
 | S9 | Tailscale "Pricing v4" (post dated 2026-04-08): free Personal plan up to 6 users with unlimited user-owned devices (was 3 users / 100 devices); paid tiers Standard $8 and Premium $18 per user per month. The official post text was not readable here; figures come from pricing trackers and guides. **Confirm on tailscale.com/pricing** | tailscale.com/blog/pricing-v4 plus trackers |
 | S10 | Plex: hardware-accelerated transcoding requires a paid Plex Pass; since 2025-04-29 viewers without a Pass need a paid Remote Watch Pass for remote streaming unless the server owner has a Pass; lifetime Plex Pass raised to US$749.99 effective 2026-07-01 and a five-year plan added at US$249.99; confirm on plex.tv | press coverage (9to5mac, neowin, alternativeto) and review sites |
+| S11 | Exchange rates used for conversions: USD/INR 95.95 (2026-09-16), EUR/INR 110.43 (2026-08-28); October rates were forecasts only | forex rate pages |
+| S12 | Storage prices: Backblaze B2 US$6.95/TB/month, free egress up to 3x average stored then US$0.01/GB; Cloudflare R2 US$0.015/GB-month, free egress, operations charged; Wasabi US$6.99/TB/month with 1 TB minimum; Hetzner Storage Box BX11 EUR 3.20/month plus VAT for 1 TB | third-party pricing pages and guides (2026) |
+| S13 | India consumer cloud: Google One 2 TB Rs 650/month; iCloud+ 2 TB Rs 749/month | July 2026 buyer's guide |
+| S14 | Domains: Cloudflare Registrar `.com` US$10.11/yr (2026-02-19 record; another record US$10.46); `.in` cheapest first-year US$1.99, renewals from US$5.50, some US$17.99 | PriceWorld, domain-comparison sites |
+| S15 | India hardware (low confidence, mostly undated retailer pages): N100 mini PC 16 GB/256 GB Rs 17,999; 4 TB NAS HDD about Rs 7,000-10,500; 2 TB portable Rs 12,049-12,949; 1 TB SSD Rs 4,500-14,000 (conflicting); APC 600 VA UPS Rs 3,490-4,800 and 1100 VA Rs 6,700-8,430; Raspberry Pi 5 4 GB Rs 5,500-12,000 (unusable) | forum seller list, retailer pages, roundups |
+| S16 | Electricity tariffs by state differ widely and sources conflict (Delhi, Maharashtra, Karnataka, Tamil Nadu, Kerala examples in Part I) | calculator and blog sites; use your DISCOM's tariff order |
+| S17 | Cloudflare Zero Trust free plan up to 50 users; paid US$7/user/month | third-party pricing pages |
 
 ## [U] Unverified or conflicting - do not rely on yet
 
 | ID | Item | State |
 |----|------|-------|
 | U2 | Current text of Cloudflare's CDN service term for video/large files on Free/Pro/Business | Second-hand only |
-| U3 | All Indian prices (domain, storage, drives, UPS, electricity tariffs) | Not yet researched; Part I will cite dated sources |
+
+## Still unverified
+
+No vendor pricing page could be opened from this session, so every price above is a search-reported figure and must be confirmed before purchase. Hardware and tariff figures are low confidence.
 
 ## Not yet verified (will be checked at the phase that needs them)
 

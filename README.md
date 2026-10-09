@@ -25,14 +25,15 @@ Every verified fact and its source is in [`docs/12-verification-log.md`](docs/12
 | C | Storage architecture and directory layout | [`docs/02a-storage-layout.md`](docs/02a-storage-layout.md) | draft v0.1 |
 | D | Hardware tiers and capacity matrix | [`docs/03-hardware-capacity.md`](docs/03-hardware-capacity.md) | draft v0.1 |
 | E | Application catalogue + service-exposure matrix (one file per category) | [`docs/apps/`](docs/apps/README.md) | draft v0.1 |
-| F | Device integration matrix | `docs/05-device-integration.md` | planned |
+| F | Device integration matrix | [`docs/05-device-integration.md`](docs/05-device-integration.md) | draft v0.1 |
 | G | Security, identity and backup architecture | [`docs/06-security-backup.md`](docs/06-security-backup.md) | draft v0.1 |
 | H | Automation and monitoring | [`docs/07-automation-monitoring.md`](docs/07-automation-monitoring.md) | draft v0.1 |
-| I | Cost comparison (INR, dated sources) | `docs/08-cost.md` | planned |
+| I | Cost comparison (INR, dated sources) | [`docs/08-cost.md`](docs/08-cost.md) | draft v0.1 (prices low-to-medium confidence) |
 | J | Phased implementation roadmap | [`docs/09-roadmap.md`](docs/09-roadmap.md) | draft v0.1 |
 | J | Staged growth plan | [`docs/09a-growth-stages.md`](docs/09a-growth-stages.md) | draft v0.1 |
-| K | Documentation templates | `docs/templates/` | planned |
+| K | Documentation templates and repo/secrets policy | [`docs/templates/`](docs/templates/README.md) | draft v0.1 |
 | L | Information needed from the owner | [`docs/11-information-needed.md`](docs/11-information-needed.md) | **awaiting answers** |
+| - | Troubleshooting handbook (25 topics) | [`docs/10-troubleshooting.md`](docs/10-troubleshooting.md) | draft v0.1 |
 | - | Tested example scripts, systemd units and test suites | [`examples/`](examples/README.md) | tested |
 | - | Verification log | [`docs/12-verification-log.md`](docs/12-verification-log.md) | live |
 

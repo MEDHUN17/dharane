@@ -13,9 +13,10 @@ Last updated: 2026-10-09
 - [x] Verification log (sources and dates)
 - [x] Part E application catalogue + exposure matrix (docs/apps/)
 - [x] Part G security + backup, Part H automation + monitoring, tested example scripts (examples/)
-- [ ] Part F device integration
-- [ ] Part I cost comparison (needs dated INR research; hardware/state answers help)
-- [ ] Part K documentation templates
+- [x] Part F device integration
+- [x] Part I cost comparison (dated, sourced; hardware prices low confidence; refine after Part L)
+- [x] Part K documentation templates + repo/secrets policy
+- [x] Troubleshooting handbook
 - [ ] Implementation phases (start after Part L is answered)
 
 ## Open decisions (owner)
@@ -47,4 +48,4 @@ storage, backup-local).
 - No public exposure before backups are restore-tested and alerts exist.
 
 ## Next
-Waiting on Part L answers. In the meantime: Part E-K documents.
+Waiting on Part L answers (docs/11-information-needed.md). Then: tier the hardware, refine Part I, start Phase 0/1 interactively.
