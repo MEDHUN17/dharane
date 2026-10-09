@@ -1,6 +1,6 @@
 # Part I - Cost model (INR)
 
-Prepared **2026-10-09**. Prices come from web-search summaries of vendor and retailer pages, not from the vendors' own pages (those hosts were blocked in this session). **None is a confirmed price.** A second pass on 2026-10-09 re-checked memory, SSDs, hard drives, mini PCs, enclosures and small items (rows marked **[S27]-[S35]**) and found that memory and storage cost far more in 2026 than earlier rows in this file assumed. Rupee figures are conversions: the base price, the exchange rate and its date are shown so you can recompute. Taxes (GST), card foreign-exchange markups and shipping are **not** included.
+Prepared **2026-10-09**. Prices come from web-search summaries of vendor and retailer pages, not from the vendors' own pages (those hosts were blocked in this session). **None is a confirmed price.** A second pass on 2026-10-09 re-checked memory, SSDs, hard drives, mini PCs, enclosures and small items (rows marked **[S27]-[S35]**, **[S41]-[S43]**) and found that memory and storage cost far more in 2026 than earlier rows in this file assumed; sources expect no relief before 2027. Rupee figures are conversions: the base price, the exchange rate and its date are shown so you can recompute. Taxes (GST), card foreign-exchange markups and shipping are **not** included.
 
 Exchange rates used (search-reported): **USD/INR 95.95** (2026-09-16), **EUR/INR 110.43** (2026-08-28). Both move; recompute with a live rate before paying.
 
@@ -41,14 +41,16 @@ Confidence: **A** several consistent sources; **B** one decent source; **C** con
 | 2 TB NAS-class 3.5" HDD | Rs 17,700-20,000 (WD Red Plus WD20EFPX about Rs 17,700; IronWolf ST2000VN003 Rs 19,999) | Amazon.in, Smartprix, September-October 2026 **[S32]** | **B** |
 | 2 TB / 4 TB surveillance-rated 3.5" HDD | 2 TB Rs 13,000-16,000 (WD Purple, SkyHawk, Toshiba S300); 4 TB Rs 12,000-21,500 (very wide spread: WD Purple 4 TB Rs 11,999-13,499, SkyHawk Rs 12,799-21,499, S300 Rs 18,299) | Amazon.in, trackers, a July 2026 roundup **[S32]** | **C** |
 | Desktop-class 3.5" HDD (Seagate BarraCuda) | 4 TB Rs 18,500-19,500; 2 TB Rs 14,799-15,999 | Retailer listings, undated, seen 2026-10-09 **[S32]** | **B** |
-| 2 TB portable USB drive | Rs 12,049-12,949 (June 2026 listings); another undated guide says about Rs 6,000-6,500 | Listing roundup | **C** |
-| 4 TB portable USB drive | Rs 10,903 (sale, undated) to Rs 16,700-17,000 | Retailer pages, undated | **C** |
-| 1 TB SATA SSD | About Rs 4,500-6,000 (2025 guide); one 2026 listing showed Rs 13,999 (conflict) | Mixed | **C** |
-| 1 TB NVMe SSD | Rs 4,849 (sale, undated) to about Rs 10,000 (Gen 3-4) | Retailer pages, undated | **C** |
+| 2 TB portable USB drive | Rs 11,250-13,150 (September-October 2026; Seagate Expansion 2 TB Rs 11,249 on 2026-10-08). The "Rs 6,000-6,500" figure matches September 2025 prices | Flipkart, Amazon.in, trackers **[S41]** | **B** |
+| 4 TB portable USB drive | Rs 12,250-17,100; only the top (Toshiba Canvio Basics 4 TB Rs 17,088, 2026-10-09) is an October point | Trackers and retailer pages **[S41]** | **C** |
+| 1 TB SATA SSD | Rs 10,499-13,999 for the cheapest brand-labelled models, Rs 17,400-35,049 for name brands (June-October 2026). The earlier Rs 4,500-6,000 is a 2025 price | Amazon.in via trackers **[S42]** | **B** |
+| 1 TB NVMe SSD | Rs 14,400-22,990 (June-October 2026). Rs 4,849-6,399 were 2025 prices | Amazon.in via trackers **[S42]** | **B** |
+| 128 GB SATA SSD | Rs 879-1,600 (budget brands, May-August 2026) | Trackers **[S42]** | **B** |
+| Used hard drives (asking prices only) | 1 TB internal Rs 1,500-3,200; 1 TB external Rs 2,000-5,000; 2 TB external Rs 4,200-7,500; run a SMART self-test before trusting one | OLX, Quikr, undated **[S41]** | **C** |
 | UPS, APC Back-UPS 600 VA (router + mini PC) | About Rs 3,490-4,800 | Reseller pages and a July 2026 roundup | B |
 | UPS, APC Back-UPS 1100 VA | About Rs 6,700-8,430 | Same | B |
 | Raspberry Pi 5 4 GB | Sources range Rs 5,500 to Rs 12,000 | Retailer blogs | **N** (too inconsistent to use) |
-| 1 TB portable USB drive | Toshiba Canvio about Rs 3,599; WD Elements Rs 8,899-9,981; Seagate Expansion about Rs 9,799; older deal pages Rs 3,700-4,000 | June 2026 roundup and deal pages | **C** (large spread) |
+| 1 TB portable USB drive | Rs 8,999-11,200 (August-October 2026). The Rs 3,599 Toshiba Canvio price was a June sale low | Flipkart, Amazon.in, trackers **[S41]** | **B** |
 | 256 GB 2.5" SATA SSD | Rs 2,200-3,800 mainstream brands (no-name Rs 1,250-1,750; premium Rs 5,100-7,700) | Amazon.in tracker points, June-October 2026 **[S33]** | **B** |
 | 512 GB 2.5" SATA SSD | Rs 3,500-6,600 mainstream brands (cheapest Rs 2,600-3,500; name brands Rs 7,000 and up) | Amazon.in tracker points, June-October 2026 **[S33]** | **B** |
 | Laptop memory, 8 GB DDR3L SO-DIMM (new) | Rs 600-2,000, typically Rs 1,000-1,600; 4 GB Rs 789-1,029; used 8 GB asked Rs 800-1,500 (OLX) | Trackers and listings, June-October 2026 **[S27]** | **A** (new), **C** (used) |
@@ -87,7 +89,7 @@ Tariffs differ by state, slab, fixed charges and surcharges. Search results disa
 | Category | Cost |
 |----------|------|
 | Existing hardware assumed | The machine itself: Rs 0 |
-| Additional purchases | A backup disk (a 2 TB portable drive, Rs 12,049-12,949 **C**; or a 4 TB 3.5" NAS-class drive Rs 23,700-26,500 **A** plus an enclosure Rs 800-1,200 **B**) plus a 600 VA UPS (Rs 3,490-4,800). **About Rs 15,500-17,700 one-time** using the portable drive (portable prices were not re-checked in October 2026 and may be low), or **about Rs 28,000-32,500** with the 4 TB drive |
+| Additional purchases | A backup disk (a 2 TB portable drive, Rs 11,250-13,150 **B**; or a 4 TB 3.5" NAS-class drive Rs 23,700-26,500 **A** plus an enclosure Rs 800-1,200 **B**) plus a 600 VA UPS (Rs 3,490-4,800). **About Rs 14,700-18,000 one-time** using the 2 TB portable drive (Rs 11,250-13,150 **B**), or **about Rs 28,000-32,500** with the 4 TB drive |
 | Mandatory recurring | Electricity at 10-20 W: about Rs 350-1,730/yr depending on tariff. Off-site backup of up to ~0.5 TB: a rotated second drive (extra one-time cost, no subscription) or a Hetzner-style 1 TB box at about Rs 4,200-5,000/yr, or B2 0.5 TB at about Rs 4,000/yr. **About Rs 4,400-6,800/yr** with a paid off-site copy |
 | Optional recurring | Domain about Rs 970-1,000/yr (only if you want HTTPS names) |
 
@@ -96,7 +98,7 @@ Tariffs differ by state, slab, fixed charges and surcharges. Search results disa
 | Category | Cost |
 |----------|------|
 | Existing hardware assumed | Router, switch, phones, PCs |
-| Additional purchases | N100-class mini PC with 16 GB + 512 GB (Rs 17,000-19,000 **B**) + two 4 TB NAS-class drives, one data and one backup (Rs 47,400-53,000 **A**) + two single-bay enclosures (Rs 1,600-2,400 **B**) + a 1100 VA UPS (Rs 6,700-8,430). **About Rs 72,700-82,800**; with two 2 TB surveillance-rated drives instead (Rs 26,000-32,000 **C**) it is **about Rs 51,300-61,800**. A 1 TB SSD for more fast storage is not re-priced here: the earlier Rs 4,800-10,000 figure is likely stale |
+| Additional purchases | N100-class mini PC with 16 GB + 512 GB (Rs 17,000-19,000 **B**) + two 4 TB NAS-class drives, one data and one backup (Rs 47,400-53,000 **A**) + two single-bay enclosures (Rs 1,600-2,400 **B**) + a 1100 VA UPS (Rs 6,700-8,430). **About Rs 72,700-82,800**; with two 2 TB surveillance-rated drives instead (Rs 26,000-32,000 **C**) it is **about Rs 51,300-61,800**. A 1 TB SATA SSD for more fast storage adds Rs 10,500-14,000 **B** |
 | Mandatory recurring | Electricity at about 30 W (mini PC plus two disks): about Rs 1,040-2,590/yr. Off-site backup: 1 TB on a flat-rate box about Rs 4,200-5,000/yr; 2 TB on B2 or Wasabi about Rs 16,000/yr. **About Rs 5,300-18,600/yr** depending on how much you must send off-site |
 | Optional recurring | Domain Rs 970-1,000/yr; a hosted password manager if you do not self-host (not priced); heartbeat/push (free tiers, limits unverified) |
 | Replacement reserve | Spinning drives last years, not decades; budget a drive replacement every ~5 years **[E]** (Rs 13,000-26,500 each depending on size and class, **A**-**C**) and a UPS battery replacement every few years (not priced) |
@@ -114,7 +116,7 @@ Tariffs differ by state, slab, fixed charges and surcharges. Search results disa
 | Category | Cost |
 |----------|------|
 | Existing hardware assumed | The laptop(s), a UPS, the router, the phones |
-| Additional purchases (choose by what you own) | **If the laptop has a hard drive:** a 256 GB SATA SSD, Rs 2,200-3,800 **B**. **If it has 4 GB of memory:** 8 GB of laptop memory, Rs 600-2,000 if the laptop uses DDR3/DDR3L **A**, Rs 5,200-7,600 if it uses DDR4 **A**. **Data storage, one of:** a 512 GB SATA SSD in a 2.5" enclosure, Rs 3,500-6,600 + Rs 260-470 **B**; a portable hard drive (1 TB Rs 3,600-10,000 **C**, 2 TB Rs 12,049-12,949 **C**; **not re-checked in October 2026 and possibly low**); a 3.5" drive, which now costs far more (2 TB surveillance-rated Rs 13,000-16,000 **C**, 4 TB NAS-class Rs 23,700-26,500 **A**) plus an enclosure Rs 800-1,200 **B**. **Small items:** an Ethernet cable and a USB installer stick, about Rs 550-950 **B**. Examples: SSD + 8 GB DDR3L memory + a 512 GB SSD in an enclosure, about **Rs 6,600-12,900**; the same with DDR4 memory, about **Rs 11,200-18,500**; a 2 TB portable alone, about **Rs 12,000-12,900** (portable prices unverified) |
+| Additional purchases (choose by what you own) | **If the laptop has a hard drive:** a 256 GB SATA SSD, Rs 2,200-3,800 **B**. **If it has 4 GB of memory:** 8 GB of laptop memory, Rs 600-2,000 if the laptop uses DDR3/DDR3L **A**, Rs 5,200-7,600 if it uses DDR4 **A**. **Data storage, one of:** a 512 GB SATA SSD in a 2.5" enclosure, Rs 3,500-6,600 + Rs 260-470 **B**; a portable hard drive (1 TB Rs 8,999-11,200 **B**, 2 TB Rs 11,250-13,150 **B**; a used drive is asked at Rs 1,500-7,500 **C** and needs a SMART check); a 3.5" drive, which now costs far more (2 TB surveillance-rated Rs 13,000-16,000 **C**, 4 TB NAS-class Rs 23,700-26,500 **A**) plus an enclosure Rs 800-1,200 **B**. **Small items:** an Ethernet cable and a USB installer stick, about Rs 550-950 **B**. Examples: SSD + 8 GB DDR3L memory + a 512 GB SSD in an enclosure, about **Rs 6,600-12,900**; the same with DDR4 memory, about **Rs 11,200-18,500**; a 2 TB portable alone, about **Rs 11,250-13,150**; SSD + DDR3L memory + a 1 TB portable, about **Rs 11,800-17,000** |
 | Mandatory recurring | Off-site copy: Backblaze B2 at about Rs 667/TB/month gives roughly **300 GB for Rs 200** (150 GB for Rs 100); or Google One 100 GB Rs 130 or 200 GB Rs 210. Domain renewal about Rs 970-1,000/yr, roughly Rs 80/month. Electricity for a laptop plus drive (about 25-35 W): about 18-25 kWh/month, **Rs 72-250/month** across Rs 4-10 tariffs. *Whether the Rs 200 includes electricity decides which of these fit* |
 | Optional | A second local drive (another Rs 3,800-7,100 for a 512 GB SSD in an enclosure, more for a hard drive) to reach three copies; a recorder for cameras (separate budget); a paid game host (Rs 400+/month) |
 | What money at this scale cannot fix | Public hosting of media or games from a home line with no inbound ports; 16-camera AI recording on an old laptop; a new 4 TB NAS-class drive (Rs 23,700-26,500) |
