@@ -57,7 +57,7 @@ Confidence: **A** several consistent sources; **B** one decent source; **C** con
 | Laptop memory, 8 GB DDR4 SO-DIMM (new) | Rs 5,200-7,600 (about 2-2.5x its 2025 price); 16 GB about Rs 13,500-14,000 (older dealer listings at Rs 2,450-4,725 look pre-spike); used 8 GB asked Rs 2,000-4,500 | Listings, July-October 2026 **[S27][S28]** | **A** (8 GB new), **B** (16 GB), **C** (used) |
 | USB-SATA enclosure or dock | 2.5" USB 3.0 enclosure Rs 260-470; 3.5" single-bay with a 12 V adapter Rs 800-1,200; 2-bay dock Rs 1,900-2,700 | Amazon.in and Flipkart listings, undated **[S31]** | **B** |
 | USB 3.0 gigabit Ethernet adapter; Cat6 patch cable (1-2 m); USB flash drive | Adapter Rs 800-2,000 (TP-Link UE300 Rs 1,000-1,100); cable Rs 145-355; flash drive 16 GB Rs 400-600, 32 GB Rs 590-690 | Amazon.in and Flipkart listings, undated **[S34]** | **B** |
-| 16-channel analog DVR | CP Plus Rs 5,700-6,800 (5 MP Rs 10,800); Hikvision Rs 9,500-14,500; full 16-camera kit with 4 TB disk Rs 30,000-45,000 | B2B listings and a price tracker, 2026 | **C** (hard disk not priced) |
+| 16-channel analog DVR | CP Plus Rs 5,700-6,800 (5 MP Rs 10,800); Hikvision Rs 9,500-14,500; full 16-camera kit with 4 TB disk Rs 30,000-45,000 (this predates the 2026 disk price rise, **[S32]**: treat it as a floor) | B2B listings and a price tracker, 2026 | **C** |
 | Managed or PoE switch, cameras, UPS replacement batteries | Not researched | - | **N**: tell me if you plan to buy and I will price them |
 
 ### Buying storage and memory in 2026: cautions

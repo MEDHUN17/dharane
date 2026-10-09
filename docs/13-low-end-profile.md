@@ -121,7 +121,7 @@ What works: TVs in the house over the LAN (Jellyfin has Android TV/Fire OS, LG w
 Sixteen cameras need a **recorder with its own disk**: at 1 Mbps each that is about 173 GB per day, at 2 Mbps about 346 GB per day; a 256 GB disk holds under two days, and a 4 TB disk about 12-23 days **[E]**. AI detection needs decoding and a capable CPU; Frigate also needs AVX2 and 4-16 GB RAM **[V]**. Therefore:
 
 - **Existing DVR/NVR:** keep it. Change its passwords, turn off cloud/P2P features, update firmware, and reach it through the laptop as a Tailscale subnet router. Do not forward ports.
-- **Analog cameras and no recorder:** a 16-channel analog DVR was listed around Rs 5,700-14,500 before the hard disk (a surveillance-rated 2 TB disk was Rs 13,000-16,000 and a 4 TB one Rs 12,000-21,500 in 2026 **[S][C]**); a full kit with cameras and disk Rs 30,000-45,000 **[S][C]**. That is a separate budget; defer it.
+- **Analog cameras and no recorder:** a 16-channel analog DVR was listed around Rs 5,700-14,500 before the hard disk (a surveillance-rated 2 TB disk was Rs 13,000-16,000 and a 4 TB one Rs 12,000-21,500 in 2026 **[S][C]**); a full kit with cameras and disk was listed at Rs 30,000-45,000, a price that predates the 2026 disk rise, so treat it as a floor **[S][C]**. That is a separate budget; defer it.
 - Remote viewing over a slow uplink: view one sub-stream at a time.
 
 ## 9. Passwords and account recovery
