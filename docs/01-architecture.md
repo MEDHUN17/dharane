@@ -78,8 +78,8 @@ flowchart LR
 ```mermaid
 flowchart TB
   subgraph Disks
-    D1["SSD ext4<br/>/ , /srv/stacks , /srv/appdata"]
-    D2["Data disk ext4<br/>/srv/data"]
+    D1["SSD ext4<br/>/ , /srv/config/stacks , /srv/appdata"]
+    D2["Data disk ext4<br/>/srv/storage"]
     D3["Backup disk ext4<br/>/srv/backup-local"]
   end
   subgraph Host["Debian host"]
@@ -108,7 +108,7 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-  LIVE["Live data<br/>/srv/data and /srv/appdata"] -->|"restic nightly"| LOCAL["Copy 2: local backup disk"]
+  LIVE["Live data<br/>/srv/storage and /srv/appdata"] -->|"restic nightly"| LOCAL["Copy 2: local backup disk"]
   LIVE -->|"restic nightly, encrypted"| OFF["Copy 3: off-site repository"]
   DUMP["Database dumps<br/>written before backup"] --> LIVE
   KEYS["Repository passwords and recovery kit<br/>stored OFF the server"] -.-> LOCAL

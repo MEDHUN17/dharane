@@ -3,21 +3,47 @@
 Last updated: 2026-10-09
 
 ## Status
-- [x] Repo reachable; branch `claude/home-server-architecture-a081p8` created and pushed.
-- [ ] Parts A-D, J, L (first deliverable)
-- [ ] Parts E-I, K
-- [ ] Implementation phases (start only after hardware details are provided)
+- [x] Repo reachable; branch `claude/home-server-architecture-a081p8` pushed (read + write verified).
+- [x] Part A executive summary
+- [x] Part B architecture (11 Mermaid diagrams, render-validated)
+- [x] Part C design decisions + storage layout
+- [x] Part D hardware tiers and capacity
+- [x] Part J roadmap + staged growth plan
+- [x] Part L information request
+- [x] Verification log (sources and dates)
+- [ ] Part E application catalogue (one file per category)
+- [ ] Part F device integration, Part G security + backup, Part H automation + monitoring
+- [ ] Part I cost comparison (needs dated INR research; hardware/state answers help)
+- [ ] Part K documentation templates
+- [ ] Implementation phases (start after Part L is answered)
 
-## Open decisions
-1. **Repo visibility: currently PUBLIC.** Fine for this generic blueprint. Make it private
-   before adding any real inventory (IPs, hostnames, tailnet, ACLs). Owner decision.
+## Open decisions (owner)
+1. **Repo visibility is PUBLIC.** Fine for this generic blueprint. Make it private, or use a separate private
+   repo, before storing any real inventory (IPs, hostnames, tailnet, ACLs, device lists).
+2. **Doc-site access.** This build session blocks most documentation hosts (tailscale.com, debian.org,
+   docs.docker.com, docs.immich.app, developers.cloudflare.com, caddyserver.com, jellyfin.org, docs.frigate.video).
+   Allowing them under the environment's Network access settings would let me verify directly instead of via
+   GitHub-hosted doc sources and search summaries.
 
-## Provisional assumptions (replace when real details arrive)
+## Facts to re-check before relying on them
+- Tailscale free-plan limits: sources conflict (3 users/100 devices vs 6 users/unlimited). See `docs/12-verification-log.md` U1.
+- Cloudflare CDN video/large-file terms for Free/Pro: second-hand only (U2).
+
+## Provisional assumptions (replace when Part L is answered)
 - Hardware unknown; plan is tier-based (A-D), single machine first.
 - CGNAT / no inbound ports possible: design needs no port forwarding by default.
 - Location: India (INR costs, local tariffs); state/DISCOM and ISP not yet known.
 
+## Decisions made (see docs/02-design-decisions.md)
+Debian 13 bare metal; ext4; Docker CE + Compose plugin (rootful, hardened); Tailscale on host; Caddy;
+restic (local + off-site); AdGuard Home or Pi-hole with a secondary resolver; systemd timers + shell;
+no Proxmox/Kubernetes/SSO/n8n at Stage 1. Directory layout under /srv (config, secrets, appdata, dumps,
+storage, backup-local).
+
 ## Rules in force
-- No invented image names, ports, env vars or Compose keys; verify against official docs.
+- No invented image names, ports, env vars or Compose keys; verify against official docs at the phase that needs them.
 - No secrets in the repo; placeholders only.
-- No public exposure before backups and auth are in place.
+- No public exposure before backups are restore-tested and alerts exist.
+
+## Next
+Waiting on Part L answers. In the meantime: Part E-K documents.
