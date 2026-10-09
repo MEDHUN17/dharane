@@ -4,7 +4,7 @@ The plan does **not** block on these answers: provisional assumptions are in `00
 
 **Never send:** passwords, auth keys, API tokens, private keys, recovery codes, your exact home address, or your public IP. Disk serial numbers: last 4 characters are enough.
 
-> **Status:** first answers received in chat and deliberately **not stored in this public repository**. The profile they point to is described generically in [`13-low-end-profile.md`](13-low-end-profile.md). Remaining follow-ups are listed in section "Follow-up questions" at the end.
+> **Status:** first answers received in chat on 2026-10-09 and recorded, **sanitised** (counts, ranges and classes only; no ISP name, domain, addresses or account names), in [`../profile/owner.md`](../profile/owner.md). That file is an input, not a constraint: the blueprint stays hardware-agnostic, and the constrained-laptop adaptation is described generically in [`13-low-end-profile.md`](13-low-end-profile.md). Remaining follow-ups are in section "Follow-up questions" at the end.
 
 ## Questions (and why each matters)
 
@@ -75,3 +75,6 @@ Cameras / games / media size:
 5. **Data size:** roughly how many GB of photos and videos across the phones (Settings > Storage), and whether Google Photos/Google One is already in use; how much documents; rough media library size.
 6. **"Public":** people you know who can install an app, or anyone? Minecraft Java or Bedrock; other games; do any players use consoles?
 7. **Budget:** does the monthly figure include electricity?
+8. **Place and power:** your state and electricity provider (for the tariff slab), how often and how long the power goes out, whether the router and modem are on the UPS, and the UPS's VA or watt rating (printed on its label).
+9. **Time and comfort:** how comfortable you are typing commands, and roughly how many hours a month you can spend on maintenance. This decides how much complexity is sensible.
+10. **Phones and TVs:** the TV make and operating system (Android TV, Google TV, Fire OS, webOS, Tizen), and whether anyone uses iPhones, Windows PCs, Macs or game consoles.

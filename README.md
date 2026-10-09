@@ -34,7 +34,8 @@ Every verified fact and its source is in [`docs/12-verification-log.md`](docs/12
 | J | Phased implementation roadmap | [`docs/09-roadmap.md`](docs/09-roadmap.md) | draft v0.1 |
 | J | Staged growth plan | [`docs/09a-growth-stages.md`](docs/09a-growth-stages.md) | draft v0.1 |
 | K | Documentation templates and repo/secrets policy | [`docs/templates/`](docs/templates/README.md) | draft v0.1 |
-| L | Information needed from the owner | [`docs/11-information-needed.md`](docs/11-information-needed.md) | first answers received (kept private); follow-ups open |
+| L | Information needed from the owner | [`docs/11-information-needed.md`](docs/11-information-needed.md) | first answers received; follow-ups open |
+| - | **Owner profile** - the owner's answers, sanitised; an input, never a constraint | [`profile/owner.md`](profile/owner.md) | provisional |
 | - | Troubleshooting handbook (25 topics) | [`docs/10-troubleshooting.md`](docs/10-troubleshooting.md) | draft v0.1 |
 | - | Tested example scripts, systemd units and test suites | [`examples/`](examples/README.md) | tested |
 | - | Verification log | [`docs/12-verification-log.md`](docs/12-verification-log.md) | live |
@@ -42,5 +43,5 @@ Every verified fact and its source is in [`docs/12-verification-log.md`](docs/12
 ## How to use this
 
 1. Read Part A, then B.
-2. Answer Part L in chat (not in this repo).
+2. Answer Part L in chat (not in this repo). The sanitised result is recorded in `profile/owner.md`; the blueprint itself stays hardware-agnostic.
 3. Implementation proceeds phase by phase from `docs/09-roadmap.md`, each step verified before the next.

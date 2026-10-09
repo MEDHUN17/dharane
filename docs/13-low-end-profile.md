@@ -1,7 +1,7 @@
 # Constrained single-laptop profile
 
 For: an old dual-core Core i3-class laptop, **4-8 GB RAM**, a single **~256 GB** internal disk, an uplink of a few Mbps, a router with **no port forwarding** (or CGNAT), and a small budget (about Rs 12,000-15,000 once and Rs 200 a month). It adapts the blueprint to those limits and overrides the tier defaults where it says so.
-Labels: **[V]** verified in docs, **[S]** search summary (see [`12-verification-log.md`](12-verification-log.md)), **[K]** stable knowledge, **[E]** estimate, **[U]** unverified, **[C]** low-confidence price. No personal details live in this public repo.
+Labels: **[V]** verified in docs, **[S]** search summary (see [`12-verification-log.md`](12-verification-log.md)), **[K]** stable knowledge, **[E]** estimate, **[U]** unverified, **[C]** low-confidence price. No identifying details (ISP, domain, addresses, accounts) live in this public repo; the owner's sanitised answers are in [`../profile/owner.md`](../profile/owner.md).
 
 ## 1. Verdict by workload
 

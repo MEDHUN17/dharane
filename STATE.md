@@ -19,12 +19,16 @@ Last updated: 2026-10-09
 - [x] Troubleshooting handbook
 - [x] Power, UPS, inverter and physical-setup guide (docs/04-power-physical.md)
 - [x] Generic schema-validated Compose template (examples/compose/)
-- [x] Constrained single-laptop profile (docs/13-low-end-profile.md), generic; personal answers kept out of this public repo
+- [x] Constrained single-laptop profile (docs/13-low-end-profile.md), written generically for that class of machine
+- [x] Owner profile recorded, sanitised and provisional (profile/owner.md): an input, never a constraint
+- [ ] Decision guide (docs/14): the broader chart for choosing by the variables that change (in progress)
 - [ ] Implementation phases: Phase 0 (inventory) in progress; waiting on the follow-up answers in docs/11-information-needed.md
 
 ## Open decisions (owner)
 1. **Repo visibility is PUBLIC.** Fine for this generic blueprint. Make it private, or use a separate private
-   repo, before storing any real inventory (IPs, hostnames, tailnet, ACLs, device lists).
+   repo, before storing any real inventory (IPs, hostnames, tailnet, ACLs, device lists). `profile/owner.md` holds counts,
+   ranges and classes only; the ISP name, the domain and the password-manager brand were left out on purpose. If the repo
+   becomes private, those can be added to the profile.
 2. **Doc-site access.** This build session blocks most documentation hosts (tailscale.com, debian.org,
    docs.docker.com, docs.immich.app, developers.cloudflare.com, caddyserver.com, jellyfin.org, docs.frigate.video).
    Allowing them under the environment's Network access settings would let me verify directly instead of via
@@ -34,7 +38,10 @@ Last updated: 2026-10-09
 - Tailscale free-plan limits: reported 6 users / unlimited devices since 2026-04-08 (S9); confirm on the pricing page.
 - Cloudflare CDN video/large-file terms for Free/Pro: second-hand only (U2).
 
-## Provisional assumptions (replace when Part L is answered)
+## Provisional assumptions (superseded by `profile/owner.md` wherever it has a value)
+
+The profile is an input to planning, not a constraint on the blueprint: Parts A-K stay valid for any hardware, and anything specific to the owner lives in `profile/` and in the clearly marked example sections of the decision guide.
+
 - Hardware unknown; plan is tier-based (A-D), single machine first.
 - CGNAT / no inbound ports possible: design needs no port forwarding by default.
 - Location: India (INR costs, local tariffs); state/DISCOM and ISP not yet known.
@@ -46,9 +53,10 @@ no Proxmox/Kubernetes/SSO/n8n at Stage 1. Directory layout under /srv (config, s
 storage, backup-local).
 
 ## Rules in force
+- The owner profile is an input, never a constraint: do not bend Parts A-K to it, and do not write "you have X" in them.
 - No invented image names, ports, env vars or Compose keys; verify against official docs at the phase that needs them.
 - No secrets in the repo; placeholders only.
 - No public exposure before backups are restore-tested and alerts exist.
 
 ## Next
-Waiting on the follow-up answers (docs/11-information-needed.md): laptops and CPU model, upload speed, router DNS setting, camera type, data sizes, who "public" means, whether the monthly budget includes electricity. Then: finalise purchases, refine Part I, start Phase 1 interactively.
+Waiting on the follow-up answers (docs/11-information-needed.md): laptops and CPU model, upload speed and unit, router DNS setting, camera type, data sizes, who "public" means, whether the monthly budget includes electricity, state and tariff, comfort and time. Meanwhile the decision guide (docs/14) lets any measured value be read against every option. Then: finalise purchases, refine Part I, start Phase 1 interactively.
