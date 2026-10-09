@@ -2,6 +2,8 @@
 
 Labels as in the [README](README.md): **[V]** verified in Immich's own documentation (see `../12-verification-log.md` V1, V11), **[S]**, **[K]**, **[U]**.
 
+**Choosing between Immich and plain folders:** follow the photo-tool path in the [decision guide](../14-decision-guide.md#51-which-photo-tool).
+
 ## Immich (full profile)
 
 | | |

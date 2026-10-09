@@ -2,6 +2,8 @@
 
 **Advanced / Stage 4**, only with measured headroom and a dedicated disk. Labels as in the [README](README.md): **[V]** verified in Frigate's docs (V6, V13), **[S]**, **[K]**, **[E]**, **[U]**. For legal and privacy rules about recording people (family, guests, neighbours, staff), check the rules that apply where you live; this document gives no legal advice.
 
+**Which path applies** (existing recorder, analog DVR, IP NVR, software NVR): see the camera path in the [decision guide](../14-decision-guide.md#54-cameras-which-path).
+
 ## Frigate (profile)
 
 | | |

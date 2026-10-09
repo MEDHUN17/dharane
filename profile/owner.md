@@ -1,6 +1,6 @@
 # Owner profile (provisional input, not a constraint)
 
-**How to read this file.** It records what the owner has said so far, so that decisions start from real numbers instead of guesses. It is an *input*: nothing in the blueprint (`docs/00` to `docs/12`) depends on it, and nothing here narrows what the repository describes. When a value is measured or changes, edit it here and re-read the revisit triggers in the decision guide. Values marked *unknown* are genuinely unknown: a blank is not a "no".
+**How to read this file.** It records what the owner has said so far, so that decisions start from real numbers instead of guesses. It is an *input*: nothing in the blueprint (`docs/00` to `docs/12`) depends on it, and nothing here narrows what the repository describes. When a value is measured or changes, edit it here and re-read the [revisit triggers](../docs/14-decision-guide.md#7-revisit-triggers) in the [decision guide](../docs/14-decision-guide.md). Values marked *unknown* are genuinely unknown: a blank is not a "no".
 
 **This repository is public**, so only counts, ranges and classes are recorded. Left out on purpose: the ISP name, the domain name, IP addresses, account and tailnet names, serial numbers, router make and credentials, and the password-manager brand (recorded only as "hosted"). Keep those in a private place: a private repository, or a local file named `profile/<name>.local.<ext>` (git ignores that pattern).
 
@@ -114,7 +114,7 @@ The full follow-up list is at the end of [`11-information-needed.md`](../docs/11
 
 ## 10. Decisions this profile does not make
 
-Which machine to keep or buy; which applications to run; whether anything is made public; which off-site provider to use; whether to buy a DVR or NVR; whether to self-host passwords. Those stay open until measured, and each has its decision path in the guide. Nothing in the blueprint should be bent to fit this file.
+Which machine to keep or buy; which applications to run; whether anything is made public; which off-site provider to use; whether to buy a DVR or NVR; whether to self-host passwords. Those stay open until measured, and each has its [decision path](../docs/14-decision-guide.md#5-decision-paths) in the guide. Nothing in the blueprint should be bent to fit this file.
 
 ## Change log
 

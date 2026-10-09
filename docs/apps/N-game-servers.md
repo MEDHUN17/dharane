@@ -2,6 +2,8 @@
 
 **Advanced / Stage 4**, resource-isolated, with no access to personal data. Labels as in the [README](README.md): **[V]**, **[S]**, **[K]**, **[E]**, **[U]**. Figures for specific games are starting expectations: read each game's own dedicated-server documentation before sizing.
 
+**Hosting by audience and connectivity:** see the grid in the [decision guide](../14-decision-guide.md#42-game-server) and its path in section 5.3.
+
 ## The networking truth first
 
 | Option | Works behind CGNAT? | Hides your home IP? | Notes |

@@ -216,6 +216,8 @@ The kit lives **off the server and outside the house** (second location) and in 
 
 ## 6. Off-site comparison (qualitative; prices in Part I)
 
+To choose by data size, upload speed and monthly budget, follow the path in the [decision guide](14-decision-guide.md#52-where-does-the-off-site-copy-go).
+
 | Destination | Cost model | Privacy | Restore speed | Complexity | Main risk |
 |-------------|-----------|---------|---------------|-----------|-----------|
 | Rotated external drive (kept at another location) | One-time hardware | Total (encrypt the drive too) | Fast | Manual routine | Gaps between swaps; drive failure |

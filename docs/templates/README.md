@@ -2,6 +2,8 @@
 
 These are **blank templates**. Copy them into your **private** `server-config` repository (`/srv/config/docs/`) and fill them in there. **Never fill them in inside this public repository.**
 
+The public repository keeps only a sanitised profile of the owner's answers ([`../../profile/owner.md`](../../profile/owner.md): counts, ranges and classes, no names or addresses). Real inventory belongs in the private copy of these templates.
+
 | Template | Covers |
 |----------|--------|
 | [`01-system-and-hardware.md`](01-system-and-hardware.md) | System inventory, hardware inventory, operating-system details |

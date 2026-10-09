@@ -4,7 +4,7 @@ Hardware is still unknown, so this roadmap lists **tasks, validations, rollback 
 
 Command labels used from now on: **[R]** read-only, **[W]** changes configuration or state, **[D]** destructive or hard to reverse (always preceded by target verification and a backup). Never paste passwords, auth keys, tokens, private keys or recovery codes into chat; use placeholders and I will show where to insert the real value locally.
 
-> **Constrained hardware?** If the machine is an old laptop with 4-8 GB RAM, a ~256 GB disk and a slow uplink, follow [`13-low-end-profile.md`](13-low-end-profile.md) for which phases to do, in what order, and which to skip.
+> **Constrained hardware?** If the machine is an old laptop with 4-8 GB RAM, a ~256 GB disk and a slow uplink, follow [`13-low-end-profile.md`](13-low-end-profile.md) for which phases to do, in what order, and which to skip. To choose between options, and to decide again when a measured value changes, use the [decision guide](14-decision-guide.md).
 
 ## Dependency map
 
@@ -55,7 +55,7 @@ Hard gate: **no public exposure (Phase 9) until Phase 6 (restore-tested backups)
 |---|---|
 | Objective | Know the machine, network, users and priorities; pick the tier; fix Stage 1 scope |
 | Prerequisites | None |
-| Tasks | Answer `11-information-needed.md`. Run the read-only inventory commands in Part D section 10 **[R]**. Find out whether the ISP uses CGNAT (compare the router's WAN address with the address an external "what is my IP" site reports; an address in 100.64.0.0/10 or a mismatch suggests CGNAT **[K]**). Check IPv6 availability. Measure idle power with a plug-in meter. List the devices that need access. Create a **private** Git repo for `server-config` (this blueprint repo is public). Decide where the off-site backup will live. |
+| Tasks | Answer `11-information-needed.md` (the sanitised result lives in `profile/owner.md`; real inventory goes in the private repo). Run the read-only inventory commands in Part D section 10 **[R]**. Find out whether the ISP uses CGNAT (compare the router's WAN address with the address an external "what is my IP" site reports; an address in 100.64.0.0/10 or a mismatch suggests CGNAT **[K]**). Check IPv6 availability. Measure idle power with a plug-in meter. List the devices that need access. Create a **private** Git repo for `server-config` (this blueprint repo is public). Decide where the off-site backup will live. |
 | Config produced | Hardware and requirements records (in the private repo) |
 | Expected outcome | Tier chosen; Stage 1 scope agreed; list of unknowns |
 | Security checks | Nothing sensitive in the public repo; note router admin password policy |

@@ -36,6 +36,7 @@ Every verified fact and its source is in [`docs/12-verification-log.md`](docs/12
 | K | Documentation templates and repo/secrets policy | [`docs/templates/`](docs/templates/README.md) | draft v0.1 |
 | L | Information needed from the owner | [`docs/11-information-needed.md`](docs/11-information-needed.md) | first answers received; follow-ups open |
 | - | **Owner profile** - the owner's answers, sanitised; an input, never a constraint | [`profile/owner.md`](profile/owner.md) | provisional |
+| - | **Decision guide** - choose by the variables that change: machine-class matrix, readiness gates, reachability by audience, decision paths, upgrade ladder, revisit triggers | [`docs/14-decision-guide.md`](docs/14-decision-guide.md) | draft v0.1 (prices low confidence) |
 | - | Troubleshooting handbook (25 topics) | [`docs/10-troubleshooting.md`](docs/10-troubleshooting.md) | draft v0.1 |
 | - | Tested example scripts, systemd units and test suites | [`examples/`](examples/README.md) | tested |
 | - | Verification log | [`docs/12-verification-log.md`](docs/12-verification-log.md) | live |

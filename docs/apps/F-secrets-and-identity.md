@@ -2,6 +2,8 @@
 
 Labels as in the [README](README.md): **[V]**, **[S]**, **[K]**, **[U]**.
 
+**Whether to self-host at all:** follow the path in the [decision guide](../14-decision-guide.md#55-self-host-passwords).
+
 ## A password manager is not an authentication gateway
 
 | | Password manager (Vaultwarden, Bitwarden) | Authentication gateway / identity provider (Authelia, Authentik) |
