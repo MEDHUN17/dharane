@@ -18,7 +18,7 @@ Limits of this table: two machines in the same tier can behave very differently 
 Hardware gotchas that matter regardless of tier:
 - **Jellyfin on integrated graphics**: its docs recommend, for example, Intel N100, Core i5-11400 or Pentium Gold G7400 class parts, say **not** to expect good results from Intel J/M/N/Y-series up to 11th gen, advise against AMD graphics for this role, and list most single-board computers (including the Raspberry Pi 5) as too slow for a good experience **[V]**. Jellyfin 10.11 requires a CPU with SSE4.1 **[V]**.
 - **Immich machine-learning** on x86 requires the x86-64-v2 level since v3; most CPUs from about 2012 qualify **[V]**.
-- **Frigate** prefers wired cameras (Wi-Fi cameras lose streams), lists Intel iGPU/OpenVINO, Hailo and NVIDIA among recommended detectors, and no longer recommends the Google Coral for new installs **[V]**.
+- **Frigate** needs a CPU with **AVX and AVX2**; these are often absent in low-power or budget parts, notably Intel Celeron/Pentium models before the 2020 Tiger Lake generation and Atom-based chips, so many Tier A machines are ruled out **[V]**. RAM: 4 GB basic minimum with a dedicated detector, 8 GB if you use enrichments, 16 GB recommended for 8+ cameras **[V]**. It prefers wired cameras (Wi-Fi cameras lose streams), lists Intel iGPU/OpenVINO, Hailo and NVIDIA among recommended detectors, and no longer recommends the Google Coral for new installs **[V]**.
 - HDDs: avoid SMR drives for busy write workloads and for any parity/rebuild scenario; prefer CMR NAS-class drives, and surveillance-rated drives for 24/7 recording **[K]**.
 
 ## 2. Overheads you must budget
@@ -64,7 +64,7 @@ Hardware gotchas that matter regardless of tier:
 | code-server | Tier B | Tier B/C | ~0.5-2 GB per active user **[E]** | bursty | workspaces | low | none |
 | n8n | Tier B | Tier B | ~300-800 MB **[E]** | low | small | low | none |
 | Prometheus + Grafana + exporters | Tier B | Tier B | ~0.5-1.5 GB **[E]** | low-medium | grows with retention | low | none |
-| **Frigate (NVR)** | Tier B with a detector **[V]** | Tier B/C + OpenVINO/Hailo/GPU **[V]** | ~1-4 GB **[E]** | decode + motion: medium-high | GB/day per camera, see section 6 | camera streams (Mbps each) | video decode + detector **[V]** |
+| **Frigate (NVR)** | 4 GB RAM + AVX/AVX2 CPU + a detector **[V]** | 16 GB for 8+ cameras; OpenVINO/Hailo/GPU **[V]** | ~1-4 GB **[E]** | decode + motion: medium-high | GB/day per camera, see section 6 | camera streams (Mbps each) | video decode + detector **[V]** |
 | **Game servers** | game-dependent | Tier B/C | 2-8+ GB each **[E]** | often single-thread-bound | worlds 0.5-5 GB **[E]** | upstream, low per player | none |
 | **Ollama / local LLM** | Tier B CPU-only, tiny models | Tier D | model size + context | CPU-only: low tokens/s; GPU: fast | model files 2-40+ GB **[E]** | local | GPU/VRAM strongly preferred |
 | restic backup job | Tier A | Tier B | up to ~1 GB on big repos **[E]** | medium + IO | repo size | upstream-bound off-site | none |
@@ -146,7 +146,7 @@ storage_GB_per_day_per_camera = bitrate_Mbps * 86400 / 8 / 1000
 | 4 Mbps continuous | ~43.2 GB | ~4.8 TB |
 | 8 Mbps continuous | ~86.4 GB | ~9.7 TB |
 
-Motion/event-only recording typically cuts this several-fold but adds the risk of missing pre-event footage **[E]**. Use a surveillance-rated HDD (24/7 writes), keep recordings off the system SSD (wear, and a full disk would crash everything), put cameras on a separate network or VLAN with no internet access (Frigate's own example hardware has dual NICs for exactly this **[V]**), and prefer wired cameras **[V]**. Detection: use a modern detector (Intel iGPU via OpenVINO, Hailo, NVIDIA) rather than buying a Coral for a new build **[V]**; the Frigate docs list e.g. ~15 ms inference on an Intel N100 and note that device can run only one detector instance **[V]**. Retention versus backup: do not back up continuous footage off-site by default; export selected clips (Part G).
+Motion/event-only recording typically cuts this several-fold but adds the risk of missing pre-event footage **[E]**. Use a surveillance-rated HDD for long retention (Frigate notes modern SSDs are fine for endurance and HDDs are the cost-effective choice for large archives **[V]**), keep recordings off the system disk so that a full recording disk can never take down the OS, avoid network storage for recordings **[V]**, put cameras on a separate network or VLAN with no internet access (Frigate's own example hardware has dual NICs for exactly this **[V]**), and prefer wired cameras **[V]**. Detection: use a modern detector (Intel iGPU via OpenVINO, Hailo, NVIDIA) rather than buying a Coral for a new build **[V]**; the Frigate docs list e.g. ~15 ms inference on an Intel N100 and note that device can run only one detector instance **[V]**. Retention versus backup: do not back up continuous footage off-site by default; export selected clips (Part G).
 
 ## 7. AI inference (optional)
 

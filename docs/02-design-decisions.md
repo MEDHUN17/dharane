@@ -109,7 +109,7 @@ Recommended Stage 1: single data disk + separate local backup disk + off-site re
 
 | Option | Advantages | Disadvantages | Notes |
 |--------|------------|---------------|-------|
-| **Tailscale (host install)** | Works behind CGNAT/double NAT; per-device auth; ACLs/tags; MagicDNS; subnet router; exit node; SSH integration **[K]** | Third-party coordination service; free plan numbers in flux **[U]** (reports differ: 3 users/100 devices vs 6 users/unlimited devices since April 2026; check the pricing page) | Host install beats container: it sees the host network, SSH and subnet routing are simpler **[K]** |
+| **Tailscale (host install)** | Works behind CGNAT/double NAT; per-device auth; ACLs/tags; MagicDNS; subnet router; exit node; SSH integration **[K]** | Third-party coordination service; Personal (free, non-commercial) is reported as up to 6 users with unlimited user-owned devices since Tailscale's 2026-04-08 "Pricing v4" change **[S]**; older pages still show 3 users/100 devices. Confirm on the pricing page | Host install beats container: it sees the host network, SSH and subnet routing are simpler **[K]** |
 | Plain WireGuard | No third party | Needs a reachable endpoint; fails behind CGNAT without a VPS | Good only with a public IP or VPS |
 | Headscale (self-hosted control plane) | Removes the vendor dependency | Needs a public server; you operate it | Advanced |
 | ZeroTier | Similar overlay | Different ecosystem; less common in home-server guides | Not recommended to mix with Tailscale |
@@ -186,7 +186,7 @@ Initial upload is bounded by your uplink: terabytes over a slow Indian residenti
 
 ## C12. Network-wide ad blocking
 
-AdGuard Home and Pi-hole are both suitable **[K]**. Pick AdGuard Home for built-in encrypted upstream support and straightforward DNS rewrites (which you need for split DNS); pick Pi-hole if you already know it. Both bind only to the LAN and Tailscale interfaces; never publish port 53 to the internet (open resolvers get abused). Hand out **two** DNS servers via DHCP so a reboot of the server does not break the household; the second can be a spare Pi, the router's resolver, or a second instance. Phones/browsers using private/encrypted DNS bypass you; document that limitation. Tailscale can use your resolver as its tailnet DNS for blocking away from home.
+AdGuard Home and Pi-hole are both suitable **[K]**. Pick AdGuard Home for built-in encrypted upstream support and straightforward DNS rewrites (which you need for split DNS); pick Pi-hole if you already know it. Both bind only to the LAN and Tailscale interfaces; never publish port 53 to the internet (open resolvers get abused). Hand out **two** DNS servers via DHCP so a reboot of the server does not break the household. Clients do not reliably try the primary first, so **both resolvers must filter identically** (same blocklists, same local rewrites): a second server that is just the router or a public resolver will leak ads and fail to resolve your internal names for whichever clients pick it. Use a spare Pi or a second instance kept in sync. Phones/browsers using private/encrypted DNS bypass you; document that limitation. Tailscale can use your resolver as its tailnet DNS for blocking away from home.
 
 ## C13. Monitoring
 

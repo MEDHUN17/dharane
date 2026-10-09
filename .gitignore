@@ -1,4 +1,6 @@
 # Secrets and machine-specific material - never commit these.
+# These patterns are deliberately aggressive. If a legitimate documentation file is
+# ignored by mistake, check with `git check-ignore -v <path>` and add it with `git add -f`.
 .env
 .env.*
 !.env.example

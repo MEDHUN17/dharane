@@ -221,7 +221,7 @@ sequenceDiagram
   A->>Up: forward upstream
   Up-->>A: answer
   A-->>Dev: answer
-  Note over Dev,B: If the primary is down the device uses the secondary after a timeout
+  Note over Dev,B: Devices may use either resolver at any time, so both must apply the same filtering and local records
 ```
 
 Some phones and browsers use their own encrypted DNS and bypass this entirely; see Part E-I.

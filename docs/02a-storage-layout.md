@@ -7,7 +7,7 @@ Placeholders only: UUIDs, names and sizes below are examples.
 
 | Role | Typical media | Mount | Holds | Why |
 |------|---------------|-------|-------|-----|
-| System + app state | SSD | `/` and `/srv/appdata`, `/srv/config` | OS, Docker images, Compose files, app config, **all databases**, thumbnails, caches | Random IO and latency. Immich says its Postgres data should use local SSD and never a network share **[V]**; Jellyfin recommends an SSD for its files and transcode cache **[V]** |
+| System + app state | SSD | `/` and `/srv/appdata`, `/srv/config` | OS, Docker images, Compose files, app config, **all databases**, caches | Random IO and latency. Immich says its Postgres data should use local SSD and never a network share **[V]**; Jellyfin recommends an SSD for its files and transcode cache **[V]** |
 | Bulk data | HDD (or large SSD) | `/srv/storage` | Original photos/videos, documents, shared files, media, downloads | Capacity and sequential reads |
 | Backup (local) | Separate physical HDD | `/srv/backup-local` | restic repository | Different failure domain from the data disk |
 | Surveillance (Stage 4) | Surveillance-rated HDD | `/srv/surveillance` | Camera recordings | Continuous 24/7 sequential writes shouldn't compete with everything else |
@@ -29,11 +29,12 @@ A single disk is possible at Stage 1 (one SSD with everything) but then you have
 │   └── e.g. immich/postgres, jellyfin/config, paperless/db, caddy/data
 ├── dumps/                     # SSD. Database dumps staged before each backup
 ├── storage/                   # MOUNT: bulk data disk
-│   ├── photos/                #   original photos and videos (Immich library location)
+│   ├── photos/                #   Immich UPLOAD_LOCATION: library/, upload/, profile/, thumbs/, encoded-video/, backups/
 │   ├── documents/             #   Paperless media/consume, personal documents
 │   ├── files/{shared,users/<name>}/   # SMB/Syncthing content
-│   ├── media/{movies,tv,music}/       # re-acquirable media
-│   └── downloads/{incomplete,complete}/   # same filesystem as media so hardlinks work
+│   └── media-root/            #   ONE parent for the whole media/download stack (see section 2a)
+│       ├── media/{movies,tv,music}/
+│       └── downloads/{torrents,usenet}/   # same parent as media so hardlinks and instant moves work
 ├── games/<server>/            # SSD preferred for worlds; excluded from "bulk" if disk is slow
 ├── surveillance/              # MOUNT (Stage 4): NVR disk
 ├── backup-local/              # MOUNT: local restic repo
@@ -42,7 +43,16 @@ A single disk is possible at Stage 1 (one SSD with everything) but then you have
 
 Why `/srv`: it is the Filesystem Hierarchy Standard location for "data served by this system" **[K]**, it keeps everything you must back up or restore in one tree, and it survives an OS reinstall if `/srv` mounts are separate.
 
-Downloads and media share one filesystem on purpose: hardlinks and atomic moves only work inside a single filesystem, which avoids duplicated terabytes (Part E-E).
+### 2a. Why `media-root/` exists (hardlinks without exposing personal data)
+
+Hardlinks and instant moves only work inside **one filesystem**: you cannot hardlink directories, and you cannot hardlink across separate file systems, partitions, volumes **or mounts** **[V]** (TRaSH Guides). Inside a container, two separate bind mounts count as two mounts even when they come from the same host disk. So:
+
+- Mount `/srv/storage/media-root` into the download/arr containers as **one** path (for example `/data`) and let them use `media/` and `downloads/` beneath it. Do not bind-mount `media/` and `downloads/` separately.
+- Do **not** mount all of `/srv/storage` for this: that would let a download client or indexer app read personal photos and documents.
+- Jellyfin gets `media-root/media` read-only; it never needs `downloads/`.
+- Run the apps as a per-app user plus a shared group with `UMASK 002` (folders 775, files 664) so they can read each other's files **[V]**.
+
+Immich note **[V]**: Immich stores everything under one `UPLOAD_LOCATION` by default and documents optional overrides for thumbnails, encoded video, profile and backups; it advises against mounting `upload/` and `library/` as separate bind mounts on the same device. Mount the photo directory once as a whole.
 
 ## 3. Mounting without foot-guns
 
@@ -85,7 +95,7 @@ Principles: each app writes only where it must; shared datasets use a **group**,
 | `/srv/appdata/<app>` | that app's service UID, or the image's documented UID | 0750 | only that app | rw, private to the app |
 | Databases | the DB image's UID | 0700 | only the DB container | rw |
 | `/srv/storage/photos` | the photo app's UID | 0750 | photo app rw; backup reads | rw by app |
-| `/srv/storage/media` | `media-writer` : `media` | 2775 (setgid) | players `:ro`; arr apps rw | read-only for Jellyfin |
+| `/srv/storage/media-root` | per-app users : `media` | 2775 (setgid), `UMASK 002` | arr/download apps rw as one mount; Jellyfin `media/` `:ro` | read-only for Jellyfin |
 | `/srv/storage/files/shared` | `root` : `family` | 2770 | SMB / Syncthing | family group rw |
 | `/srv/storage/files/users/<name>` | `<name>` : `family` | 2750 or 0700 | SMB / Syncthing | owner rw, optional group read |
 | `/srv/backup-local` | `root` | 0700 | backup script only | not mounted into apps |
@@ -101,6 +111,7 @@ Practices:
 - Databases live on SSD under `/srv/appdata/<app>/...` (or a Docker volume for Postgres-on-Windows only **[V]**).
 - Back them up with the engine's own tool (for example a Postgres dump written to `/srv/dumps`), not by copying live files. A filesystem copy or snapshot of a running database can be crash-consistent but is not guaranteed application-consistent **[K]**.
 - Keep the dump files in the restic run (or the app's built-in backup, where it has one, alongside the originals).
+- **Immich** writes its own database dumps to `UPLOAD_LOCATION/backups`, by default daily at 02:00 keeping the last 14 (changed in v2.5.0, so check the docs for your version) **[V]**. Dumps contain metadata only; they are useless without the originals. Prefer these built-in dumps; schedule restic **after** them (for example 03:00). If you add your own independent `pg_dump`, run it away from 02:00 so the two never race. Restores need a compatible Immich version, and the command-line restore requires a fresh install where Immich has never run **[V]**.
 - Never run a database on NFS/SMB **[V for Immich]**.
 
 ## 7. Encryption at rest (decision)
@@ -144,7 +155,8 @@ Method: record current usage monthly (Part H), compute growth per category, and 
 | `/srv/secrets` | Yes, encrypted, to a repo with separate credentials; never to a public location |
 | `/srv/appdata` | Yes, except pure caches (thumbnail/model caches are re-creatable) |
 | `/srv/dumps` | Yes |
-| `/srv/storage/photos`, `documents`, `files` | Yes, local + off-site |
-| `/srv/storage/media`, `downloads` | Local only, or not at all (re-acquirable) |
+| `/srv/storage/photos` (Immich) | Yes, local + off-site: `library/`, `upload/`, `profile/` (originals) and `backups/` (DB dumps). `thumbs/` and `encoded-video/` are regenerable, so they may be excluded at the cost of regeneration time after a restore **[V]** |
+| `/srv/storage/documents`, `files` | Yes, local + off-site |
+| `/srv/storage/media-root` | Local only, or not at all (re-acquirable) |
 | `/srv/surveillance` | No by default; export selected clips |
 | `/srv/backup-local` | Never back up a repo into itself |

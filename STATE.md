@@ -26,7 +26,7 @@ Last updated: 2026-10-09
    GitHub-hosted doc sources and search summaries.
 
 ## Facts to re-check before relying on them
-- Tailscale free-plan limits: sources conflict (3 users/100 devices vs 6 users/unlimited). See `docs/12-verification-log.md` U1.
+- Tailscale free-plan limits: reported 6 users / unlimited devices since 2026-04-08 (S9); confirm on the pricing page.
 - Cloudflare CDN video/large-file terms for Free/Pro: second-hand only (U2).
 
 ## Provisional assumptions (replace when Part L is answered)

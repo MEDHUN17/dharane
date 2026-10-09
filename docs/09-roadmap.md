@@ -133,7 +133,7 @@ Hard gate: **no public exposure (Phase 9) until Phase 6 (restore-tested backups)
 | Expected outcome | SSH from a phone on cellular works; LAN remains a break-glass path |
 | Security checks | MFA on the tailnet identity; new devices need approval; no admin service reachable from unrelated devices |
 | Validation | Connect from outside the home network; `tailscale ping` shows direct or relayed; revoke a test device and confirm it loses access |
-| Common failures | Policy too strict (lockout - keep LAN SSH); CGNAT forces relays (slower, still works); LAN subnet overlaps a remote site; free-plan limits differ from what you expect **[U]** |
+| Common failures | Policy too strict (lockout - keep LAN SSH); CGNAT forces relays (slower, still works); LAN subnet overlaps a remote site; free-plan limits differ from what you expect (reported 6 users / unlimited devices **[S]**, confirm on the pricing page) |
 | Rollback | `tailscale down`; remove the node in the admin console; revert policy to the previous version |
 | Done when | Break-glass (LAN) and remote (tailnet) paths are both tested and documented |
 
@@ -223,7 +223,7 @@ Not required for the core. Each item stands alone: Jellyfin hardware acceleratio
 
 ## Phase 13 - Optional ad blocking rollout, game servers, CCTV/NVR
 
-- **Ad blocking**: AdGuard Home already exists as internal DNS (Phase 8b). Household rollout = point router DHCP at it **and** a secondary resolver, trial with one device first, document the fallback if it fails, never publish port 53. (This phase is reordered earlier in practice because split DNS needs an internal resolver.)
+- **Ad blocking**: AdGuard Home already exists as internal DNS (Phase 8b). Household rollout = point router DHCP at it **and** a second resolver that filters identically (clients may use either, so both must apply the same blocklists and local records), trial with one device first, document the fallback if it fails, never publish port 53. (This phase is reordered earlier in practice because split DNS needs an internal resolver.)
 - **Game servers**: gate on capacity (Part D), the CGNAT answer, and an exposure decision; own Docker network, resource limits, no access to personal data, save backups, on-demand start/stop. Cloudflare Tunnel does not carry arbitrary game UDP **[S]**.
 - **CCTV/NVR**: gate on a dedicated disk, a camera network with no internet, the retention policy, and enough CPU/iGPU for decode/detection (Part D section 6).
 
