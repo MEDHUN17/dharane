@@ -314,7 +314,7 @@ Certificate note **[V/K]**: Caddy manages issuance and renewal automatically; it
 
 | Constraint | Detail | Source |
 |-----------|--------|--------|
-| Upload size | Request bodies capped at 100 MB on Free and Pro (Business 200, Enterprise 500); larger gets a 413 | **[S]** Cloudflare docs |
+| Upload size | Request bodies capped at 100 MB on Free and Pro (Business 200, Enterprise up to 5 GB self-serve); larger gets a 413 | **[V]** Cloudflare docs |
 | Video/large files via the CDN | The old "section 2.8" was replaced by a CDN-specific term; serving video or large files through the CDN is tied to Cloudflare's own paid services. Exact current wording not verified | **[S]** blog.cloudflare.com/updated-tos; **[U]** current text |
 | Protocols on a Tunnel public hostname | HTTP, HTTPS, UNIX sockets, and TCP (TCP clients need `cloudflared` locally). No documented anonymous public UDP | **[S]** |
 | Arbitrary TCP/UDP for the public | Cloudflare Spectrum: not on Free; Pro has only Minecraft and SSH (one app each); Business adds RDP; generic TCP/UDP is Enterprise | **[S]** |

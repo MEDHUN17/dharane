@@ -1,6 +1,6 @@
 # Part I - Cost model (INR)
 
-Prepared **2026-10-09**. Prices come from web-search summaries of vendor and retailer pages, not from the vendors' own pages (those hosts were blocked in this session). **None is a confirmed price.** Rupee figures are conversions: the base price, the exchange rate and its date are shown so you can recompute. Taxes (GST), card foreign-exchange markups and shipping are **not** included.
+Prepared **2026-10-09**. Prices come from web-search summaries of vendor and retailer pages, not from the vendors' own pages (those hosts were blocked in this session). **None is a confirmed price.** A second pass on 2026-10-09 re-checked memory, SSDs, hard drives, mini PCs, enclosures and small items (rows marked **[S27]-[S35]**) and found that memory and storage cost far more in 2026 than earlier rows in this file assumed. Rupee figures are conversions: the base price, the exchange rate and its date are shown so you can recompute. Taxes (GST), card foreign-exchange markups and shipping are **not** included.
 
 Exchange rates used (search-reported): **USD/INR 95.95** (2026-09-16), **EUR/INR 110.43** (2026-08-28). Both move; recompute with a live rate before paying.
 
@@ -27,14 +27,20 @@ Confidence: **A** several consistent sources; **B** one decent source; **C** con
 | Google One tiers (India) | Rs 59 (30 GB), Rs 130 (100 GB), Rs 210 (200 GB), Rs 650 (2 TB) per month | July 2026 buyer's guide **[S]** | 100 GB = **Rs 1,560/yr**; 200 GB = **Rs 2,520/yr** | B |
 | playit.gg premium | US$3/month or US$30/year (free tier exists; limits disputed) | Reviews and guides 2026 **[S]** | Rs 288/month or Rs 2,879/yr | C |
 | Minecraft hosting, India | Rs 150 per GB (4 GB = Rs 399/month, vendor claim); Hostinger Game Panel Rs 649/month renewing at Rs 999 | Vendor pages and a 2026-10-05 news article **[S]** | as listed | C |
-| Aternos, Oracle Cloud Always Free | Free (Aternos ad-supported; Oracle reportedly cut to 2 OCPU/12 GB in June 2026) | Guides and trackers **[S]** | Rs 0 | C |
+| Aternos, Oracle Cloud Always Free | Free (Aternos ad-supported; Oracle reportedly cut to 2 OCPU/12 GB in 2026, with idle accounts reclaimable after 30 days) | Guides and trackers **[S19]**, Oracle's terms page **[V34]** | Rs 0 | C |
+| Small VPS with a public IPv4 (a relay) | US$3.50-5 a month (Vultr US$3.50 **[C]**; DigitalOcean US$4, probably not offered in Bangalore, where US$6 is the cheapest; Akamai/Linode and Vultr 1 GB US$5); plus 18% GST | Aggregator sites, June-August 2026 **[S38]** | about Rs 336-576 a month before GST (Rs 480 for a 1 GB plan) | C |
+| Paid static IPv4 from the internet provider | About Rs 100-350 a month plus 18% GST; BSNL Rs 1,800-3,000 a year by circle; Jio reportedly not sold to homes | Forum reports and circle tariff summaries, undated **[S36]** | Rs 118-413 a month with GST | C |
 
 ### Hardware (one-time)
 
 | Item | Price found | Source | Conf. |
 |------|-------------|--------|-------|
-| Intel N100 mini PC, DDR4, 16 GB + 256 GB | Rs 17,999 (N150: Rs 18,599); barebone Rs 14,399 / Rs 14,999 | Seller list on an enthusiast forum, **undated** | **C** |
-| 4 TB NAS-class 3.5" HDD | About Rs 7,000-10,500 (IronWolf ~Rs 8,250; WD Red Plus ~Rs 9,000) | One retailer guide that contradicted itself | **C** |
+| Intel N100 mini PC, 16 GB + 512 GB (Amazon.in) | Rs 16,999-19,999 in tracker snapshots (newest Rs 18,999, 2026-07-25). The earlier "Rs 17,999 for 16 GB + 256 GB" is not confirmed by any dated source; barebone 4x2.5G LAN units Rs 15,499 (N100) / Rs 16,399 (N150); an imported-brand N150 16 GB/512 GB Rs 35,399 | Price-tracker snapshots December 2025 - July 2026 **[S30]** | **B** (Rs 17,000-19,000) |
+| Refurbished office mini PC, Core i5 6th-8th gen, 8 GB + 256-512 GB SSD (HP EliteDesk Mini, Dell OptiPlex Micro, Lenovo ThinkCentre Tiny) | Rs 10,000-13,000 (newest HP EliteDesk 800 G4 Mini 8/256 Rs 12,799, 2026-09-14); dealers Rs 7,500-15,000; Flipkart listings Rs 16,700-19,990 (conflict); seller warranty about one month to one year | Amazon.in tracker snapshots June-September 2026, IndiaMART, OLX **[S29]** | **B** (Amazon.in range), **C** (others) |
+| 4 TB NAS-class 3.5" HDD | **Rs 23,700-26,500** (Seagate IronWolf ST4000VN006 about Rs 24,750-25,500; WD Red Plus WD40EFPX about Rs 26,499). The earlier Rs 7,000-10,500 figures came from stale or out-of-stock pages | Amazon.in, Smartprix, PrimeABGB and MD Computers listings, September-October 2026 **[S32]** | **A** |
+| 2 TB NAS-class 3.5" HDD | Rs 17,700-20,000 (WD Red Plus WD20EFPX about Rs 17,700; IronWolf ST2000VN003 Rs 19,999) | Amazon.in, Smartprix, September-October 2026 **[S32]** | **B** |
+| 2 TB / 4 TB surveillance-rated 3.5" HDD | 2 TB Rs 13,000-16,000 (WD Purple, SkyHawk, Toshiba S300); 4 TB Rs 12,000-21,500 (very wide spread: WD Purple 4 TB Rs 11,999-13,499, SkyHawk Rs 12,799-21,499, S300 Rs 18,299) | Amazon.in, trackers, a July 2026 roundup **[S32]** | **C** |
+| Desktop-class 3.5" HDD (Seagate BarraCuda) | 4 TB Rs 18,500-19,500; 2 TB Rs 14,799-15,999 | Retailer listings, undated, seen 2026-10-09 **[S32]** | **B** |
 | 2 TB portable USB drive | Rs 12,049-12,949 (June 2026 listings); another undated guide says about Rs 6,000-6,500 | Listing roundup | **C** |
 | 4 TB portable USB drive | Rs 10,903 (sale, undated) to Rs 16,700-17,000 | Retailer pages, undated | **C** |
 | 1 TB SATA SSD | About Rs 4,500-6,000 (2025 guide); one 2026 listing showed Rs 13,999 (conflict) | Mixed | **C** |
@@ -43,9 +49,14 @@ Confidence: **A** several consistent sources; **B** one decent source; **C** con
 | UPS, APC Back-UPS 1100 VA | About Rs 6,700-8,430 | Same | B |
 | Raspberry Pi 5 4 GB | Sources range Rs 5,500 to Rs 12,000 | Retailer blogs | **N** (too inconsistent to use) |
 | 1 TB portable USB drive | Toshiba Canvio about Rs 3,599; WD Elements Rs 8,899-9,981; Seagate Expansion about Rs 9,799; older deal pages Rs 3,700-4,000 | June 2026 roundup and deal pages | **C** (large spread) |
-| 256 GB 2.5" SATA SSD | Rs 2,599-3,599 (several brands) | July-September 2026 deal listings and a June roundup | **C** |
+| 256 GB 2.5" SATA SSD | Rs 2,200-3,800 mainstream brands (no-name Rs 1,250-1,750; premium Rs 5,100-7,700) | Amazon.in tracker points, June-October 2026 **[S33]** | **B** |
+| 512 GB 2.5" SATA SSD | Rs 3,500-6,600 mainstream brands (cheapest Rs 2,600-3,500; name brands Rs 7,000 and up) | Amazon.in tracker points, June-October 2026 **[S33]** | **B** |
+| Laptop memory, 8 GB DDR3L SO-DIMM (new) | Rs 600-2,000, typically Rs 1,000-1,600; 4 GB Rs 789-1,029; used 8 GB asked Rs 800-1,500 (OLX) | Trackers and listings, June-October 2026 **[S27]** | **A** (new), **C** (used) |
+| Laptop memory, 8 GB DDR4 SO-DIMM (new) | Rs 5,200-7,600 (about 2-2.5x its 2025 price); 16 GB about Rs 13,500-14,000; used 8 GB asked Rs 2,000-4,500 | Listings, July-October 2026 **[S27][S28]** | **A** (8 GB new), **B** (16 GB), **C** (used) |
+| USB-SATA enclosure or dock | 2.5" USB 3.0 enclosure Rs 260-470; 3.5" single-bay with a 12 V adapter Rs 800-1,200; 2-bay dock Rs 1,900-2,700 | Amazon.in and Flipkart listings, undated **[S31]** | **B** |
+| USB 3.0 gigabit Ethernet adapter; Cat6 patch cable (1-2 m); USB flash drive | Adapter Rs 800-2,000 (TP-Link UE300 Rs 1,000-1,100); cable Rs 145-355; flash drive 16 GB Rs 400-600, 32 GB Rs 590-690 | Amazon.in and Flipkart listings, undated **[S34]** | **B** |
 | 16-channel analog DVR | CP Plus Rs 5,700-6,800 (5 MP Rs 10,800); Hikvision Rs 9,500-14,500; full 16-camera kit with 4 TB disk Rs 30,000-45,000 | B2B listings and a price tracker, 2026 | **C** (hard disk not priced) |
-| Managed or PoE switch, cameras, surveillance HDD, VPS, USB-SATA dock/enclosure, UPS replacement batteries | Not researched | - | **N**: tell me if you plan to buy and I will price them |
+| Managed or PoE switch, cameras, UPS replacement batteries | Not researched | - | **N**: tell me if you plan to buy and I will price them |
 
 ## 2. Electricity
 
@@ -76,7 +87,7 @@ Tariffs differ by state, slab, fixed charges and surcharges. Search results disa
 | Category | Cost |
 |----------|------|
 | Existing hardware assumed | The machine itself: Rs 0 |
-| Additional purchases | A backup disk (a 2 TB portable drive, Rs 12,049-12,949 **C**; or a 4 TB 3.5" drive Rs 7,000-10,500 **C**, which also needs a way to attach it: not priced) plus a 600 VA UPS (Rs 3,490-4,800). **About Rs 15,500-17,700 one-time** using the portable drive |
+| Additional purchases | A backup disk (a 2 TB portable drive, Rs 12,049-12,949 **C**; or a 4 TB 3.5" NAS-class drive Rs 23,700-26,500 **A** plus an enclosure Rs 800-1,200 **B**) plus a 600 VA UPS (Rs 3,490-4,800). **About Rs 15,500-17,700 one-time** using the portable drive (portable prices were not re-checked in October 2026 and may be low), or **about Rs 28,000-32,500** with the 4 TB drive |
 | Mandatory recurring | Electricity at 10-20 W: about Rs 350-1,730/yr depending on tariff. Off-site backup of up to ~0.5 TB: a rotated second drive (extra one-time cost, no subscription) or a Hetzner-style 1 TB box at about Rs 4,200-5,000/yr, or B2 0.5 TB at about Rs 4,000/yr. **About Rs 4,400-6,800/yr** with a paid off-site copy |
 | Optional recurring | Domain about Rs 970-1,000/yr (only if you want HTTPS names) |
 
@@ -85,10 +96,10 @@ Tariffs differ by state, slab, fixed charges and surcharges. Search results disa
 | Category | Cost |
 |----------|------|
 | Existing hardware assumed | Router, switch, phones, PCs |
-| Additional purchases | N100-class mini PC with 16 GB + 256 GB (Rs 17,999-18,599 **C**) + two 4 TB drives, one data and one backup (Rs 14,000-21,000 **C**; attaching two disks to a mini PC may need enclosures: not priced) + a 1100 VA UPS (Rs 6,700-8,430). **About Rs 38,700-48,000**; add a 1 TB SSD (about Rs 4,800-10,000 **C**) if you want more fast storage: **about Rs 43,500-58,000** |
+| Additional purchases | N100-class mini PC with 16 GB + 512 GB (Rs 17,000-19,000 **B**) + two 4 TB NAS-class drives, one data and one backup (Rs 47,400-53,000 **A**) + two single-bay enclosures (Rs 1,600-2,400 **B**) + a 1100 VA UPS (Rs 6,700-8,430). **About Rs 72,700-82,800**; with two 2 TB surveillance-rated drives instead (Rs 26,000-32,000 **C**) it is **about Rs 51,300-61,800**. A 1 TB SSD for more fast storage is not re-priced here: the earlier Rs 4,800-10,000 figure is likely stale |
 | Mandatory recurring | Electricity at about 30 W (mini PC plus two disks): about Rs 1,040-2,590/yr. Off-site backup: 1 TB on a flat-rate box about Rs 4,200-5,000/yr; 2 TB on B2 or Wasabi about Rs 16,000/yr. **About Rs 5,300-18,600/yr** depending on how much you must send off-site |
 | Optional recurring | Domain Rs 970-1,000/yr; a hosted password manager if you do not self-host (not priced); heartbeat/push (free tiers, limits unverified) |
-| Replacement reserve | Spinning drives last years, not decades; budget a drive replacement every ~5 years **[E]** (Rs 7,000-10,500 each **C**) and a UPS battery replacement every few years (not priced) |
+| Replacement reserve | Spinning drives last years, not decades; budget a drive replacement every ~5 years **[E]** (Rs 13,000-26,500 each depending on size and class, **A**-**C**) and a UPS battery replacement every few years (not priced) |
 
 ### Scenario C: Expanded (Stages 4-6)
 
@@ -103,10 +114,10 @@ Tariffs differ by state, slab, fixed charges and surcharges. Search results disa
 | Category | Cost |
 |----------|------|
 | Existing hardware assumed | The laptop(s), a UPS, the router, the phones |
-| Additional purchases (choose by what you own) | **If the laptop has a hard drive:** a 256 GB SATA SSD, about Rs 2,600-3,600 **C**. **Data storage, one of:** 1 TB portable Rs 3,600-10,000 **C**; 2 TB portable Rs 12,049-12,949 **C**; 4 TB 3.5" NAS-class Rs 7,000-10,500 **C** plus an enclosure/dock (not priced). **Small items:** Ethernet cable, USB installer stick (a few hundred rupees **E**). Examples: SSD + 4 TB drive about **Rs 9,600-14,100** before the dock; a 2 TB portable alone about **Rs 12,000-12,900**; SSD + 1 TB portable about **Rs 6,200-13,600** |
+| Additional purchases (choose by what you own) | **If the laptop has a hard drive:** a 256 GB SATA SSD, Rs 2,200-3,800 **B**. **If it has 4 GB of memory:** 8 GB of laptop memory, Rs 600-2,000 if the laptop uses DDR3/DDR3L **A**, Rs 5,200-7,600 if it uses DDR4 **A**. **Data storage, one of:** a 512 GB SATA SSD in a 2.5" enclosure, Rs 3,500-6,600 + Rs 260-470 **B**; a portable hard drive (1 TB Rs 3,600-10,000 **C**, 2 TB Rs 12,049-12,949 **C**; **not re-checked in October 2026 and possibly low**); a 3.5" drive, which now costs far more (2 TB surveillance-rated Rs 13,000-16,000 **C**, 4 TB NAS-class Rs 23,700-26,500 **A**) plus an enclosure Rs 800-1,200 **B**. **Small items:** an Ethernet cable and a USB installer stick, about Rs 550-950 **B**. Examples: SSD + 8 GB DDR3L memory + a 512 GB SSD in an enclosure, about **Rs 6,600-12,900**; the same with DDR4 memory, about **Rs 11,200-18,500**; a 2 TB portable alone, about **Rs 12,000-12,900** (portable prices unverified) |
 | Mandatory recurring | Off-site copy: Backblaze B2 at about Rs 667/TB/month gives roughly **300 GB for Rs 200** (150 GB for Rs 100); or Google One 100 GB Rs 130 or 200 GB Rs 210. Domain renewal about Rs 970-1,000/yr, roughly Rs 80/month. Electricity for a laptop plus drive (about 25-35 W): about 18-25 kWh/month, **Rs 72-250/month** across Rs 4-10 tariffs. *Whether the Rs 200 includes electricity decides which of these fit* |
-| Optional | A second local drive (another Rs 3,600-10,500 **C**) to reach three copies; a recorder for cameras (separate budget); a paid game host (Rs 400+/month) |
-| What money at this scale cannot fix | Public hosting of media or games from a home line with no inbound ports; 16-camera AI recording on an old laptop |
+| Optional | A second local drive (another Rs 3,800-7,100 for a 512 GB SSD in an enclosure, more for a hard drive) to reach three copies; a recorder for cameras (separate budget); a paid game host (Rs 400+/month) |
+| What money at this scale cannot fix | Public hosting of media or games from a home line with no inbound ports; 16-camera AI recording on an old laptop; a new 4 TB NAS-class drive (Rs 23,700-26,500) |
 
 Seeding time for the off-site copy depends on the measured upload speed (section 5 of [`13-low-end-profile.md`](13-low-end-profile.md)).
 
@@ -114,12 +125,12 @@ Seeding time for the off-site copy depends on the measured upload speed (section
 
 | Addition | One-time | Recurring |
 |----------|----------|-----------|
-| **CCTV / NVR** | Cameras, PoE switch, surveillance HDD, perhaps an accelerator: **not priced** | +15-25 W (about Rs 43-180/month across Rs 4-10 tariffs **[E]**); no off-site storage by default |
-| **Game servers** | Possibly more RAM or a second machine: not priced | +10-40 W; a VPS relay or rented host if you do not use Tailscale: not priced |
+| **CCTV / NVR** | Cameras, PoE switch, perhaps an accelerator: **not priced**. A surveillance-rated disk: 2 TB Rs 13,000-16,000, 4 TB Rs 12,000-21,500 **C** | +15-25 W (about Rs 43-180/month across Rs 4-10 tariffs **[E]**); no off-site storage by default |
+| **Game servers** | Possibly more RAM or a second machine: not priced | +10-40 W; a VPS relay about Rs 336-576 a month before GST **C**, or a rented host from about Rs 400 a month, if you do not use Tailscale |
 
 ## 4. Is self-hosting cheaper than subscriptions?
 
-Not on storage cost alone. A shared Google One 2 TB plan is about **Rs 7,800/yr** (or iCloud+ 2 TB about **Rs 8,988/yr**) **[S]**. Scenario B costs about Rs 39-58k up front plus Rs 5-19k/yr, and you maintain it. Self-hosting becomes worthwhile for reasons other than price: more capacity than 2 TB, privacy and control, media streaming, ad blocking, learning, and not depending on a subscriber account. Decide on those grounds, not savings.
+Not on storage cost alone. A shared Google One 2 TB plan is about **Rs 7,800/yr** (or iCloud+ 2 TB about **Rs 8,988/yr**) **[S]**. Scenario B costs about Rs 73-83k up front (Rs 51-62k with two 2 TB drives) plus Rs 5-19k/yr, and you maintain it. Self-hosting becomes worthwhile for reasons other than price: more capacity than 2 TB, privacy and control, media streaming, ad blocking, learning, and not depending on a subscriber account. Decide on those grounds, not savings.
 
 ## 5. Which paid services are worth it
 
@@ -165,3 +176,4 @@ Rows in the price book come from these pages; open them to confirm before buying
 - India hardware: https://techenclave.com/t/intel-n100-n150-mini-pcs-itx-motherboards-for-nas-home-servers-firewalls-opnsense-pfsense/397179 , https://getpc.co.in/parts/storage/seagate-ironwolf-4tb , https://magicdrop.in/drops/2tb-hard-disk , https://magicdrop.in/drops/1tb-ssd , https://magicdrop.in/drops/best-ups-for-home , https://estorewale.com/product/apc-back-ups-1100va-bx1100c-in
 - Electricity tariffs (indicative): https://www.voltflow.net/blog/electricity-rates-india-by-state-2026 , https://desiutility.com/electricity/tariffs , https://www.mymotor.in/blog/ev-charging-cost-india-state-wise-tariff
 - Added for the constrained scenario: https://magicdrop.in/drops/1tb-external-hard-drive , https://magicdrop.in/drops/256gb-ssd , https://www.aajjo.com/product/cp-plus-16-ch-dvr-in-ghaziabad-ms-sv-india-infotech-solutions , https://price-history.in/product/cp-plus-16-channel-dvr-2-ea7eWzIm , https://gbnodes.host/blogs/cheap-minecraft-server-hosting-india-2026/ , https://zoutons.com/news/hostinger-minecraft-server-hosting-price-india-2026 , https://terminalbytes.com/oracle-cloud-free-tier-changes-2026 , https://www.teklynk.dev/blog/how-to-host-a-game-server-from-your-home-using-playItgg
+- Added in the October 2026 pass (memory, SSDs, hard drives, mini PCs, enclosures, small items, relay servers, static IPs): see S27-S39 and their links in [`12-verification-log.md`](12-verification-log.md).

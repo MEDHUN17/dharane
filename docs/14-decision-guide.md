@@ -76,6 +76,8 @@ flowchart LR
 | Cameras | None; analog with a DVR; IP with an NVR; cameras with no recorder. Count | Look at the cables (coax/BNC or network) and for a box with a disk | Path in section 5 (cameras) |
 | Operator time and comfort | Hours per month; comfort with a command line | Ask honestly | How much complexity is sensible (`00` principle 6: the smallest tool that does the job) |
 
+**Reading the reachability test.** A router WAN address inside 100.64.0.0/10 means the provider runs carrier-grade NAT **[V33]**. An address outside it does not rule CGNAT out, because an operator may number that link from other address space **[V33]**. A match with the external page means the router has a public IPv4 *now*, not that inbound connections work or that the address stays the same **[K]**. A private WAN address on your own router behind the provider's box is double NAT, not proof of CGNAT: read the outermost device's WAN address, and use an IPv4-only check page, because many show your IPv6 address instead **[K]**.
+
 ### 2.2 Reading "an old Core i3"
 
 "An old Core i3" can mean anything from a 2010 to a 2017 machine, and three features decide which services it can run: **AVX2** (Frigate needs AVX and AVX2 **[V13]**), **x86-64-v2** (Immich's machine-learning container **[V1]**) and **Quick Sync on Linux** (Jellyfin transcoding, from Broadwell **[V24]**). The digits after `i3-` start with the generation: `i3-2310M` is 2nd, `i3-4005U` 4th, `i3-6006U` 6th; a three-digit number such as `i3-380M` is 1st generation. The table below is general knowledge **[K]**: confirm the exact part on Intel's product page or, better, by looking at the CPU flags on the machine itself.
@@ -193,24 +195,38 @@ Three audiences: the **household** (always the home network, or Tailscale away f
 |----------|------------|--------|
 | Household | Direct play on the LAN; TV apps exist for Android TV/Fire OS, LG webOS, Samsung Tizen, Roku, tvOS and more, but check each TV model **[V14]** | Library on an external drive; no transcoding on A-class machines |
 | Invited | Tailscale on a phone, PC or an Android TV/Apple TV device **[S26]**; smart TVs generally cannot run Tailscale **[K]** | Each remote stream needs about the file bitrate in upload; Jellyfin recommends 20 Mbps or more **[V5]** (section 2.3) |
-| Strangers | Not advised, from any connection | Needs inbound reachability and a big uplink; Cloudflare's terms restrict serving video through its CDN unless you use its paid services **[S2][U2]**; making copyrighted films and shows available to the public is distribution and a legal risk (this is not legal advice). Share individual files through a hosted service instead |
+| Strangers | Not advised, from any connection | Needs inbound reachability and a big uplink; on Free, Pro and Business plans, traffic through Cloudflare Tunnel public hostnames is subject to terms that require a paid service to serve video and large files (private routes are exempt, but then every viewer needs Cloudflare's client) **[V29]**; making copyrighted films and shows available to the public is distribution and a legal risk (this is not legal advice). Share individual files through a hosted service instead |
 
 ### 4.2 Game server
 
 | Connectivity | Invited (can install an app) | Strangers |
 |--------------|------------------------------|-----------|
-| No inbound (CGNAT, or no port forwarding) | **Tailscale** on PC and Android; consoles cannot join; free-plan user limit reportedly 6 **[S9]**, node sharing for more | A rented host or a free host (Aternos: ad-supported, queues, sleeps when empty **[S20]**); a tunnel service such as playit.gg (free tier, conflicting reports about TCP **[U]**) |
-| No inbound plus a small VPS relay | Not needed | The VPS forwards the game port to the home server over WireGuard or Tailscale; its cost is not priced yet **[N]**; it adds latency; the home upload still limits players; check the provider's DDoS terms (`apps/N`) |
+| No inbound (CGNAT, or no port forwarding) | **Tailscale** on PC and Android; consoles cannot join; free-plan user limit reportedly 6 **[S9]**; sharing a machine does not add a user but the friend reaches only that machine **[S39]** | A rented host or a free host (Aternos: ad-supported, queues, sleeps when empty **[S20]**); a tunnel service such as playit.gg (free tier, conflicting reports about TCP **[U]**) |
+| No inbound plus a small VPS relay | Not needed | The VPS forwards the game port to the home server over WireGuard or Tailscale; a small plan with a public IPv4 costs about Rs 336-480 a month before 18% GST **[S38]** (section 4.4); it adds latency; the home upload still limits players; check the provider's DDoS terms (`apps/N`) |
 | Public IPv4 and a router that can forward | Tailscale is still simpler and private | Port-forward only with a whitelist, isolation from personal data and `cpus`/`mem_limit` set; it exposes the home IP and the shared uplink to attack; a rented host is safer (`apps/N`) |
+
+Why not Cloudflare or ngrok for the game itself: Cloudflare Tunnel has no UDP service type, and TCP needs Cloudflare's `cloudflared` program on every player's device **[V27]**; Spectrum for Minecraft is a paid add-on on Pro or Business, one application each **[V27]**, so it is not an option at this budget. ngrok's free plan gives TCP only with a payment method on file, 1 GB of transfer a month and no UDP **[V31]**.
 
 ### 4.3 Web apps, cameras and administration
 
 | Thing | Route | Notes |
 |-------|-------|-------|
-| A small public web app or form | Cloudflare Tunnel plus Access: no inbound ports, any connectivity | HTTP/HTTPS (and TCP through a client) only; no anonymous public UDP **[S3]**; request bodies capped at 100 MB on Free and Pro **[S1]**; passes the exposure checklist first (`apps/00`) |
+| A small public web app or form | Cloudflare Tunnel plus Access: no inbound ports, any connectivity | HTTP/HTTPS (and TCP through a client) only; TCP, SSH, RDP and SMB need Cloudflare's client program on the visitor's device and there is no UDP **[V27]**; request bodies are capped at 100 MB on Free and Pro **[V28]**; passes the exposure checklist first (`apps/00`) |
 | Private apps (photos, files, documents, passwords) | Tailscale; LAN address at home | Never published (`apps/00`) |
-| A DVR or NVR | Tailscale subnet router on the LAN | Never port-forward the recorder; view one sub-stream at a time on a slow uplink (`13` section 8) |
+| A DVR or NVR | Tailscale subnet router on the LAN | Never port-forward the recorder; view one sub-stream at a time on a slow uplink (`13` section 8). Sharing a machine does not carry the subnet router's routes, so each person who needs the DVR must be invited as a user and counts toward the free-plan limit **[S39]** |
 | SSH and router admin pages | Tailscale or LAN only | Never published |
+
+### 4.4 If you want inbound reachability: the routes and what they cost
+
+None of this is needed for the household or for invited people (Tailscale works behind CGNAT). It matters only for strangers.
+
+| Route | Typical cost (INR) | What to know |
+|-------|--------------------|--------------|
+| A public IP from the provider | A paid static IPv4 is typically Rs 100-350 a month plus 18% GST; BSNL bills Rs 1,800-3,000 a year **[S36]** | Ask in writing: price, GST, whether the address is public or a private (NAT) one, and whether it is static. Some providers reportedly do not sell it for homes, a "static IP" can still sit behind NAT, and some gate bridge mode behind it **[S36]**. It helps only if a router in the path can forward ports |
+| IPv6 | Usually Rs 0 | Many providers support it **[S37]**, but the provider's router often blocks inbound connections (reports conflict by model), and visitors on IPv4-only networks cannot reach an IPv6-only server **[S37][K]** |
+| A relay server (VPS) with a public IPv4 | About Rs 336-384 a month before 18% GST for the cheapest plans, Rs 480 for a 1 GB plan **[S38]** | More than a Rs 200 monthly budget on its own. Oracle's free tier costs Rs 0 but was reportedly halved in 2026, reclaims idle accounts after 30 days and needs card verification **[S38][V34]** |
+| A tunnel service | playit.gg premium US$30 a year (about Rs 2,879) **[S20]**; ngrok pay-as-you-go from US$20 a month **[V31]** | You trust a third party with the traffic; free-tier limits are small or disputed (section 4.2) |
+| A rented game host | About Rs 400 a month for 4 GB (vendor claim) **[S21]** | No home exposure at all |
 
 ## 5. Decision paths
 
@@ -317,24 +333,41 @@ Backups come first because nothing else matters if the data exists in one place 
 
 ## 6. Upgrade ladder
 
-Each rung gives a price band, how far to trust it, what it unlocks in section 3, and what to settle first. All prices are search-reported listings, not confirmed purchases; they move, so check live listings before paying (`08` section 8). Rungs are ordered by what they unlock per rupee on a small machine, not by number of steps: skip a rung whose problem you do not have, and the paths in section 5 say when.
+Each rung gives a price band, how far to trust it, what it unlocks in section 3, and what to settle first. All prices are search-reported listings (mostly Amazon.in snapshots read through price trackers), not confirmed purchases; they move, so check live listings before paying (`08` section 8). **2026 is an expensive year for memory and storage** (DDR4 memory, hard drives and SSDs rose sharply, and sources expect the pressure to last into 2027 **[S28][S32]**), so older price lists, including some earlier figures in this repository, are too low. Rungs are ordered by what they unlock per rupee on a small machine: skip a rung whose problem you do not have, and the paths in section 5 say when.
 
-| Rung | What | Price band **[C]** unless stated | Unlocks | Settle or check first |
-|------|------|----------------------------------|---------|-----------------------|
-| 0 | **Measure, plus free fixes**: CPU flags, RAM, disk type, upload speed, router WAN check; lid-close setting and compressed swap (`13` section 3) | Rs 0; an Ethernet cable and an installer USB stick are a few hundred rupees **[E]** | Every cell in section 3 stops being a guess | Which machine becomes the server |
-| 1 | **Stopgap photo copies**: Google Photos backup on each phone, or copy each phone's camera folder to a computer over USB | Rs 0 inside the free space; Google One 100 GB Rs 130 a month, 200 GB Rs 210 a month **[S]** (2026-07) | Photos exist in two places before anything is installed | Whether the free space is enough |
-| 2 | **SSD in place of a hard drive**: 256 GB 2.5" SATA SSD | Rs 2,600-3,600 (2026-06 to 09 listings) | Immich becomes possible once RAM is 8 GB; databases and Docker stop feeling slow (A1 moves towards A2) | Is the drive really a hard drive? Does the laptop take a 2.5" SATA drive? Back up before swapping |
-| 3 | **RAM to 8 GB** | Not priced yet **[N]**: look up live listings for the exact memory type (DDR3, DDR3L or DDR4) and size | A1 becomes A2: one heavy service fits | Which memory type the laptop uses, how many slots are free, the maximum it accepts (check the maker's page) |
-| 4 | **A data drive**: 1 TB portable, 2 TB portable, or a 4 TB 3.5" NAS-class drive with a dock or enclosure | 1 TB portable Rs 3,600-10,000; 2 TB portable Rs 12,049-12,949; 4 TB NAS drive Rs 7,000-10,500; the dock or enclosure is not priced yet **[N]** | Photos and files move off the 256 GB disk; a local backup copy can exist | Portable bus-powered drive or 3.5" drive with its own power: put a 3.5" dock on the UPS (`13` section 3) |
+| Rung | What | Price band (INR) | Unlocks | Settle or check first |
+|------|------|------------------|---------|-----------------------|
+| 0 | **Measure, plus free fixes**: CPU flags, RAM, disk type, upload speed, router WAN check; lid-close setting and compressed swap (`13` section 3) | Rs 0. An Ethernet cable (1-2 m Cat6, Rs 145-355) and an installer USB stick (16 GB, Rs 400-600) come to about Rs 550-950 **[S34]** | Every cell in section 3 stops being a guess | Which machine becomes the server |
+| 1 | **Stopgap photo copies**: Google Photos backup on each phone, or copy each phone's camera folder to a computer over USB | Rs 0 inside the free space; Google One 100 GB Rs 130 a month, 200 GB Rs 210 a month **[S13]** | Photos exist in two places before anything is installed | Whether the free space is enough |
+| 2 | **SSD in place of a hard drive**: 256 GB 2.5" SATA SSD | Rs 2,200-3,800 for mainstream brands (no-name Rs 1,250-1,750, premium Rs 5,100-7,700), June-October 2026 **[S33]** | Immich becomes possible once RAM is 8 GB; databases and Docker stop feeling slow (A1 moves towards A2) | Is the drive really a hard drive? Does the laptop take a 2.5" SATA drive? Back up before swapping |
+| 3 | **RAM to 8 GB** | DDR3L (typically 2nd-5th generation laptops): 8 GB Rs 600-2,000 new, typically Rs 1,000-1,600; used Rs 800-1,500 asked. DDR4 (typically 7th generation and later): 8 GB Rs 5,200-7,600 new **[S27]** | A1 becomes A2: one heavy service fits | The memory type (6th generation can be either), free slots and the maker's maximum: read them with `sudo dmidecode -t memory` on Linux or `Get-CimInstance Win32_PhysicalMemory` in Windows PowerShell **[V25]**; a DDR3L stick also works in a DDR3 laptop but not the reverse **[S27]** |
+| 4 | **A data drive** sized to the data: a 512 GB SSD in an enclosure; a portable hard drive; or a 3.5" drive with a dock | 512 GB SSD Rs 3,500-6,600 **[S33]** plus a 2.5" enclosure Rs 260-470; 3.5" single-bay enclosure with its own 12 V adapter Rs 800-1,200; 3.5" drives: 2 TB surveillance-rated Rs 13,000-16,000, 4 TB NAS-rated Rs 23,700-26,500 **[S32][S31]**; portable hard drives: see the note below the table | Photos and files move off the 256 GB disk; a local backup copy can exist | Portable bus-powered drive or 3.5" drive with its own power: put a 3.5" dock on the UPS (`13` section 3); enclosure chip caveats are in the cautions below the table |
 | 5 | **An off-site copy**: object storage with restic, or a consumer cloud plan | About Rs 667 per TB per month on a B2-class service, so about 300 GB for Rs 200 **[S11][S12]**; Google One tiers as in rung 1 | The first copy away from home (three copies need rung 6 as well) | Upload speed and the seed time in section 2.3; section 5.2 |
-| 6 | **A second local drive** for a separate backup copy | Another Rs 3,600-10,500 | Live copy, local backup and off-site copy on different media (3-2-1) | Whether the budget allows it now or after rung 7 |
-| 7 | **A better machine** (Tier B): a refurbished office mini PC, or a new N100/N150 mini PC | New N100/N150 mini PC with 16 GB and 256 GB: Rs 17,999 (N150 Rs 18,599), undated; refurbished office mini PCs are not priced yet **[N]** | B1 or B2 in section 3: Immich with machine learning, Paperless alongside it, hardware transcoding, a small camera setup | Whether rungs 2-3 on the existing laptop already give what you need; the laptop can then stay as a spare resolver and watcher |
-| 8 | **A recorder for the cameras** | 16-channel analog DVR Rs 5,700-14,500 before the disk; a full 16-camera kit with a disk Rs 30,000-45,000 **[S]** | Recording and remote viewing without taxing the server | Analog or IP cameras, and whether a recorder already exists (section 5.4) |
-| 9 | **Reach for strangers**: a rented host, a tunnel service, or a relay server; or a public IP from the provider | Rented Minecraft host about Rs 400 a month for 4 GB (vendor claim); playit.gg premium US$30 a year (about Rs 2,879); a small relay server (VPS) and a public IP from the provider are not priced yet **[N]** | Section 4.2 rows for strangers | Who really needs to join, and whether console players are among them |
+| 6 | **A second local drive** for a separate backup copy | The same prices as rung 4; it must be a separate device, not the second bay of one dock (one cable, one adapter, one failure) | Live copy, local backup and off-site copy on different media (3-2-1) | Whether the budget allows it now or after rung 7 |
+| 7 | **A better machine** (Tier B): a refurbished office mini PC, or a new N100/N150 mini PC | Refurbished i5 (6th-8th generation) with 8 GB and a 256-512 GB SSD: Rs 10,000-13,000 **[S29]**. New N100 with 16 GB and 512 GB: Rs 17,000-19,000 **[S30]** | B1 or B2 in section 3: Immich with machine learning, Paperless alongside it, hardware transcoding, a small camera setup | Compare with rungs 2-3 on the laptop (table below). Warranty is the seller's, not the maker's: get it in writing |
+| 8 | **A recorder for the cameras** | 16-channel analog DVR Rs 5,700-14,500 before the disk; a full 16-camera kit with a disk Rs 30,000-45,000 **[S24]**; the disk alone is now Rs 12,000-21,500 **[S32]** | Recording and remote viewing without taxing the server | Analog or IP cameras, and whether a recorder already exists (section 5.4) |
+| 9 | **Reach for strangers**: a rented host, a tunnel service, or a relay server; or a public IP from the provider | Rented Minecraft host about Rs 400 a month for 4 GB (vendor claim) **[S21]**; playit.gg premium US$30 a year (about Rs 2,879) **[S20]**; a small relay server (VPS) about Rs 336-480 a month before GST **[S38]**; a paid static IP about Rs 100-350 a month plus GST **[S36]**; routes compared in section 4.4 | Section 4.2 rows for strangers | Who really needs to join, and whether console players are among them |
 | 10 | **A second always-on device** for DNS, monitoring and the camera subnet router | A spare laptop costs nothing; a single-board computer is not priced (prices in the sources conflicted) | Household ad blocking without one reboot cutting the internet (`13` section 2) | Whether a spare laptop already exists |
 | 11 | **NAS-class storage or a second site** | Not priced | Stage 5 (`09a`) | A measured limit, not a wish |
 
-**Reading the ladder with a budget.** A one-time budget of about Rs 12,000-15,000 reaches rungs 0-4 in several combinations (for example 2, 3 and a 1 TB portable drive), and rung 5 fits a monthly figure near Rs 200 *if the monthly figure does not also have to pay for electricity* (`08` Scenario D). Rungs 7-9 are outside that budget and are what the revisit triggers in section 7 watch for.
+**Cautions for rung 4 (read before buying an enclosure).** The Linux kernel carries workarounds for specific USB-to-SATA chips, and cheap enclosures rarely say which chip they use, so same-looking boxes differ **[V26]**. After buying, check `lsusb` for the chip and `lsusb -t` for `Driver=uas` or `usb-storage`. Disk health (SMART) passes through some chips only with the right `smartctl` device type; disk spin-down over USB is enclosure-specific and must be tested **[V26]**. A bus-powered 2.5" drive needs a USB port on the laptop itself, not a hub, and a 2 TB or larger drive may draw more at start-up than a USB port supplies **[K]**. A 2-bay dock is one failure domain; use two single-bay boxes for data and backup.
+
+**Portable hard drives (1-4 TB).** Not re-checked in the 2026 research pass that produced the table above; the earlier figures in `08` (1 TB portable Rs 3,600-10,000, 2 TB portable Rs 12,049-12,949) pre-date the rises described at the top of this section and may be stale. Check live listings.
+
+### Keep the old laptop, or buy a refurbished office mini PC?
+
+Costs are sums of the ranges in the ladder **[E]**; they say nothing about quality. Storage for the data is extra in every row.
+
+| Option | One-time cost | Notes |
+|--------|---------------|-------|
+| Laptop with DDR3L memory: 8 GB stick plus 256 GB SSD | About Rs 2,800-5,800 | Cheapest by far; the battery works as a small built-in UPS. Leaves most of a Rs 12,000-15,000 budget for storage |
+| Laptop with DDR4 memory: 8 GB stick plus 256 GB SSD | About Rs 7,400-11,400 | RAM is the expensive part in 2026 |
+| Refurbished i5 office mini PC, 8 GB and a 256-512 GB SSD | About Rs 10,000-13,000 **[S29]** | Comes with RAM and SSD; idles at about 10-15 W **[S35]**; seller warranty only; the most that fits the budget, with nothing left for storage |
+| New N100 mini PC, 16 GB and 512 GB | About Rs 17,000-19,000 **[S30]** | Over a Rs 12,000-15,000 budget; newer, quiet, low idle power **[K]** |
+
+If the laptop turns out to be DDR3L-era, the first row costs about a third of the third and keeps the laptop; if it is DDR4-era, rows two and three cost about the same and the mini PC adds a second machine. The laptop can then stay as the second resolver, watcher and subnet router (`13` section 2).
+
+**Reading the ladder with a budget.** A one-time budget of about Rs 12,000-15,000 reaches rungs 0-4 in a few combinations: for example rungs 2 and 3 on a DDR3L laptop (Rs 2,800-5,800) plus a 512 GB SSD in an enclosure (Rs 3,800-7,100), or a refurbished mini PC alone. It does not reach a new 2 TB or 4 TB hard drive. Rung 5 fits a monthly figure near Rs 200 *if the monthly figure does not also have to pay for electricity* (`08` Scenario D). Rungs 7-9 are outside that budget except as alternatives to rungs 2-3; they are what the revisit triggers in section 7 watch for.
 
 ## 7. Revisit triggers
 

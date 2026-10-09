@@ -44,7 +44,7 @@ Labels: **[V]** verified in docs, **[S]** search summary (see [`12-verification-
 | Lid | Configure the lid switch to do nothing, and disable suspend |
 | Network | Wired Ethernet, not Wi-Fi. Old Wi-Fi chips often need non-free firmware |
 | Heat | Clean the fan and vents; hard, ventilated surface; consider fresh thermal paste on a very old machine |
-| Disk | **An SSD is the single best upgrade** for a 256 GB internal disk if it is a hard drive: databases and Docker on a spinning laptop disk are slow and fragile (Immich requires its database on local SSD **[V]**). A 256 GB 2.5" SATA SSD was listed around Rs 2,600-3,600 **[S][C]** |
+| Disk | **An SSD is the single best upgrade** for a 256 GB internal disk if it is a hard drive: databases and Docker on a spinning laptop disk are slow and fragile (Immich requires its database on local SSD **[V]**). A 256 GB 2.5" SATA SSD was listed at Rs 2,200-3,800 in June-October 2026 **[S]** |
 | Power | Plug into the UPS; put the router and ONT on it too (`04-power-physical.md`) |
 | CPU features | Check `lscpu`/`/proc/cpuinfo` flags: Frigate needs AVX and AVX2 **[V]**; Immich's ML container needs x86-64-v2 **[V]**; Jellyfin needs SSE4.1 **[V]** |
 | Old iGPU | Linux Quick Sync works from Broadwell (5th gen) onward; older Intel graphics use VA-API; H.264 is supported on any QSV-capable part, HEVC 8-bit from Skylake **[V]**. Plan on direct play, not transcoding |
@@ -121,7 +121,7 @@ What works: TVs in the house over the LAN (Jellyfin has Android TV/Fire OS, LG w
 Sixteen cameras need a **recorder with its own disk**: at 1 Mbps each that is about 173 GB per day, at 2 Mbps about 346 GB per day; a 256 GB disk holds under two days, and a 4 TB disk about 12-23 days **[E]**. AI detection needs decoding and a capable CPU; Frigate also needs AVX2 and 4-16 GB RAM **[V]**. Therefore:
 
 - **Existing DVR/NVR:** keep it. Change its passwords, turn off cloud/P2P features, update firmware, and reach it through the laptop as a Tailscale subnet router. Do not forward ports.
-- **Analog cameras and no recorder:** a 16-channel analog DVR was listed around Rs 5,700-14,500 before the hard disk **[S][C]**; a full kit with cameras and disk Rs 30,000-45,000 **[S][C]**. That is a separate budget; defer it.
+- **Analog cameras and no recorder:** a 16-channel analog DVR was listed around Rs 5,700-14,500 before the hard disk (a surveillance-rated 2 TB disk was Rs 13,000-16,000 and a 4 TB one Rs 12,000-21,500 in 2026 **[S][C]**); a full kit with cameras and disk Rs 30,000-45,000 **[S][C]**. That is a separate budget; defer it.
 - Remote viewing over a slow uplink: view one sub-stream at a time.
 
 ## 9. Passwords and account recovery
@@ -142,10 +142,13 @@ Sixteen cameras need a **recorder with its own disk**: at 1 Mbps each that is ab
 
 ## 11. What to buy, and in what order **(prices are provisional [S][C])**
 
-1. **Nothing until you know:** RAM, CPU model, HDD or SSD, how many laptops, upload speed, data size.
-2. **SSD swap** if the drive is a hard drive: about Rs 2,600-3,600.
-3. **Data drive:** the cheapest reliable capacity that fits your data: a 1 TB portable listing ranged from about Rs 3,600 to Rs 10,000 and a 2 TB from about Rs 12,000-13,000; a 4 TB 3.5" NAS-class drive about Rs 7,000-10,500 plus an enclosure/dock (not priced). Prices conflicted between sources: check live listings and prefer a known brand with a proper invoice.
-4. **Small items:** an Ethernet cable and a USB stick for the Debian installer (a few hundred rupees **[E]**).
-5. **Later:** a second drive for a local backup copy, then a recorder if you need one.
+Memory and storage became much more expensive in 2026, so the cheap, high-impact steps come first. The ladder in [`14-decision-guide.md`](14-decision-guide.md) section 6 has the price bands and what each step unlocks.
+
+1. **Nothing until you know:** RAM and its type (DDR3L or DDR4), CPU model, HDD or SSD, how many laptops, upload speed, data size.
+2. **SSD swap** if the drive is a hard drive: Rs 2,200-3,800 **[S]**.
+3. **RAM to 8 GB** if the laptop has 4 GB and a free or replaceable SO-DIMM slot: Rs 600-2,000 for DDR3L, Rs 5,200-7,600 for DDR4 **[S]**. Read the memory type first, with `sudo dmidecode -t memory` on Linux or `Get-CimInstance Win32_PhysicalMemory` in Windows PowerShell **[V]**.
+4. **Data drive:** the cheapest reliable capacity that fits your data. A 512 GB SATA SSD in an enclosure is about Rs 3,800-7,100 **[S]**. Hard drives now cost far more than older lists say (2 TB surveillance-rated Rs 13,000-16,000; 4 TB NAS-class Rs 23,700-26,500 **[S]**), and portable-drive prices were not re-checked in October 2026 (earlier: 1 TB Rs 3,600-10,000, 2 TB Rs 12,000-13,000 **[C]**). Prices conflicted between sources: check live listings and prefer a known brand with a proper invoice.
+5. **Small items:** an Ethernet cable (Rs 145-355) and a USB stick for the Debian installer (Rs 400-600): about Rs 550-950 together **[S]**.
+6. **Later:** a second drive for a local backup copy, then a recorder if you need one.
 
 Cost tables for this scenario are in [`08-cost.md`](08-cost.md) (Scenario D).

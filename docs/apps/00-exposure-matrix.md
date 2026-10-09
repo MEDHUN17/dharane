@@ -44,7 +44,7 @@ Two notes: (a) a service can be class 2 for daily use yet have an admin interfac
 | SFTP | 4/2 | It is SSH | As SSH; give family `internal-sftp`-only accounts only if you must |
 | Web file manager | 4 | A whole-filesystem browser is a high-value target; **File Browser is archived with no further security fixes [V]** | Avoid; if used, mount only one share, class 2 at most |
 | Nextcloud | 2 (3 possible) | Heavier attack surface and frequent patches; clients and WebDAV do not pass Cloudflare Access cleanly **[K]** | Tailscale by default; if published: Access policy for web paths, app MFA, trusted-domain and proxy settings, fast patching, upload sizes within Cloudflare's limits |
-| Immich | 2 | Holds your private photos; actively developed; its docs name Tailscale for access without an open port and warn that a reverse proxy may expose web UI and API **[V]**; Cloudflare caps proxied request bodies at 100 MB (Free/Pro) which breaks large video uploads **[S]** | Tailscale on phones; LAN address inside the app at home; no public exposure |
+| Immich | 2 | Holds your private photos; actively developed; its docs name Tailscale for access without an open port and warn that a reverse proxy may expose web UI and API **[V]**; Cloudflare caps proxied request bodies at 100 MB (Free/Pro) which breaks large video uploads **[V]** | Tailscale on phones; LAN address inside the app at home; no public exposure |
 | Jellyfin | 2 | Serving video through Cloudflare's CDN is restricted by its terms unless you use its paid services **[S]/[U]**; bandwidth heavy | Tailscale; separate admin and user accounts; discovery (UDP 7359) stays on the LAN **[V]** |
 | Plex | 2 | Cloud-account dependent; remote streaming has its own paywall **[S]** | Same as Jellyfin |
 | Paperless-ngx | 2 | Contains identity, tax, medical records | Tailscale only; never public; app MFA on **[V]** |
@@ -69,7 +69,7 @@ Two notes: (a) a service can be class 2 for daily use yet have an admin interfac
 ## Checklist before anything is made class 3
 
 1. The app has its own authentication and I know how to rotate its admin credential.
-2. Payload sizes and protocols fit Cloudflare's limits (100 MB request body on Free/Pro **[S]**; HTTP/HTTPS/TCP only **[S]**).
+2. Payload sizes and protocols fit Cloudflare's limits (100 MB request body on Free/Pro **[V]**; HTTP/HTTPS, and TCP/SSH/RDP/SMB only through a client program, no UDP **[V]**).
 3. An Access policy exists (who, MFA, session length) and I tested it from a non-tailnet device.
 4. Only the specific hostname is routed; no wildcard routes to internal services.
 5. The app runs on the `public` Docker network only, with no access to databases of other stacks.

@@ -193,7 +193,7 @@ Hard gate: **no public exposure (Phase 9) until Phase 6 (restore-tested backups)
 | Expected outcome | Only intended hostnames resolve publicly; unauthenticated requests are stopped by Access |
 | Security checks | No router port-forwards; no internal names in public DNS; an external port scan of your home IP shows nothing open; Docker published ports bound to localhost |
 | Validation | From a non-tailnet device: Access prompts; after login, the app works; after revoking the user, access ends; kill switch tested |
-| Common failures | Uploads over 100 MB fail **[S]**; video streaming restricted **[S]/[U]**; WebSocket/streaming apps misbehave; treating Access as a replacement for app authentication |
+| Common failures | Uploads over 100 MB fail **[V]**; video streaming restricted on Free/Pro/Business **[V]**; WebSocket/streaming apps misbehave; treating Access as a replacement for app authentication |
 | Rollback | Disable the public hostname or stop `cloudflared`; private access is unaffected |
 | Done when | Kill switch works and the exposure inventory matches reality |
 

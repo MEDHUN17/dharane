@@ -78,7 +78,7 @@ Labels: **[V]** verified, **[S]** search summary, **[K]** stable knowledge, **[U
 | Problem | Publishes selected web apps with no inbound port, no exposed home IP, and CGNAT-proof |
 | Class / when | **Optional** / Stage 3, only for services that pass the exposure checklist |
 | Needs | Cloudflare account, domain on Cloudflare DNS, a `cloudflared` container on the `public` network. Public hostnames can target HTTP, HTTPS, UNIX sockets and TCP (TCP clients need `cloudflared`); no documented anonymous public UDP **[S]** |
-| Limits | 100 MB request-body cap on Free/Pro (Business 200, Enterprise 500) **[S]**; CDN restrictions on serving video/large files **[S]/[U]**; Cloudflare terminates TLS and can see plaintext **[K]** |
+| Limits | 100 MB request-body cap on Free/Pro (Business 200, Enterprise up to 5 GB self-serve) **[V]**; on Free, Pro and Business, public-hostname traffic is subject to terms that require a paid service to serve video and large files, and private network routes (which need Cloudflare's client on every viewer) are exempt **[V]**; Cloudflare terminates TLS and can see plaintext **[K]** |
 | Security | The tunnel token is a credential (store in `/srv/secrets`, rotate on suspicion); only specific hostnames routed; route to app containers, not to Caddy; kill switch documented |
 | Backup | Record hostnames and Access policies in the private repo; the tunnel config may live in Cloudflare's dashboard, so export notes |
 | Cost | Reported free within the Zero Trust free plan (up to 50 users) **[S]** |
