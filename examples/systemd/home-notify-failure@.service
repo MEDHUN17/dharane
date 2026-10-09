@@ -1,0 +1,6 @@
+[Unit]
+Description=Send a notification that %i failed
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/notify.sh -p high -t "Unit failed: %i" "systemd unit %i failed on %H. See: journalctl -u %i -n 50"

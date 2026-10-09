@@ -1,0 +1,10 @@
+[Unit]
+Description=Local health checks (example)
+OnFailure=home-notify-failure@%n.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/check-health.sh
+Nice=10
+NoNewPrivileges=yes
+PrivateTmp=yes

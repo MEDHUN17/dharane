@@ -1,0 +1,10 @@
+# One path per line (comments and blank lines are ignored by restic --files-from).
+# List each MOUNT POINT you want: --one-file-system will not cross into other filesystems
+# from a parent such as /srv.
+/srv/config
+/srv/appdata
+/srv/dumps
+/srv/storage/photos
+/srv/storage/documents
+/srv/storage/files
+# /srv/secrets belongs in a SEPARATE repository with its own password (see docs/06-security-backup.md).

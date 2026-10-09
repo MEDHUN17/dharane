@@ -1,0 +1,19 @@
+# /etc/home-server/health.conf   (owner root, mode 0600)   shell syntax, placeholders only
+DISK_MOUNTS=(/ /srv/storage /srv/backup-local)
+DISK_WARN_PCT=80
+DISK_CRIT_PCT=90
+MOUNTS_REQUIRED=(/srv/storage /srv/backup-local)
+SENTINELS=(/srv/storage/.disk-ok /srv/backup-local/.disk-ok)
+BACKUP_STAMPS=(/var/lib/home-server/last-backup-local.ok /var/lib/home-server/last-backup-offsite.ok)
+BACKUP_MAX_AGE_HOURS=30
+MEM_AVAILABLE_WARN_PCT=10
+LOAD_WARN_PER_CORE=2
+TEMP_WARN_C=80
+TEMP_CRIT_C=90
+CHECK_DOCKER=1
+CERT_ENDPOINTS=()          # e.g. (photos.home.example.com:443)
+CERT_WARN_DAYS=14
+CERT_CRIT_DAYS=5
+REMIND_HOURS=24
+STATE_DIR=/var/lib/home-server/health
+NOTIFY_CMD=/usr/local/bin/notify.sh

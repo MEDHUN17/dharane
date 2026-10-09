@@ -1,0 +1,6 @@
+# Regenerable data: Immich thumbnails and encoded video can be rebuilt after a restore.
+/srv/storage/photos/thumbs
+/srv/storage/photos/encoded-video
+# Application caches
+/srv/appdata/*/cache
+*.tmp

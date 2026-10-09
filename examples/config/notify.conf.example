@@ -1,0 +1,3 @@
+# /etc/home-server/notify.conf   (owner root, mode 0600)   shell syntax, placeholders only
+NTFY_URL=https://ntfy.example.com/replace-with-your-private-topic   # treat the full URL as a secret
+NTFY_TOKEN_FILE=            # optional: path to a file containing an access token

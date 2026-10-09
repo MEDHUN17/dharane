@@ -1,0 +1,44 @@
+# /etc/home-server/backup.conf   (owner root, mode 0600)   shell syntax, placeholders only
+# Used by examples/scripts/backup.sh. Copy this file, edit the copy, never commit the copy.
+
+RESTIC_BIN=restic
+
+# --- local repository (a separate physical disk) ---
+LOCAL_REPO=/srv/backup-local/restic
+LOCAL_PASSWORD_FILE=/srv/secrets/restic-local.pass      # file containing only the repository password
+
+# --- off-site repository (leave OFFSITE_REPO empty for local-only) ---
+# Shapes: s3:<endpoint>/<bucket>/<path>   sftp:<user>@<host>:<path>   b2:<bucket>:<path>
+# Check the restic documentation for your provider's exact syntax.
+OFFSITE_REPO=
+OFFSITE_PASSWORD_FILE=/srv/secrets/restic-offsite.pass  # a DIFFERENT password from the local repo
+OFFSITE_ENV_FILE=/srv/secrets/restic-offsite.env        # exports the provider credential variables
+OFFSITE_LIMIT_UPLOAD_KIB=                               # e.g. 2000 to cap uploads at ~2 MB/s
+
+# --- what to back up ---
+PATHS_FILE=/etc/home-server/backup-paths.txt
+EXCLUDE_FILE=/etc/home-server/backup-excludes.txt
+TAG=nightly
+
+# --- safety checks ---
+# Files that exist only when the disk is really mounted. A missing sentinel aborts the run.
+SENTINELS=(/srv/storage/.disk-ok /srv/backup-local/.disk-ok)
+# Executables run before the backup (database dumps). Any failure aborts the run.
+HOOKS_DIR=/srv/config/scripts/dump.d
+
+# --- state and heartbeat ---
+STATE_DIR=/var/lib/home-server
+LOCK_FILE=/run/lock/home-backup.lock
+HEARTBEAT_OK_URL=      # external dead-man's-switch URL (treat as a secret); empty = none
+HEARTBEAT_FAIL_URL=
+
+# --- retention and maintenance (forget/prune is OFF until you enable it) ---
+PRUNE_ENABLED=0
+PRUNE_WEEKDAY=7            # 1=Mon .. 7=Sun
+OFFSITE_PRUNE_ENABLED=0    # keep 0 for append-only/immutable off-site repos; prune from a trusted machine
+KEEP_DAILY=14
+KEEP_WEEKLY=8
+KEEP_MONTHLY=12
+KEEP_YEARLY=5
+CHECK_WEEKDAY=7
+READ_DATA_SUBSET=5%

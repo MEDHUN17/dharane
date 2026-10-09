@@ -1,0 +1,10 @@
+[Unit]
+Description=Run the nightly backup after the 02:00 database dumps
+
+[Timer]
+OnCalendar=*-*-* 03:00:00
+RandomizedDelaySec=10min
+Persistent=true
+
+[Install]
+WantedBy=timers.target

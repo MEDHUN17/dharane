@@ -1,0 +1,15 @@
+[Unit]
+Description=Nightly restic backup (example)
+Wants=network-online.target
+After=network-online.target
+RequiresMountsFor=/srv/storage /srv/backup-local
+OnFailure=home-notify-failure@%n.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/backup.sh
+Nice=10
+IOSchedulingClass=idle
+NoNewPrivileges=yes
+PrivateTmp=yes
+TimeoutStartSec=12h
